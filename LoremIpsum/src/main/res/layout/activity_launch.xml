@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/lorem_bg" />
+
+    <RelativeLayout
+        android:id="@+id/layout_progress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/please_wait"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_preparing_application_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressBar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/preparing_application_start"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_failed"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/error"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_main"
+            android:layout_centerHorizontal="true"
+            android:text="@string/application_preparing_failed_details"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_detail_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_details"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="34dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+</RelativeLayout>

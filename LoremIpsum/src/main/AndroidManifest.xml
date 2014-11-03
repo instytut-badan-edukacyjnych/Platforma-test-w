@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pl.edu.ibe.testplatform"
+    android:versionCode="63"
+    android:versionName="1.2.3">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <supports-screens
+        android:smallScreens="false"
+        android:normalScreens="false"
+        android:largeScreens="false"
+        android:xlargeScreens="true"
+        android:requiresSmallestWidthDp="700" />
+
+    <application
+        android:name="pl.edu.ibe.loremipsum.tablet.LoremIpsumApp"
+        android:icon="@drawable/ic_launcher"
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:logo="@drawable/logo_small"
+        android:theme="@style/LoremIpsumTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="pl.edu.ibe.loremipsum.tablet.LaunchActivity"
+            android:theme="@style/LoremIpsumTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="pl.edu.ibe.loremipsum.tablet.login.LoginActivity"
+            android:theme="@style/LoremIpsumTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="pl.edu.ibe.loremipsum.tablet.task.TaskAct"
+            android:screenOrientation="landscape" />
+        <activity android:name="pl.edu.ibe.loremipsum.tablet.MainActivity" />
+        <activity
+            android:name="pl.edu.ibe.loremipsum.tablet.examinee.ExamineeManagerActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="pl.edu.ibe.loremipsum.tablet.test.TestConfigActivity" />
+        <activity android:name="pl.edu.ibe.loremipsum.tablet.report.ReportActivity" />
+        <activity android:name="pl.edu.ibe.loremipsum.task.management.SuiteSelectActivity" />
+        <activity android:name="pl.edu.ibe.loremipsum.tablet.report.PrintDialogActivity" />
+
+        <service android:name="pl.edu.ibe.loremipsum.task.management.collector.SendingService" />
+        <receiver
+            android:name="pl.edu.ibe.loremipsum.task.management.collector.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="LoremTheme" parent="@style/_LoremTheme" />
+
+    <style name="_LoremTheme" parent="android:Theme.Holo.Light">
+        <item name="android:editTextBackground">@drawable/loremtheme_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">#9930de73</item>
+        <item name="android:textSelectHandleLeft">@drawable/loremtheme_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/loremtheme_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/loremtheme_text_select_handle_middle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewLoremTheme</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/loremtheme_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/loremtheme_btn_radio_holo_light</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerLoremTheme</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarLoremTheme</item>
+        <item name="android:seekBarStyle">@style/SeekBarLoremTheme</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/loremtheme_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/loremtheme_activated_background_holo_light</item>
+    </style>
+</resources>

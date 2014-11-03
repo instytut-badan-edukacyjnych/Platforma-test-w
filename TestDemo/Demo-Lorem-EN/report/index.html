@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demonstration report</title>
+    <script src="protovis-r3.2.js"></script>
+    <script src="chartData.js"></script>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="strings-pl.js"></script>
+    <style type="text/css">
+        body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font: 14px/134% Helvetica Neue, sans-serif;
+        }
+
+        #frame {
+        width: 700pt;
+        margin: 0 auto;
+        }
+
+        #demo_prev {
+        float: left;
+        visibility: hidden;
+        }
+        #demo_next {
+        float: right;
+        }
+
+        #center {
+        }
+
+        #fig1 {
+        float: left;
+        height: 200pt;
+        width: 310pt;
+        margin-top: 15pt;
+        margin-bottom: 15pt;
+        background-color: #fafafa;
+        }
+
+        #fig2 {
+        float: right;
+        width: 310pt;
+        height: 200pt;
+        margin-top: 15pt;
+        margin-bottom: 15pt;
+        background-color: #fafafa;
+        }
+
+        #rnd {
+        float: left;
+        width: 80pt;
+        height: 230pt;
+        }
+
+        #ttl {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        }
+
+        #ex0 {
+        margin-top: 20px;
+        width: 320pt;
+        left: 50%;
+        }
+
+        #ex1 {
+        margin-top: 20px;
+        margin-left: 30px;
+        }
+
+        #ex2 {
+        margin-top: 20px;
+        margin-left: 30px;
+        }
+
+        #ex3 {
+        margin-top: 20px;
+        margin-left: 30px;
+        }
+
+        #button {
+        width: 60pt;
+        margin: 0 auto;
+        }
+
+        #ex4 {
+        margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="frame">
+
+    <div id="demo_prev"><a href="report4/index.html">&lt; Previous example</a></div>
+    <div id="demo_next"><a href="report2/index.html">Next example &gt;</a></div>
+
+    <div id="ttl" align="center"></div>
+    <div id="ex0"></div>
+    <div id="ex1"></div>
+
+    <div id="center">
+        <div id="fig1">
+            <script type="text/javascript+protovis">
+
+/* Sizing and scales. */
+var w = 400,
+    h = 250,
+    x = pv.Scale.linear(0, 1.1).range(0, w),
+    y = pv.Scale.ordinal(pv.range(n)).splitBanded(0, h, 4/5);
+
+/* The root panel. */
+var vis = new pv.Panel()
+    .width(w)
+    .height(h)
+    .bottom(20)
+    .left(20)
+    .right(10)
+    .top(5);
+
+/* The bars. */
+var bar = vis.add(pv.Panel)
+    .data(data)
+    .top(function() y(this.index))
+    .height(y.range().band)
+  .add(pv.Bar)
+    .data(function(d) d)
+    .top(function() this.index * y.range().band / m)
+    .height(y.range().band / m)
+    .left(0)
+    .width(x)
+    .fillStyle(pv.Colors.category20().by(pv.index));
+
+/* The value label. */
+bar.anchor("right").add(pv.Label)
+    .textStyle("white")
+    .text(function(d) d.toFixed(1));
+
+/* The variable label. */
+bar.parent.anchor("left").add(pv.Label)
+    .textAlign("right")
+    .textMargin(5)
+    .text(function() "ABCDEFGHIJK".charAt(this.parent.index));
+
+/* X-axis ticks. */
+vis.add(pv.Rule)
+    .data(x.ticks(5))
+    .left(x)
+    .strokeStyle(function(d) d ? "rgba(255,255,255,.3)" : "#000")
+  .add(pv.Rule)
+    .bottom(0)
+    .height(5)
+    .strokeStyle("#000")
+  .anchor("bottom").add(pv.Label)
+    .text(x.tickFormat);
+
+vis.render();
+
+            </script>
+        </div>
+
+        <div id="rnd">
+          <div style='width: 40pt; margin: 100pt auto;'>
+          </div>
+        </div>
+        
+        <div id="fig2">
+          <script type="text/javascript+protovis">
+  
+var format = pv.Format.number();
+
+var vis = new pv.Panel()
+    .data(bullets)
+    .width(300)
+    .height(30)
+    .margin(25)
+    .left(80);
+
+var bullet = vis.add(pv.Layout.Bullet)
+    .orient("left")
+    .ranges(function(d) d.ranges)
+    .measures(function(d) d.measures)
+    .markers(function(d) d.markers);
+
+bullet.range.add(pv.Bar);
+bullet.measure.add(pv.Bar);
+
+bullet.marker.add(pv.Dot)
+    .shape("triangle")
+    .fillStyle("white");
+
+bullet.tick.add(pv.Rule)
+  .anchor("bottom").add(pv.Label)
+    .text(bullet.x.tickFormat);
+
+bullet.anchor("left").add(pv.Label)
+    .font("bold 12px sans-serif")
+    .textAlign("right")
+    .textBaseline("bottom")
+    .text(function(d) d.title);
+
+bullet.anchor("left").add(pv.Label)
+    .textStyle("#666")
+    .textAlign("right")
+    .textBaseline("top")
+    .text(function(d) d.subtitle);
+
+vis.render();
+
+        </script>
+      </div>
+    </div>
+
+    <div id="ex2"></div>
+    <div id="ex3"></div>
+    <div id="ex4"></div>
+    <div id="button">
+        <button>Press me!</button>
+    </div>
+    <div id="ex5"></div>
+
+</div>
+
+<script type="text/javascript">
+    $('#ttl').text(title);
+    $('#ex0').text(expl0);
+    $('#ex1').text(expl1);
+    $('#ex2').text(expl2);
+    $('#ex3').text(expl3);
+    $('#ex4').text(expl4);
+    $('#ex5').text(expl5);
+
+    var alertText = msg0;
+    
+    $( "#button" ).click(function() {
+      alert( alertText );
+    });
+
+    $( "#randomize" ).click(function() {
+      ;
+    });
+
+</script>
+<script type="text/javascript">
+    var PrintHelper = {
+      requestPageCount: function() {
+        printer.setNumberOfPages(1);
+      },
+
+      displayPage: function(page) {
+        switch(page) {
+          default: /*...*/ break;
+          // ... switch to the right content here
+        }
+        
+        printer.renderFinished(); // content capture occurs here
+      }
+    }
+
+</script>
+</body>
+</html>
+

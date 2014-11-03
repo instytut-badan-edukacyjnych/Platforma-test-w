@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<resources>
+    <string name="app_name">Platforma Testów IBE</string>
+    <string name="set_menu">Ustawienia</string>
+    <string name="pup_menu">Osoby egzaminowane</string>
+    <string name="sch_menu">Placówki</string>
+    <string name="car_menu">Badacze</string>
+    <string name="in_menu">Logowanie</string>
+    <string name="und_menu">Cofnij</string>
+    <string name="add_menu">Dodaj</string>
+    <string name="del_menu">Usuń</string>
+    <string name="exp_menu">Eksport</string>
+    <string name="sav_menu">Zapisz</string>
+    <string name="rep_menu">Raport</string>
+    <string name="vie_menu">Uwagi</string>
+    <string name="tab_menu">Tabela</string>
+    <string name="gra_menu">Wykres</string>
+    <string name="ok_text">Ok</string>
+    <string name="cancel_text">Anuluj</string>
+    <string name="yes_text">Tak</string>
+    <string name="no_text">Nie</string>
+    <string name="save_text">Zapisz</string>
+    <string name="prev_text">Poprzedni</string>
+    <string name="sel_text">Wybierz</string>
+    <string name="e_fake">Funkcja niedostępna do czasu zakończenia badania głównego.</string>
+    <string name="no_tasks">&lt;brak zadań></string>
+    <string name="no_tasks_title">Baza zadań jest pusta</string>
+    <string name="no_tasks_mess">Baza zadań jest pusta.\n\nZestaw zadań można wybrać z menu poleceniem "Ustawienia".</string>
+    <string name="info_cards">Ekran edycji danych osób prowadzących badanie.\n\nUWAGA. Wszelkie zmiany zwłaszcza dodawanie nowych osób powinno być uzgodnione z koordynatorem badań.</string>
+    <string name="info_login">Osoba prowadząca badanie powinna wybrać swój identyfikator, którym będą podpisywane wyniki badania. \n\nJeżeli nie ma identyfikatora na rozwijanej liście lub dane z nim związane są nieprawidłowe można je zmienić lub uzupełnić wybierając z bocznego menu pole „Badacze”.</string>
+    <string name="info_main">Menu w prawym górnym rogu zapewnia dostęp do ustawień aplikacji.\n\nJeżeli osoba badana po raz pierwszy przystępuje do testu powinna skorzystać z Samouczka.\n\nPrzed rozpoczęciem badania należy z listy wybrać placówkę i osobę badaną. Jeżeli placówka lub osoba badana nie są widoczni na liście, można uzupełnić dane wybierając „Dodaj badanego” na tym ekranie.</string>
+    <string name="info_pupils">Ekran edycji danych osób egzaminowanych.\n\nUWAGA. Wszelkie zmiany zwłaszcza dodawanie nowych osób egzaminowanych powinno być uzgodnione z koordynatorem badań. Każda osoba egzaminowana podlegające badaniu musi mieć niepowtarzalny identyfikator inaczej nie będzie zagwarantowane prawidłowe zachowanie wyników badań.</string>
+    <string name="info_schools">Ekran edycji danych placówek.\n\nUWAGA. Wszelkie zmiany zwłaszcza dodawanie nowych placówek powinno być uzgodnione z koordynatorem badań.</string>
+    <string name="info_settings">Ekran zmian dotyczących plików konfiguracyjnych i banku zadań.\n\nW celu określenia banku zadań do przeprowadzenia testów należy wybrać przycisk przy polu „Lokalizacja zadań” i wybrać katalog, w którym umieszczony został bank zadań.\n\nUWAGA. Zmiana plików konfiguracyjnych na tym ekranie może spowodować nieprawidłowe działanie aplikacji.</string>
+    <string name="mes_wait">Proszę czekać …</string>
+    <string name="mes_abort_title">Badanie zostało przerwane</string>
+    <string name="mes_abort">Proszę opisać przyczynę przerwania badania w uwagach do badania.</string>
+    <string name="mes_task">Wybierz zeszyt z zadaniami</string>
+    <string name="mes_badpas">Nieprawidłowe hasło.</string>
+    <string name="mes_close_ask">Czy chcesz zamknąć aplikację?</string>
+    <string name="mes_bank_err">[BŁĄD] Nie załadowano wszystkich zadań: </string>
+    <string name="mes_change">Czy chcesz zmienić istniejące dane?</string>
+    <string name="mes_save_change">Czy zapisać wprowadzone zmiany?</string>
+    <string name="mes_new_id">Czy chcesz utworzyc nowa kartę?</string>
+    <string name="mes_enter_id">Nowy identyfikator</string>
+    <string name="mes_delete_id">Czy chcesz usunąć ten identyfikator?</string>
+    <string name="mes_pass_no_equ">Hasło w obu polach nie jest identyczne</string>
+    <string name="password_too_short">Hasło musi mieć przynajmniej 6 znaków</string>
+    <string name="login_too_short">Login musi mieć przynajmniej 6 znaków</string>
+    <string name="mes_empty">Pole nie może być puste</string>
+    <string name="mes_exist">Podany identyfikator jest już wykorzystywany</string>
+    <string name="mes_last_res">Ostatnie badanie odbyło się</string>
+    <string name="mes_no_note">Do tego badania nie było uwag.</string>
+    <string name="mes_bad_nam">BŁĄD - Nieprawidłowa nazwa pliku.</string>
+    <string name="mes_empty_dir">Katalog jest pusty</string>
+    <string name="mes_prev_dir">Poprzedni katalog</string>
+    <string name="mes_set_info">UWAGA: Prosimy bardzo rozważnie dokonywać zmian ustawień. Zmiany mogą spowodować nieprawidłowe działanie aplikacji.</string>
+    <string name="mes_dir_empty">-- pusty ---</string>
+    <string name="mes_del_school">Czy chcesz usunąć placówkę?</string>
+    <string name="mes_del_card">Czy chcesz usunąć badacza?</string>
+    <string name="mes_del_pupil">Czy chcesz usunąć osobę egzaminowaną?</string>
+    <string name="mes_enter_new_id">Identyfikator</string>
+    <string name="mes_enter_new_group">Nazwa oddziału</string>
+    <string name="mes_enter_new_gender">Płeć</string>
+    <string name="mes_enter_new_birthday">Data urodzenia</string>
+    <string name="mes_no_data">Nie znaleziono wyników do wyświetlenia</string>
+    <string name="login_title">Logowanie</string>
+    <string name="login_mess">Proszę się zalogować przed rozpoczęciem badania.</string>
+    <string name="login_short_mess">Proszę się zalogować.</string>
+    <string name="login_no_mess">Proszę z listy wybrać identyfikator.</string>
+    <string name="note_title">Uwagi do badania</string>
+    <string name="pass_title">Wprowadź hasło</string>
+    <string name="about_title">Test Umiejętności na Starcie Szkolnym</string>
+    <string name="about_version">Wersja: </string>
+    <string name="about_update">Aktualizacja: </string>
+    <string name="about_signature">Bank zadań: </string>
+    <string name="about_serial">Tablet: </string>
+    <string name="err_load_data">Wystąpił błąd podczas wczytywania danych\n.Sprawdź czy wybrany plik ma właściwą zawartość.</string>
+    <string name="result_group">Oddział: </string>
+    <string name="result_pupil">Uczeń: </string>
+    <string name="result_date">Badanie z dnia: </string>
+    <string name="result_from">Od: </string>
+    <string name="result_to">Do: </string>
+    <string name="result_area">Obszar:</string>
+    <string name="result_ref">Prównanie do:</string>
+    <string name="result_sg_01_patt">Osoby egzaminowane z Państwa placówki w porównaniu do wszystkich [band1] uzyskały [equ1] wynik w skali mierzącej umiejętności [area1].</string>
+    <string name="result_sg_23_patt">Osoby egzaminowane z Państwa placówki w porównaniu do wszystkich [band1] uzyskali [equ1] wynik w skali mierzącej umiejętności [area1].</string>
+    <string name="result_st_01_patt">[equ2] [part1] osób egzaminowanych z Państwa placówki znajduje się na trzech najwyższych poziomach umiejętności niezbędnych do nauki [area2]. [equ3] [part2] osób egzaminowanych radzi sobie przeciętnie w tym zakresie. [equ4] [part3] osób egzaminowanych znajduje się na dwóch najniższych poziomach. Strzałkami oznaczono różnice między odsetkiem osób egzaminowanych z Państwa placówki i [band2] na danym poziomie umiejętności.</string>
+    <string name="result_st_23_patt">[equ2] [part1] osób egzaminowanych z Państwa placówki znajduje się na trzech najwyższych poziomach umiejętności niezbędnych do nauki [area2]. [equ3] [part2] osób egzaminowanych radzi sobie przeciętnie w tym zakresie. [equ4] [part3] osób egzaminowanych znajduje się na dwóch najniższych poziomach. Strzałkami oznaczono różnice między odsetkiem osób egzaminowanych z Państwa placówki i [band2] na danym poziomie umiejętności.</string>
+    <string name="result_p_01_patt">Osoba egzaminowana charakteryzuje się [sel1] poziomem umiejętności matematycznych, [sel2] poziomem umiejętności niezbędnych do nauki pisania i [sel3] poziomem umiejętności niezbędnych do nauki czytania. Wyniki porównano do [band3].</string>
+    <string name="result_p_23_patt">Uczeń charakteryzuje się [sel1] poziomem umiejętności matematycznych, [sel2] poziomem umiejętności niezbędnych do nauki pisania i [sel3] poziomem umiejętności niezbędnych do nauki czytania. Wyniki porównano do [band3].</string>
+    <string name="result_band1_0">osoby egzaminowane w wieku pięciu lat uczęszczających do ostatnich grup wychowania przedszkolnego</string>
+    <string name="result_band1_1">osoby egzaminowane uczących się w zerówkach w przedszkolu</string>
+    <string name="result_band1_2">osób egzaminowanych z zerówek w szkołach podstawowych</string>
+    <string name="result_band1_3">osób egzaminowanych z klas pierwszych w szkołach podstawowych</string>
+    <string name="result_band2_0">dziećmi w wieku 5-lat z ostatnich grup wychowania przedszkolnego</string>
+    <string name="result_band2_1">dziećmi z zerówki w przedszkolu</string>
+    <string name="result_band2_2">osobami egzaminowanymi z zerówki w szkole podstawowej</string>
+    <string name="result_band2_3">osobami egzaminowanymi pierwszej klasy w szkole podstawowej</string>
+    <string name="result_band3_0">grupy osób egzaminowanych w wieku 5-lat z ostatnich grup wychowania przedszkolnego</string>
+    <string name="result_band3_1">grupy osób egzaminowanych z zerówki w przedszkolu</string>
+    <string name="result_band3_2">osób egzaminowanych z zerówki w szkole podstawowej</string>
+    <string name="result_band3_3">osób egzaminowanych pierwszej klasy w szkole podstawowej</string>
+    <string name="result_band4_0">osóby egzaminowanych pięcioletnich z ostatnich grup wychowania przedszkolnego.</string>
+    <string name="result_band4_1">osób egzaminowanych z  zerówek w przedszkolach.</string>
+    <string name="result_band4_2">osób egzaminowanych z  zerówek w szkołach.</string>
+    <string name="result_band4_3">osób egzaminowanych z pierwszej klasy szkoły podstawowej.</string>
+    <string name="result_equ1_true">wyższy</string>
+    <string name="result_equ1_false">niższy</string>
+    <string name="result_equ2_true">Aż</string>
+    <string name="result_equ2_false"></string>
+    <string name="result_equ3_true">To lepszy wynik niż obserwowany u ogółu</string>
+    <string name="result_equ3_false"></string>
+    <string name="result_equ4_true">Tylko</string>
+    <string name="result_equ4_false"></string>
+    <string name="result_area1_m">matematyczne</string>
+    <string name="result_area1_p">niezbędne do nauki pisania</string>
+    <string name="result_area1_c">niezbędne do nauki czytania</string>
+    <string name="result_area2_m">matematyki</string>
+    <string name="result_area2_p">pisania</string>
+    <string name="result_area2_c">czytania</string>
+    <string name="result_sel_a">wysokim</string>
+    <string name="result_sel_b">przeciętnym</string>
+    <string name="result_sel_c">niskim</string>
+    <string name="result_test">badanie z dnia</string>
+    <string name="set_lot_title">Wskaż katalog lokalizacji zadań</string>
+    <string name="set_lor_title">Wskaż katalog lokalizacji wyników</string>
+    <string name="set_lcs_title">Wstaż plik z identyfikatorami badaczy</string>
+    <string name="set_lsh_title">Wskaż plik z identyfikatorami placówek</string>
+    <string name="set_lpu_title">Wskaż plik z identyfikatorami osób egzaminowanych</string>
+    <string name="emp">---</string>
+    <string name="sch">Placówka</string>
+    <string name="department">Oddział</string>
+    <string name="pup">Uczeń</string>
+    <string name="sal">Pokaż wszystkie</string>
+    <string name="res">Wyniki</string>
+    <string name="tes">Badanie</string>
+    <string name="not">Uwagi do badania</string>
+    <string name="man">Samouczek</string>
+    <string name="id">Identyfikator</string>
+    <string name="nam">Imię</string>
+    <string name="sur">Nazwisko</string>
+    <string name="log">Wejście</string>
+    <string name="pas">Hasło</string>
+    <string name="pas_rep">Powtórz hasło</string>
+    <string name="pas_off">Bez hasła</string>
+    <string name="lot">Lokalizacja zadań (legacy!)</string>
+    <string name="lor">Lokalizacja wyników</string>
+    <string name="lca">Lista badaczy</string>
+    <string name="lsh">Lista placówek</string>
+    <string name="lpu">Lista osób egzaminowanych</string>
+    <string name="dot">…</string>
+    <string name="pid">Identyfikator osoby egzaminowanej</string>
+    <string name="gen">Płeć</string>
+    <string name="bir">Data urodzenia</string>
+    <string name="yea">Klasa</string>
+    <string name="car">Badacz</string>
+    <string name="are">Oddział</string>
+    <string name="sid">Identyfikator szkoły</string>
+    <string name="adr">Adres</string>
+    <string name="street">Ulica</string>
+    <string name="postal_code">Kod pocztowy</string>
+    <string name="city">Miasto</string>
+    <string name="province">Województwo</string>
+    <string name="sna">Nazwa</string>
+    <string name="e_task">Nie można uruchomić zadania: </string>
+    <string name="cari">Prowadzący badanie</string>
+    <string name="inf_men">chłopiec</string>
+    <string name="inf_wom">dziewczynka</string>
+    <string name="back_door">Witam</string>
+    <string name="no_pupils_title">Lista osób egzaminowanych jest pusta</string>
+    <string name="no_pupils_mess">Lista osób egzaminowanych jest pusta.\n\nOsoby egzaminowane można przypisać do badacza z ekranu głównego poleceniem "Dodaj badanego".</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="demo_mode">Demo</string>
+    <string name="login">Zaloguj sie do Lorem Ipsum!</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_repeat_password">Powtórz hasło</string>
+    <string name="perform_login">Zaloguj</string>
+    <string name="create_account">Utwórz konto</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_examined_manager">ExaminedManagerActivity</string>
+    <string name="add_new">Dodaj nowy</string>
+    <string name="save_and_exit">Zapisz i wyjdź</string>
+    <string name="title_activity_test_config">TestConfigActivity</string>
+    <string name="department_choose_or_add">Podaj odział do którego należy badany lub dodaj nowy.</string>
+    <string name="add_new_examinee">Uczestnik badania</string>
+    <string name="choose_researcher">Wybierz badacza do którego zostanie przypisana placówka i badany.</string>
+    <string name="begin_test">Rozpocznij badanie</string>
+    <string name="begin_tutorial_and_test">Uruchom samouczek</string>
+    <string name="wrong_password_or_id">Nieprawidłowe hasło lub login</string>
+    <string name="error_user_duplicate">Critical error. Two or more researchers exist with same password and id.</string>
+    <string name="error_unknown">Unknown error. </string>
+    <string name="add_note">Czy chcesz dodać notatkę do zadania?</string>
+    <string name="no_note">Bez notatki</string>
+    <string name="add_error">Wystąpił błąd przy dodawaniu.</string>
+    <string name="id_exists">Identyfikator istnieje!</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_suite_select">SuiteSelectActivity</string>
+    <string name="add_task_suite">Dodaj bank zadań</string>
+    <string name="version">wersja</string>
+    <string name="perform_login_to_old_version">Zaloguj do starej wersji systemu</string>
+    <string name="hint_task_suite_url">adres banku zadań</string>
+    <string name="install">Zainstaluj</string>
+    <string name="cancel">Anuluj</string>
+    <string name="select_task_suite">Wybierz bank zadań</string>
+    <string name="task_suite_installation_failed">Instalacja banku zadań nie powiodła się. Sprawdź czy podane zostały prawidłowe dane.</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="disable_network">Proszę włączyć tryb samolotowy (tryb offline) przed przystąpieniem do testu</string>
+    <string name="offline_mode_error">Przejście w tryb samolotowy nie powiodło się!</string>
+    <string name="no_institutions">Nie posiadasz żadnych przypisanych placówek!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_details">Szczegóły błędu:</string>
+    <string name="installing_title">Instalacja…</string>
+    <string name="preparing_download">Przygotowywanie pobierania…</string>
+    <string name="downloading">Pobieranie</string>
+    <string name="downloading_with_estimation_seconds">Pobieranie (pozostało %1$s, szybkość pobierania %2$s)</string>
+    <string name="malformed_url">Podany adres nie jest prawidłowym adresem URL</string>
+    <string name="could_not_find_task_suite">Nie znaleziono banku zadań</string>
+    <string name="preparing_task_suite">Przygotowywanie banku zadań…</string>
+    <string name="research_has_been_finished">Badanie zostało zakończone</string>
+    <string name="action_print">Zapisz jako PDF</string>
+    <string name="current_picked_date">Aktualnie wybrana data</string>
+    <string name="error_loading_test">Error loading test</string>
+    <string name="examinee_id_empty">Podaj identyfikator badanego!</string>
+    <string name="add_success">Poprawnie dodano badanego</string>
+    <string name="choose_gender">Wybierz płeć</string>
+    <string name="add_birthday">Data urodzin</string>
+    <string name="choose_institution">Wybierz placówkę</string>
+    <string name="choose_department">Wybierz oddział</string>
+    <string name="choose_examined">Wybierz badanego</string>
+    <string name="report_request">Wybrany bank zadań prosi o pozwolenie na wysyłanie nastepujących danych:</string>
+    <string name="agree">Zgadzam się</string>
+    <string name="nagree">Nie zgadzam się</string>
+    <string name="examinee_birthday">Data urodzin badanego</string>
+    <string name="examinee_gender">Płeć badanego</string>
+    <string name="examinee_id">Identyfikator badanego</string>
+    <string name="institution_id">Identyfikator placówki</string>
+    <string name="researcher_id">Identyfikator badacza</string>
+    <string name="task_and_summary_result">Dokładne wyniki badania</string>
+    <string name="summary_result">Podsumowanie badania</string>
+    <string name="change_raport_agreement">Zmien ustawienia wysyłania raportów</string>
+    <string name="reports_sending_allowed">Zezwolono na wysyłanie raportów</string>
+    <string name="report_sending_not_allowed">Nie zezwolono na wysyłanie raportów</string>
+    <string name="action_report_bug">Zgłoś błąd</string>
+    <string name="checking_updates">Sprawdzanie aktualizacji…</string>
+    <string name="checking">Sprawdzanie</string>
+    <string name="no_update_for">Brak dostępnych aktualizacji banku zadań %1$s</string>
+    <string name="do_you_want_to_update">Czy chcesz zaaktualizować bank zadań %1$s do wersji %2$s? (aktualnie posiadasz wersję %3$s)</string>
+    <string name="updating_title">Aktualizacja…</string>
+    <string name="task_suite_update_check_failed">Sprawdzanie aktualizacji nie powiodło się</string>
+    <string name="action_check_update">Sprawdź aktualizacje</string>
+    <string name="describe_bug">Opisz dokładnie błąd. Jeśli możliwe zamieść informację jak go odtworzyć.</string>
+    <string name="bug_description">Opis błędu</string>
+    <string name="email_address">Adres email</string>
+    <string name="phone_number">Numer telefonu</string>
+    <string name="select_demo_test">Wybierz pokazowy test</string>
+    <string name="checking_demo_failed">Wyszukiwanie demonstracyjnych banków zadań nie powiodło się: %1$s</string>
+    <string name="no_demo_suites">Brak zainstalowanych banków zadań zawierających tryb demostracyjny</string>
+    <string name="pilot_task_suite">pilotażowy bank zadań</string>
+    <string name="field_must_be_filled">Pole musi zostać wypełnione</string>
+    <string name="demo_start_failed">Uruchomienie trybu demo nie powiodło się</string>
+    <string name="preparing_report">Przygotowywanie raportu…</string>
+    <string name="report_preparing_failed">Nie udało się wygenerować raportu</string>
+    <string name="login_success">Sukces! Twoje konto zostało utworzone, zostałeś zalogowany!</string>
+    <string name="export_data">Eksportuj dane</string>
+    <string name="import_data">Importuj dane</string>
+    <string name="perform_test">Badanie</string>
+    <string name="examinee">Dodaj badanego</string>
+    <string name="reports">Raport</string>
+    <string name="demo">Wersja demostracyjna</string>
+    <string name="create_new_accoutn">Utwórz nowe konto</string>
+    <string name="printing">Przetwarzanie…</string>
+    <string name="preparing_pdf">Przygotowywanie pliku PDF…</string>
+    <string name="printing_failed">Zapisywanie pliku PDF nie powiodło się</string>
+    <string name="printing_completed">Zapisywanie zakończone</string>
+    <string name="printing_output">Wygenerowany plik został zapisany na karcie SD pod nazwą %1$s</string>
+    <string name="broken">uszkodzony</string>
+    <string name="unable_to_run_broken_task_suite">Wybrany bank zadań jest uszkodzony i nie może zostać uruchomiony</string>
+    <string name="add_department_id">Podaj identyfikator oddziału</string>
+    <string name="add_institution_id">Podaj identyfikator placówki</string>
+    <string name="share">Udostępnij</string>
+    <string name="action_generate_pdf">Generowanie PDF</string>
+    <string name="action_pdf_save_to_sdcard">Zapisz na karcie SD</string>
+    <string name="action_pdf_send_email">Wyślij poprzez e-mail</string>
+    <string name="action_pdf_save_to_google_drive">Zapisz w Google Drive</string>
+    <string name="action_pdf_print_in_google_cloud_print">Drukuj w Google Cloud Print</string>
+    <string name="close_task_view">Zamykanie badania</string>
+    <string name="do_you_really_want_to_close_research">Czy na pewno chcesz zakończyć badanie?</string>
+    <string name="could_not_start_demo">Nie udało sie uruchomić wersji demonstracyjnej testu</string>
+    <string name="task_suite_has_no_demo">Bank zadań nie udostępnia trybu demo</string>
+    <string name="please_wait">Proszę czekać…</string>
+    <string name="preparing_application_start">Przygotowanie do uruchomienia aplikacji…</string>
+    <string name="preparing_first_application_start">Przygotowanie do pierwszego uruchomienia aplikacji…</string>
+    <string name="error">Wystąpił błąd</string>
+    <string name="application_preparing_failed_details">Uruchamianie aplikacji nie powiodło się.</string>
+    <string name="interrupting_download">Przerywanie pobierania</string>
+    <string name="do_you_really_want_to_interrupt_download_of">Czy na pewno chcesz przerwać pobieranie banku zadań "%1$s" (wersja %2$s)?</string>
+    <string name="unknown_task_suite">Nieznany bank zadań</string>
+    <string name="unknown_version">nieznana wersja</string>
+    <string name="uninstall_task_suite">Usuń bank zadań</string>
+    <string name="uninstalling_task_suite">Deinstalacja banku zadań</string>
+    <string name="do_you_really_want_to_uninstall_task_suite">Czy na pewno chcesz usunąć bank zadań %1$s (wersja %2$s)?</string>
+    <string name="uninstalling_task_suite_message">Deinstalowanie banku %1$s (wersja %2$s)</string>
+    <string name="uninstall_failed">Deinstalacja nie powiodła się</string>
+    <string name="no_task_suite_on_list">Nie ma żadnego banku zadań na liście :(</string>
+    <string name="add_new_now">Dodaj teraz nowy!</string>
+    <string name="go_to_settings">Przejdź do ustawień</string>
+    <string name="offline_mode_enabled">Tryb samolotowy (tryb offline) jest włączony.</string>
+    <string name="disable_offline_mode">Pobranie banku zadań w tym trybie nie jest możliwe. Proszę wyłączyć tryb samolotowy (tryb offline) aby kontynuować.</string>
+    <string name="network_not_detected">Nie wykryto połączenia internetowego. Spróbuj ponownie za chwile.</string>
+    <string name="rotate_task_view">Obróć ekran zadania</string>
+    <string name="bug_report_sent_title">Zgłoszenie wysłane</string>
+    <string name="bug_report_sent_details">Twoje zgłoszenie zostało wysłane. W razie przyszłych konsultacji powołuj się na numer zgłoszenia:</string>
+    <string name="error_during_submitting_report">Błąd podczas wysyłania zgłoszenia błędu: %1$s</string>
+    <string name="disable_offline_mode_to_report_bug">Wysłanie zgłoszenia w tym trybie nie jest możliwe. Proszę wyłączyć tryb samolotowy (tryb offline) aby kontynuować.</string>
+    <string name="report_mail_subject">Raport "%1$s"</string>
+    <string name="report_mail_text">Raport jest załączony do tego e-maila.</string>
+    <string name="send_mail">Wyślij mail…</string>
+    <string name="could_not_connect_with_google_drive">Nie udało się połączyć z usługą Google Drive: %1$s</string>
+    <string name="disable_offline_mode_to_use_google_drive">Korzystanie z usługi Google Drive w tym trybie nie jest możliwe. Proszę wyłączyć tryb samolotowy (tryb offline) aby kontynuować.</string>
+    <plurals name="expected_hours">
+        <item quantity="one">jedna godzina</item>
+        <item quantity="few">%1$s godziny</item>
+        <item quantity="many">%1$s godzin</item>
+    </plurals>
+    <string name="retrieve_failed">pobieranie nie powiodło się</string>
+    <string name="expected_time_to_response">Oczekiwany czas odpowiedzi:</string>
+    <string name="in_case_of_no_response">W przypadku braku odpowiedzi w przeciągu podanego czasu, możesz skorzystać z poniższych form kontaktu z pomocą techniczną:</string>
+    <string name="email_address_colon">Adres e-mail:</string>
+    <string name="phone_number_colon">Numer telefonu:</string>
+    <string name="note_colon">Informacja:</string>
+    <string name="repair_task_suite">Napraw bank zadań</string>
+    <string name="ue_info">Aplikacja współfinansowana ze środków Unii Europejskiej w ramach Europejskiego Funduszu Społecznego</string>
+    <string name="report_error_issue">Zgłoś błąd w aplikacji</string>
+    <string name="repair_task_suite_title">Naprawić bank zadań?</string>
+    <string name="repair_task_suite_message">Bank zadań zostanie pobrany ponownie. Żadne dane związane z bankiem zadań nie zostaną utracone</string>
+    <string name="show_additional_test_info">pokaż dodatkowe informacje o teście</string>
+    <string name="name">Nazwa</string>
+    <string name="area">Obszar</string>
+    <string name="mark">Ocena</string>
+    <string name="answer">Odpowiedź</string>
+    <string name="number">Numer</string>
+    <string name="theta">Theta</string>
+    <string name="se_theta">Se Theta</string>
+    <string name="test_manager">Menedżer testu</string>
+    <string name="test_type">Typ zadania</string>
+    <string name="test_properties">Parametry zadania</string>
+    <string name="submit">Wyślij</string>
+    <string name="save_log">Zapisz logi na kartę SD</string>
+    <string name="attach_logs">Dołącz logi</string>
+    <string name="copying_logs">Kopiowanie logów…</string>
+    <string name="logs_copying_done">Kopiowanie logów zakończone</string>
+    <string name="logs_are_on_sdcard">Logi są dostępne na karcie SD, w katalogu \"%1$s\"</string>
+    <string name="submitting_report">Wysyłanie zgłoszenia…</string>
+    <string name="send_failure">Wysyłanie nie powiodło się</string>
+    <string name="field_can_not_be_empty">To pole nie może być puste</string>
+    <string name="show_correct_answers">Pokaż prawidłowe odpowiedzi</string>
+    <string name="click_to_continue">Dalej</string>
+    <string name="successButton">Start</string>
+    <string name="failureButton">Dalej</string>
+</resources>

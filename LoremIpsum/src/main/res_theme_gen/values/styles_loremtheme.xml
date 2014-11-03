@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="AutoCompleteTextViewLoremTheme" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/loremtheme_list_selector_holo_light</item>
+	    <item name="android:background">@drawable/loremtheme_edit_text_holo_light</item>
+  </style>
+
+  <style name="SpinnerLoremTheme" parent="android:Widget.Holo.Light.Spinner">
+      <item name="android:background">@drawable/loremtheme_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/loremtheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="ProgressBarLoremTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/loremtheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/loremtheme_progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
+  <style name="SeekBarLoremTheme" parent="android:Widget.Holo.Light.SeekBar">
+      <item name="android:progressDrawable">@drawable/loremtheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/loremtheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:thumb">@drawable/loremtheme_scrubber_control_selector_holo_light</item>
+  </style>
+
+</resources>

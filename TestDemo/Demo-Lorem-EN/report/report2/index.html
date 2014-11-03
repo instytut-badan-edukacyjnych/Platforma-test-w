@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demonstration report</title>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="sampleData.js"></script>
+    <script src="dataProvider.js"></script>
+    <style>
+        body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font: 14px/134% Helvetica Neue, sans-serif;
+        }
+
+        #frame {
+        width: 700pt;
+        margin: 0 auto;
+        }
+
+        #demo_prev {
+        float: left;
+        }
+        #demo_next {
+        float: right;
+        }
+
+        #ttl {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        }
+
+        #ex0 {
+        margin-top: 20px;
+        }
+
+        #ex1 {
+        margin-top: 20px;
+        }
+
+        #ex2 {
+        margin-top: 20px;
+        }
+
+        #ex3 {
+        margin-top: 20px;
+        }
+
+        #ex4 {
+        margin-top: 20px;
+        }
+
+        #ex5 {
+        margin-top: 20px;
+        }
+
+        .code {
+        background: #f0f0f0;
+        font-family: monospace;
+        }
+        .databox {
+        }
+        .databoxend { clear: both; display: block; position: relative; }
+        .iteminfo {
+        float: left;
+        margin-top: 5pt;
+        width: 150pt;
+        margin: 2pt;
+        background: #f0f0f0;
+        }
+        .iihead {
+        float: left;
+        width: 65pt;
+        background: #e0e0e0;
+        }
+        .iidata {
+        }
+    </style>
+</head>
+<body>
+<div id="frame">
+
+    <div id="demo_prev"><a href="../index.html">&lt; Previous example</a></div>
+    <div id="demo_next"><a href="../report3/index.html">Next example &gt;</a></div>
+
+    <div id="ttl" align="center">Structure of the data provided by the application</div>
+    <div id="ex0">
+      <p>Currently, the application provides the report with three data sets:</p>
+      <ul>
+        <li>test results</li>
+        <li>institution details</li>
+        <li>examinee details</li>
+      </ul>
+      <p>Samples of these data are provided below. In contrast to the previous example, which operated on some free-form
+      data generated specifically for graphs, this report example receives the data in the same format as if provided
+      by the application. The data is presented directly, with only minor formatting and some additional field descriptions
+      for increased readability.<p>
+      <p>Two useful files were included in the source code of this example:</p>
+      <ul>
+        <li>sampleData.js - random data generator that makes testing reports easier</li>
+        <li>dataProvider.js - utilities for decoding JSON format and switching between test data and real data</li>
+      </ul>
+    </div>
+
+    <div id="ex1">
+      <p><strong>Test results:</strong></p>
+      <p>Information about test results is provided in form of a list. It is obtained by <span class='code'>getResults()</span> function.
+      A set of data structures is returned and each structure containing details about single specific examination. These structures
+      contain the most important data needed to analyze and present the results to the user. It is worth noting that some of the fields
+      in these structures are identifiers relating to other data structures. Fields 'institution' and 'examinee' are such cases.</p>
+    </div>
+    <div id="databox-1" class='databox'></div>
+    <div class='databoxend'></div>
+    
+    <div id="ex2">
+      <p>Despite containing some flat identifiers, a single test result is still a complex structure.
+      A result may contain multiple attribute estimations, in form of numerical scores, one for each of the examination areas
+      defined by the authors of the test.</p>
+      <p>Specific values of the scores are heavily dependent on the test manager chosen in the test. Authors of the test
+      must select not only the test manager, but often also have to provide other configuration and calibration data that influences
+      the scores. Authors of the report should design the presentation so that it handles actual scores that test may produce.</p>
+    </div>
+    <div id="databox-2" class='databox'></div>
+    <div class='databoxend'></div>
+    
+    <div id="ex3">
+      <p><strong>Institution details:</strong></p>
+      <p>Details are obtained by <span class='code'>getInstitution(id)</span> function.
+      The function returns a structure containing fields with data provided during institution registration.
+      This function requires details of a single institution and requires an institution identifier to be passed.</p>
+    </div>
+    <div id="databox-3" class='databox'></div>
+    <div class='databoxend'></div>
+    
+    <div id="ex4">
+      <p><strong>Examinee details:</strong></p>
+      <p>Details are obtained by <span class='code'>getExaminee(id)</span> function.
+      The function returns a structure containing fields with data provided during examinee registration.
+      This function requires details of a single examinee and requires an examinee identifier to be passed.</p>
+    </div>
+    <div id="databox-4" class='databox'></div>
+    <div class='databoxend'></div>
+    
+    <div id="ex5"></div>
+</div>
+
+<script type="text/javascript">
+
+  $.each( rp.getResults().slice(0,3), function(idx, res) {
+      var dd = new Date(res.date);
+      $("#databox-1").append(
+        "<div class='iteminfo'>"
+        + "<div><div class='iihead'>ID:</div><div class='iidata'>" + res.id + "</div></div>"
+        + "<div><div class='iihead'>Date:</div><div class='iidata'>" + dd.toLocaleDateString() + "</div></div>"
+        + "<div><div class='iihead'>Time:</div><div class='iidata'>" + dd.toLocaleTimeString() + "</div></div>"
+        + "<div><div class='iihead'>Institution:</div><div class='iidata'>" + res.inst + "</div></div>"
+        + "<div><div class='iihead'>Departament:</div><div class='iidata'>" + res.dept + "</div></div>"
+        + "<div><div class='iihead'>Examinee:</div><div class='iidata'>" + res.examinee + "</div></div>"
+        + "<div><div class='iihead'>Areas:*</div><div class='iidata'>" + Object.keys( res.areas ) + "</div></div>"
+        + "</div>"
+    )
+  });
+
+  $("#databox-2").append("<div class='iteminfo'></div>");
+  var scoreInfo = $("#databox-2 .iteminfo").last();
+
+  $.each( rp.getResults()[0].areas, function(idx, area) {
+    scoreInfo.append( "<div><div class='iihead'>Score '" + idx + "':</div><div class='iidata'>" + area.score.toFixed(4) + "</div></div>");
+  });
+
+  $.each( {'i0': rp.getInstitution('i0'), 'i1': rp.getInstitution('i1') }, function(idx, inst) {
+    $("#databox-3").append(
+        "<div class='iteminfo'>"
+        + "<div><div class='iihead'>ID:</div><div class='iidata'>" + idx + "</div></div>"
+        + "<div><div class='iihead'>Name:</div><div class='iidata'>" + inst.name + "</div></div>"
+        + "<div><div class='iihead'>City:</div><div class='iidata'>" + inst.city + "</div></div>"
+        + "<div><div class='iihead'>Postal code:</div><div class='iidata'>" + inst.postal + "</div></div>"
+        + "</div>"
+    )
+  });
+
+  $.each( {'1': rp.getExaminee(1), '2': rp.getExaminee(2) }, function(idx, examn) {
+    $("#databox-4").append(
+        "<div class='iteminfo'>"
+        + "<div><div class='iihead'>ID:</div><div class='iidata'>" + idx + "</div></div>"
+        + "<div><div class='iihead'>Name:</div><div class='iidata'>" + examn.name + "</div></div>"
+        + "<div><div class='iihead'>Surname:</div><div class='iidata'>" + examn.surname + "</div></div>"
+        + "<div><div class='iihead'>Birthdate:</div><div class='iidata'>" + examn.birthday + "</div></div>"
+        + "</div>"
+    )
+  });
+
+</script>
+<script type="text/javascript">
+    var PrintHelper = {
+      requestPageCount: function() {
+        printer.setNumberOfPages(1);
+      },
+
+      displayPage: function(page) {
+        switch(page) {
+          default: /*...*/ break;
+          // ... switch to the right content here
+        }
+        
+        printer.renderFinished(); // content capture occurs here
+      }
+    }
+</script>
+</body>
+</html>
+

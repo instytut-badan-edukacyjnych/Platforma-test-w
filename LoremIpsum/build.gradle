@@ -1,0 +1,354 @@
+/*
+ * This file is part of Test Platform.
+ *
+ * Test Platform is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Test Platform is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Test Platform; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * Ten plik jest częścią Platformy Testów.
+ *
+ * Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+ * i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+ * wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+ * Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+ *
+ * Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+ * użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+ * gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+ * ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+ * Powszechnej Licencji Publicznej GNU.
+ *
+ * Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+ * Powszechnej Licencji Publicznej GNU (GNU General Public License);
+ * jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+ * Place, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+import java.util.regex.Pattern
+
+// loading android plugin
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'retrolambda'
+
+// configuration of UI tests
+// those three are obvious - paths to directories and target file name
+def testUiOutputFile = project.name + '_ui_tests.jar'
+def testUiOutputDir = project.projectDir.toString() + '/bin/androidUiTest'
+def testUiSourceDir = project.projectDir.toString() + '/src/androidUiTest'
+
+// options that are passed to adb to distinguish target device to run UI tests on.
+// may be e.g. '-d', '-e', or '-s <device identifier>'. See `adb --help` for details.
+def testUiTargetSpec = ['-e']
+
+// target directory for releases
+
+// configuration of android plugin
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 19
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            java {
+                srcDir project.projectDir.toString() + '/src/src_db_gen/java'
+            }
+            res.srcDirs = ['src/main/res', 'src/main/res_task', 'src/main/res_theme_gen']
+        }
+        androidTest {
+            java {
+
+                // NOTE: enabling line below allows for code completion in UI Tests, but
+                //       causes "normal" tests to always fail
+                // TODO: solve this issue
+                // srcDir testUiSourceDir+'/java'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            buildConfigField "boolean", "OMIT_NETWORK_CHECK", "false"
+            buildConfigField "boolean", "AUTO_LOGIN", "false"
+            buildConfigField "boolean", "AUTO_LOAD_TASK_SUITE_FROM_ASSETS", "false"
+            buildConfigField "boolean", "ENABLE_TEST_DRAWINGS", "false"
+            buildConfigField "boolean", "ENABLE_FAKE_RANDOM", "false"
+            buildConfigField "boolean", "ENABLE_GRID_POSITIONS", "false"
+        }
+        debug {
+            buildConfigField "boolean", "OMIT_NETWORK_CHECK", "true"
+            buildConfigField "boolean", "AUTO_LOGIN", "false"
+            buildConfigField "boolean", "AUTO_LOAD_TASK_SUITE_FROM_ASSETS", "false"
+            buildConfigField "boolean", "ENABLE_TEST_DRAWINGS", "false"
+            buildConfigField "boolean", "ENABLE_FAKE_RANDOM", "false"
+            buildConfigField "boolean", "ENABLE_GRID_POSITIONS", "true"
+
+        }
+    }
+
+
+
+
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+retrolambda {
+    if (!System.properties.getProperty("os.name").toLowerCase().contains("windows")) {
+        if (System.getenv("JAVA8_HOME") == null || System.getenv("JAVA7_HOME") == null) {
+            throw new GradleException('Required system environments are null (JAVA8_HOME && JAVA7_HOME).' +
+                    ' Try to run Android Studio from console. Android studio does not look into .bashrc file running from console should fix it.')
+        }
+        println(System.getenv("JAVA8_HOME"))
+        println(System.getenv("JAVA7_HOME"))
+        jdk System.getenv("JAVA8_HOME")
+        oldJdk System.getenv("JAVA7_HOME")
+        javaVersion JavaVersion.VERSION_1_7
+
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+//TODO MP check androidTestCompile instead compile
+    // TODO include those only in tests
+    compile 'org.mockito:mockito-core:1.9.5'
+    compile 'com.google.dexmaker:dexmaker:1.0'
+    compile 'com.google.dexmaker:dexmaker-mockito:1.0'
+
+    compile 'com.android.support:support-v4:19.+'
+    compile 'com.squareup.mimecraft:mimecraft:1.1.0'
+    compile 'com.jakewharton:butterknife:5.1.+'
+    compile('de.greenrobot:greendao:1.3.0') {
+        exclude module: 'support-v4'
+    }
+    compile 'com.netflix.rxjava:rxjava-core:0.18+'
+    compile 'com.netflix.rxjava:rxjava-android:0.18+'
+    compile 'com.netflix.rxjava:rxjava-debug:0.18+'
+    compile 'com.squareup.okhttp:okhttp:1.5.4+'
+    compile 'com.google.code.gson:gson:2.2.4+'
+    compile 'com.itextpdf:itextpdf:5.5.0+'
+    compile('org.simpleframework:simple-xml:2.7.+') {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
+    compile('com.google.android.gms:play-services:4.3.+') {
+        exclude module: 'support-v4'
+    }
+
+    // TODO this dependency is needed only for UI tests
+    compile files(getSdkPath() + '/platforms/android-19/uiautomator.jar')
+}
+
+assembleDebug.dependsOn(':DbGen:regenerate')
+assembleRelease.dependsOn(':DbGen:regenerate')
+
+// updating version information in manifest
+assembleRelease.doLast {
+    copyResult('release')
+}
+
+assembleDebug.doLast {
+    //  updateVersionCode()
+    //  updateVersionName()
+}
+
+def getVersionName() {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def manifestText = manifestFile.getText()
+    def patternVersionNumber = Pattern.compile("versionName=\"((.*?)(\\d+))\"")
+    def matcherVersionNumber = patternVersionNumber.matcher(manifestText)
+    matcherVersionNumber.find()
+    return matcherVersionNumber.group(1);
+}
+
+def copyResult(variant) {
+    def releasesDir = new File(project.projectDir, 'release')
+    releasesDir.mkdirs()
+    android.applicationVariants.each { v ->
+        if (v.name.equals(variant)) {
+            def src = v.outputFile
+            def dst = new File(releasesDir, project.name + '-' + getVersionName() + '.apk')
+            println 'Copying latest release to ' + dst
+            src.withInputStream { is -> dst << is }
+        }
+    }
+}
+
+def getProjectPackage() {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def manifestText = manifestFile.getText()
+    def patternPackage = Pattern.compile("package=\"([^\"]+)\"")
+    def matcher = patternPackage.matcher(manifestText)
+    matcher.find()
+    return matcher.group(1)
+}
+
+def getStartActivity() {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def manifestText = manifestFile.getText()
+    def patternStr = Pattern.quote("<activity") + ".*?" + Pattern.quote("android:name=\"") + "(.*?)" +
+            Pattern.quote("\"") + ".*?" + Pattern.quote("<category")/*+".*"+
+            Pattern.quote("category android:name=\"android.intent.category.LAUNCHER\"")*/
+    println patternStr
+    def patternPackage = Pattern.compile(patternStr, Pattern.MULTILINE | Pattern.DOTALL)
+    def matcher = patternPackage.matcher(manifestText)
+    matcher.find()
+    def name = matcher.group(1)
+    println name
+    return name
+}
+
+// helper function that loads Android SDK path from 'local.properties' file stored in main directory
+def getSdkPath() {
+    def propFile = file("../local.properties")
+    def patternSdkDir = Pattern.compile("sdk.dir=(.*)")
+    def propertiesText = propFile.getText()
+    def matcherSdkDir = patternSdkDir.matcher(propertiesText)
+    matcherSdkDir.find()
+    def sdkDir = matcherSdkDir.group(1)
+    if (sdkDir.substring(1, 3) == "\\:")
+        sdkDir = sdkDir[0] + ":" + sdkDir.substring(3);
+    return sdkDir
+}
+
+// helper function that lists all classes for UI testing
+def getTestUiClasses(testUiSourceDir) {
+    def clses = []
+    new File(testUiSourceDir).eachFileRecurse {
+        if (it.name =~ /.*\.java/) {
+            def line = it.readLines()[0]
+            def patternPackage = Pattern.compile("package\\s(.*);")
+            def matcher = patternPackage = patternPackage.matcher(line)
+            matcher.find();
+            def pkg = matcher.group(1)
+            def cls = pkg + "." + it.name.substring(0, it.name.length() - 5)
+            clses.add(cls)
+        }
+    }
+    return clses.join(",")
+}
+
+// import ant module for running UI automation
+ant.properties['sdk.dir'] = getSdkPath()
+ant.properties['target'] = 'android-19'
+ant.properties['out.filename'] = project.name + '_ui_tests.jar'
+ant.properties['out.dir'] = testUiOutputDir
+ant.properties['source.dir'] = testUiSourceDir
+ant.properties['verbose'] = true
+//ant.properties['java.compilerargs'] = '-classpath ' + project.projectDir.toString()+'/build/classes/debug'
+ant.importBuild 'build_ui_test.xml'
+
+def teeOutputStream(firstStream, secondStream) {
+    return new OutputStream() {
+        void close() {
+            firstStream.close();
+            secondStream.close();
+        }
+
+        void flush() {
+            firstStream.flush();
+            secondStream.flush();
+        }
+
+        void write(int b) {
+            firstStream.write(b);
+            secondStream.write(b);
+            if (b == '\n') flush();
+        }
+    }
+}
+
+def run(args) {
+    println "Running: " + args.toString()
+    Process proc = args.execute()
+    os = new ByteArrayOutputStream()
+    proc.consumeProcessErrorStream(teeOutputStream(System.err, os))
+    proc.consumeProcessOutputStream(teeOutputStream(System.out, os))
+    if (proc.waitFor() != 0)
+        throw new RuntimeException('exec failed')
+    return os.toString()
+}
+
+// goals for UI Tests
+task buildUiTest(dependsOn: ['assembleDebug']) << {
+    ant.project.executeTarget('ant_uitest.build')
+}
+
+task installUiTest(dependsOn: ['buildUiTest']) << {
+    run(['adb'] + testUiTargetSpec + ['push', testUiOutputDir + File.separator + testUiOutputFile, '/data/local/tmp'])
+}
+
+task runUiTest(dependsOn: ['installUiTest']) << {
+    def testClassesList = getTestUiClasses(testUiSourceDir)
+    println 'Autodetected list of UI Test Classes: ' + testClassesList
+    try {
+        testClassesListGather = []
+        for (String cls : testClasses.split(',')) {
+            if (!cls.contains('.'))
+                cls = getProjectPackage().split('\\.')[0..-2].join('.') + '.tests.ui.' + cls;
+            testClassesListGather.add(cls)
+        }
+        testClassesList = testClassesListGather.join(',')
+        println 'Overridden list of UI Test Classes: ' + testClassesList
+    } catch (Throwable t) {
+        println 'Exception: ' + t
+    }
+    println 'UI test classes to be run: ' + testClassesList
+    r = run(['adb'] + testUiTargetSpec + ['push', project.projectDir.toString() + '/build/apk/LoremIpsum-debug-unaligned.apk', '/data/local/tmp/LoremIpsum-debug-unaligned.apk'])
+    if (r.contains("Failure"))
+        throw new RuntimeException("Installation failed")
+    r = run(['adb'] + testUiTargetSpec + ['shell', 'uiautomator', 'runtest', testUiOutputFile, '-c', testClassesList])
+    new File('/home/mplucinski/loremuitest.txt').withOutputStream { it.write r.getBytes('UTF-8') }
+    r = r.split('\n')
+    def total = 0
+    def failures = 0
+    def errors = 0
+    def re_error = Pattern.compile("Error in .*")
+    def re_failure = Pattern.compile("Failure in .*")
+    for (String i : r) {
+        def m_error = re_error.matcher(i)
+        if (m_error.find()) {
+            total++;
+            errors++;
+        }
+        def m_failure = re_error.matcher(i)
+        if (m_failure.find()) {
+            total++;
+            failures++;
+        }
+    }
+
+    println 'Executed tests: ' + Integer.toString(total) + '; succeeded: ' + Integer.toString(total - failures - errors) + '; failures: ' + Integer.toString(failures) + '; errors: ' + Integer.toString(errors)
+    if (failures != 0 || errors != 0)
+        throw new RuntimeException("Tests failed")
+}

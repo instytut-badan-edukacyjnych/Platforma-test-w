@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Raport demonstracyjny</title>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="d3.v3.min.js"></script>
+    <script src="d3.bullet.js"></script>
+    <script src="sampleData.js"></script>
+    <script src="dataProvider.js"></script>
+    <script src="dataCache.js"></script>
+    <style>
+        body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font: 14px/134% Helvetica Neue, sans-serif;
+        shape-rendering: crispEdges;
+        }
+
+        #frame {
+        width: 700pt;
+        margin: 0 auto;
+        }
+
+        #demo_prev {
+        float: left;
+        }
+        #demo_next {
+        float: right;
+        }
+
+        #fig1 {
+        float: left;
+        height: 200pt;
+        width: 310pt;
+        margin-top: 15pt;
+        margin-bottom: 15pt;
+        background-color: #fafafa;
+        }
+
+        #fig2 {
+        float: right;
+        height: 200pt;
+        width: 310pt;
+        margin-top: 15pt;
+        margin-bottom: 15pt;
+        background-color: #fafafa;
+        }
+
+        #rnd {
+        float: left;
+        width: 80pt;
+        height: 230pt;
+        }
+
+        #ttl {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        }
+
+        #ex0 {
+        margin-top: 20px;
+        }
+
+        #ex1 {
+        margin-top: 20px;
+        }
+
+        #ex2 {
+        margin-top: 20px;
+        }
+
+        #ex3 {
+        margin-top: 20px;
+        }
+
+        #ex4 {
+        margin-top: 20px;
+        }
+
+        #ex5 {
+        margin-top: 20px;
+        }
+
+        #dept_placeholder {
+        background-color: yellow;
+        }
+
+        #inst_placeholder {
+        background-color: yellow;
+        }
+
+.bullet { font: 10px sans-serif; }
+.bullet .marker { stroke: #000; stroke-width: 2px; }
+.bullet .tick line { stroke: #666; stroke-width: .5px; }
+.bullet .range.s0 { fill: #eee; }
+.bullet .range.s1 { fill: #ddd; }
+.bullet .range.s2 { fill: #ccc; }
+.bullet .measure.s0 { fill: lightsteelblue; }
+.bullet .measure.s1 { fill: steelblue; }
+.bullet .title { font-size: 14px; font-weight: bold; }
+.bullet .subtitle { fill: #999; }
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+    </style>
+</head>
+<body>
+<div id="frame">
+
+    <div id="demo_prev"><a href="../report2/index.html">&lt; Poprzedni przykład</a></div>
+    <div id="demo_next"><a href="../report4/index.html">Następny przykład &gt;</a></div>
+
+    <div id="ttl" align="center">Wykorzystywanie bibliotek i obróbka danych</div>
+    <div id="ex0">
+      <p><strong>Biblioteki</strong></p>
+      <p>Szablony raportów tworzone są z użyciem HTML, JS i CSS, podobnie jak strony internetowe.
+      Raport jest uruchamiany w przestrzeni lokalnej, dzięki czemu jest możliwa np. nawigacja za pomocą
+      hiperłączy czy korzystanie z zasobów dołączanych z raportem jako osobne pliki.</p>
+      <p>Aplikacja nie dostarcza żadnych bibliotek ani nie wymaga wykorzystywania żadnej biblioteki.
+      Pozwala to autorowi raportu na użycie dowolnych wybranych przez siebie narzędzi projektowania i tworzenia
+      stron, jednak specyfika środowiska wymaga, aby moduły używane przez raport pracowały w całości po stronie
+      klienta, czyli w przeglądarce. To znaczy, że nie jest możliwe wykorzystywanie bibliotek opartych na Javie,
+      PHP czy ASP.Net itp.</p>
+      <p>Przykładowo, prezentowany obecnie demonstracyjny raport używa biblioteki D3 (http://d3js.org/)
+      do generowania grafiki wykresu, biblioteki jQuery (http://jquery.com/) dla uproszczenia operacji na drzewie
+      layoutu strony, oraz szeregu własnych drobnych algorytmów przetwarzających dane na ciekawszą formę.</p>
+    </div>
+    <div id="ex1">
+      <p><strong>Przetwarzanie danych</strong></p>
+      <p>Aplikacja dostarcza do raportu wyłącznie surowe dane zarejestrowane przez aplikację w trakcie jej pracy.
+      W celu ustalenia jakichkolwiek danych referencyjnych (normy, wartości odniesienia, dane kalibracyjne itp)
+      należy je do raportu w dowolnie wybranej formie i je potem w odpowiednio załadować.</p>
+      <p>Aby zaprezentować użytkownikowi wyniki i ew. dane dodatkowe, autor raportu musi je odpowiednio przetworzyć.
+      Głównym zbiorem danych otrzymywanym przez raport jest seria wyników badań. Analizując ten zbiór można
+      np. zgromadzić informacje jakie badania zostały przeprowadzone w ramach jakich instytucji i oddziałów.</p>
+      <p>Poniżej zamieszczono dwa wykresy obrazujący taką analizę. Wyniki badań zostały pogrupowane wg. instytucji oraz
+      wg. oddziałów, a następnie podliczone w ramach tych grup. Na przykład, na wykresie po lewej, wewnętrzne słupki dla grupy
+      <span id='dept_placeholder'></span> pokazują dodatkowy podział w ramach instytucji <span id='inst_placeholder'></span>.
+      Również w tym tekście, fragmenty podkreślone kolorem zostały wygenerowane automatycznie.</p>
+    </div>
+
+    <div id="center">
+        <div id="fig1">
+
+        </div>
+
+        <div id="rnd" style='margin-top: 20pt;'>
+          Naciśnij przycisk aby zobaczyć animację!
+          <div style='width: 40pt; margin: 20pt auto;'>
+            <button id="randomize">Losuj</button>
+          </div>
+          Spróbuj również dotknąć słupków wykresu.
+        </div>
+
+        <div id="fig2">
+
+        </div>
+    </div>
+
+    <div id="ex2"></div>
+    <div id="ex3"></div>
+    <div id="ex4"></div>
+    <div id="ex5"></div>
+</div>
+
+<script type="text/javascript">
+    var PrintHelper = {
+      requestPageCount: function() {
+        printer.setNumberOfPages(1);
+      },
+
+      displayPage: function(page) {
+        switch(page) {
+          default: /*...*/ break;
+          // ... switch to the right content here
+        }
+        
+        printer.renderFinished(); // content capture occurs here
+      }
+    }
+
+</script>
+<script>
+
+// bullet chart builder, based on D3 samples
+function buildChart(where,data) {
+  var margin = {top: 5, right: 15, bottom: 20, left: 120},
+      width = 400 - margin.left - margin.right,
+      height = 50 - margin.top - margin.bottom;
+
+  var chart = d3.bullet()
+      .width(width)
+      .height(height);
+
+  var svg = d3.select(where).selectAll("svg")
+      .data(data)
+    .enter().append("svg")
+      .attr("class", "bullet")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(chart);
+
+  var title = svg.append("g")
+      .style("text-anchor", "end")
+      .attr("transform", "translate(-6," + height / 2 + ")");
+
+  title.append("text")
+      .attr("class", "title")
+      .text(function(d) { return d.title; });
+
+  title.append("text")
+      .attr("class", "subtitle")
+      .attr("dy", "1em")
+      .text(function(d) { return d.subtitle; });
+      
+  d3.selectAll("#randomize").on("click", function() {
+    svg.datum(randomize).call(chart.duration(1000));
+  });
+};
+
+function randomize(d) {
+  if (!d.randomizer) d.randomizer = randomizer(d);
+  d.ranges = d.ranges.map(d.randomizer);
+  d.markers = d.markers.map(d.randomizer);
+  d.measures = d.measures.map(d.randomizer);
+  return d;
+}
+
+function randomizer(d) {
+  var k = d3.max(d.ranges) * .2;
+  return function(d) {
+    return Math.max(0, d + k * (Math.random() - .5));
+  };
+}
+
+
+// bar chart builder, based on D3 samples
+function buildChart2(where, data) {
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = 400 - margin.left - margin.right,
+      height = 280 - margin.top - margin.bottom;
+
+  var x = d3.scale.ordinal()
+      .rangeRoundBands([0, width], .1);
+
+  var y = d3.scale.linear()
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .ticks(10, "1");
+
+  var svg = d3.select(where).append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  x.domain(data.map(function(d) { return d.title; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Liczba");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.title); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+};
+
+  // fill report text with actual data
+  $('#dept_placeholder').text('"'+Object.keys(dept_count)[0]+'"');
+  $('#inst_placeholder').text(buildInstrs(inst_count));
+
+  // build the charts
+  buildChart("#fig1", demodata1);
+  buildChart2("#fig2", demodata2);
+</script>
+</body>
+</html>
+

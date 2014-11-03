@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demonstration report</title>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src='jquery.mobile-1.4.2.min.js'></script>
+    <link rel='stylesheet' href='jquery.mobile-1.4.2.min.css'></link>
+    <script src="d3.v3.min.js"></script>
+    <script src="d3.bullet.js"></script>
+    <script src="sampleData.js"></script>
+    <script src="dataProvider.js"></script>
+    <script src="dataCache.js"></script>
+    <style>
+        body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font: 14px/134% Helvetica Neue, sans-serif;
+        shape-rendering: crispEdges;
+        }
+
+        .ui-overlay-a, .ui-page-theme-a {
+        background-color: initial;
+        }
+
+        #frame {
+        width: 700pt;
+        margin: 0 auto;
+        }
+
+        #demo_prev {
+        float: left;
+        }
+        #demo_next {
+        float: right;
+        visibility: hidden;
+        }
+
+        #center {
+        }
+
+        #fig1 {
+        width: 100%;
+        margin-top: 5pt;
+        margin-bottom: 15pt;
+        padding-bottom: 15pt;
+        background-color: #e0e0e0;
+        }
+
+        #fig2 {
+        width: 100%;
+        margin-top: 5pt;
+        margin-bottom: 15pt;
+        padding-bottom: 15pt;
+        background-color: #e0e0e0;
+        }
+
+        #ttl {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        }
+
+        #ex0 {
+        margin-top: 20px;
+        }
+
+        #ex1 {
+        margin-top: 20px;
+        }
+
+        #ex2 {
+        margin-top: 20px;
+        }
+
+        #ex3 {
+        margin-top: 20px;
+        }
+
+        #button {
+        width: 60pt;
+        margin: 0 auto;
+        }
+
+        #ex4 {
+        margin-top: 20px;
+        }
+
+        #ex5 {
+        margin-top: 20px;
+        }
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.month {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.RdYlGn .q0-11{fill:rgb(165,0,38)}
+.RdYlGn .q1-11{fill:rgb(215,48,39)}
+.RdYlGn .q2-11{fill:rgb(244,109,67)}
+.RdYlGn .q3-11{fill:rgb(253,174,97)}
+.RdYlGn .q4-11{fill:rgb(254,224,139)}
+.RdYlGn .q5-11{fill:rgb(255,255,191)}
+.RdYlGn .q6-11{fill:rgb(217,239,139)}
+.RdYlGn .q7-11{fill:rgb(166,217,106)}
+.RdYlGn .q8-11{fill:rgb(102,189,99)}
+.RdYlGn .q9-11{fill:rgb(26,152,80)}
+.RdYlGn .q10-11{fill:rgb(0,104,55)}
+
+svg {
+  font: 10px sans-serif;
+}
+
+.area {
+  fill: steelblue;
+  clip-path: url(#clip);
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+    </style>
+</head>
+<body>
+<div id="frame">
+
+    <div id="demo_prev"><a href="../report3/index.html">&lt; Previous example</a></div>
+    <div id="demo_next"><a href="../index.html">Next example &gt;</a></div>
+
+    <div id="ttl" align="center">Data visualization</div>
+    <div id="ex0">
+      <p>Several simple analysis and their visualization are presented below. Currently only random sample data
+      provided with this report are analyzed. However, once similar report is placed in a real test, it would
+      analyze real examination data provided by the application.</p>
+    </div>
+    <div id="ex1"></div>
+
+    <div id="center">
+      <div id="ex2">
+        <p>Some of the elements visible below are interactive. By default, this report displays an analysis of
+        the full range of the data provided - that is, all institutions and all departments visited during the year.
+        It can be modified through the selectors defined below. Options provided by the selectors were
+        generated by JavaScript code automatically, basing on the data provided to the report.</p>
+      </div>
+      <div style='width:320px; position: absolute; left:120pt; top: 125pt'>
+        <select name="select-choice-1" id="select-choice-1"></select>
+      </div>
+      <div id="ex3" style='text-align:center; margin: 15pt 0'><strong>Average daily score in "mathematics"</strong></div>
+      <div id="fig1"></div>
+      <div id="ex4">
+        <p>Interactivity is not limited only to simple form elements. Graphs and other elements placed in the report
+        can be interactive too, it depends only on the libraries utilized by the report and creativity of the author.
+        For instance, the graphs below features zooming by dynamic selection of the date range to be presented.
+        Upper part of the graph reacts to touch and allows the user to pick interesting dates. This visualization
+        also respects the settings applied by the selectors above.
+      </div>
+      <div id="ex5" style='text-align:center; margin: 0'><strong>Daily number of examinees</strong></div>
+      <div id="fig2"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var PrintHelper = {
+      requestPageCount: function() {
+        printer.setNumberOfPages(1);
+      },
+
+      displayPage: function(page) {
+        switch(page) {
+          default: /*...*/ break;
+          // ... switch to the right content here
+        }
+        
+        printer.renderFinished(); // content capture occurs here
+      }
+    }
+
+</script>
+<script>
+function buildChart(where,data,dfrom,dupto) {
+  
+  $(where).empty();
+
+var width = 960,
+    height = 136,
+    cellSize = 17; // cell size
+
+var day = d3.time.format("%w"),
+    week = d3.time.format("%U"),
+    format = d3.time.format("%Y-%m-%d");
+
+var dataRange = d3.range(dfrom, dupto);
+
+var color = d3.scale.quantize()
+    .domain([-2.0, 2.0])
+    .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+
+var svg = d3.select(where).selectAll("svg")
+    .data(dataRange)
+  .enter().append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", "RdYlGn")
+  .append("g")
+    .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+
+svg.append("text")
+    .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+    .style("text-anchor", "middle")
+    .text(function(d) { return d; });
+
+var rect = svg.selectAll(".day")
+    .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+  .enter().append("rect")
+    .attr("class", "day")
+    .attr("width", cellSize)
+    .attr("height", cellSize)
+    .attr("x", function(d) { return week(d) * cellSize; })
+    .attr("y", function(d) { return day(d) * cellSize; })
+    .datum(format);
+
+rect.append("title")
+    .text(function(d) { return d; });
+
+svg.selectAll(".month")
+    .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+  .enter().append("path")
+    .attr("class", "month")
+    .attr("d", monthPath);
+
+  var values = d3.nest()
+    .key(function(d) { return d.date; })
+    .rollup(function(d) { return d[0].value; })
+    .map(data);
+
+  rect.filter(function(d) { return d in values; })
+      .attr("class", function(d) { return "day " + color(values[d]); })
+    .select("title")
+      .text(function(d) { return d + ": " + values[d]; });
+
+function monthPath(t0) {
+  var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
+      d0 = +day(t0), w0 = +week(t0),
+      d1 = +day(t1), w1 = +week(t1);
+  return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize
+      + "H" + w0 * cellSize + "V" + 7 * cellSize
+      + "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize
+      + "H" + (w1 + 1) * cellSize + "V" + 0
+      + "H" + (w0 + 1) * cellSize + "Z";
+}
+};
+
+
+function buildChart2(where,data) {
+  $(where).empty();
+
+var margin = {top: 100, right: 50, bottom: 20, left: 40},
+    margin2 = {top: 20, right: 50, bottom: 20, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 200 - margin.top - margin.bottom,
+    height2 = 90 - margin2.top - margin2.bottom;
+
+var x = d3.time.scale().range([0, width]),
+    x2 = d3.time.scale().range([0, width]),
+    y = d3.scale.linear().range([height, 0]),
+    y2 = d3.scale.linear().range([height2, 0]);
+
+var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+    xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
+    yAxis = d3.svg.axis().ticks(5).scale(y).orient("left");
+
+var brush = d3.svg.brush()
+    .x(x2)
+    .on("brush", brushed);
+
+var area = d3.svg.area()
+    .interpolate("monotone")
+    .x(function(d) { return x(d.date); })
+    .y0(height)
+    .y1(function(d) { return y(d.value); });
+
+var area2 = d3.svg.area()
+    .interpolate("monotone")
+    .x(function(d) { return x2(d.date); })
+    .y0(height2)
+    .y1(function(d) { return y2(d.value); });
+
+var svg = d3.select(where).append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom);
+
+svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+  .append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+var focus = svg.append("g")
+    .attr("class", "focus")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var context = svg.append("g")
+    .attr("class", "context")
+    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+  x.domain(d3.extent(data.map(function(d) { return d.date; })));
+  y.domain([0, d3.max(data.map(function(d) { return d.value; }))]);
+  x2.domain(x.domain());
+  y2.domain(y.domain());
+
+  focus.append("path")
+      .datum(data)
+      .attr("class", "area")
+      .attr("d", area);
+
+  focus.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  focus.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  context.append("path")
+      .datum(data)
+      .attr("class", "area")
+      .attr("d", area2);
+
+  context.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height2 + ")")
+      .call(xAxis2);
+
+  context.append("g")
+      .attr("class", "x brush")
+      .call(brush)
+    .selectAll("rect")
+      .attr("y", -6)
+      .attr("height", height2 + 7);
+
+function brushed() {
+  x.domain(brush.empty() ? x2.domain() : brush.extent());
+  focus.select(".area").attr("d", area);
+  focus.select(".x.axis").call(xAxis);
+}
+
+};
+
+
+
+function paddy(n, p, c) {
+    var pad_char = typeof c !== 'undefined' ? c : '0';
+    var pad = new Array(1 + p).join(pad_char);
+    return (pad + n).slice(-pad.length);
+};
+function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push( new Date (currentDate) )
+        currentDate.setDate( currentDate.getDate() + 1 );
+    }
+    return dateArray;
+}
+
+    function selectedOption(picker) {
+      if(typeof picker.selectedOptions !== "undefined")
+        return picker.selectedOptions[0];
+      if(picker.selectedIndex == -1)
+        return null;
+      return picker.options[picker.selectedIndex];
+    }
+
+var results = rp.getResults();
+var total = results.length;
+
+function redraw(inst, dept) {
+  var day_count = {};
+  $.each(results, function(idx, res) {
+    var m1 = res.inst == inst || (inst||'*') == '*';
+    var m2 = res.dept == dept || (dept||'*') == '*';
+    if( m1 && m2) {
+      var d = new Date(res.date);
+      var k = d.toISOString().slice(0,10);
+      var stat = day_count[k] || { date: d };
+      stat.count = (stat.count || 0) + 1;
+      stat.ar_m = (stat.ar_m || 0) + res.areas.m.score;
+      stat.ar_p = (stat.ar_p || 0) + res.areas.p.score;
+      stat.ar_c = (stat.ar_c || 0) + res.areas.c.score;
+      day_count[k] = stat;
+    }
+  });
+
+  var demodata1 = [];
+  $.each(day_count, function(key, val) {
+    demodata1.push( {
+      "date": key,
+      "value": val.ar_m / val.count,
+    });
+  });
+
+  var demodata2 = [];
+  $.each(getDates(new Date(2014,0,1),new Date(2015,0,1)), function(idx, d) {
+    demodata2.push( {
+      "date": d,
+      "value": (day_count[d.toISOString().slice(0,10)]||{count:0}).count,
+    });
+  });
+
+  buildChart("#fig1", demodata1, 2014, 2015);
+  buildChart2("#fig2", demodata2);
+};
+
+function selectorChanged() {
+      var groupPicker = $('#select-choice-1');
+      var group = selectedOption(groupPicker[0]).value;
+
+      var parts = group.split(/#;#/,2)
+      var inst = parts[0].replace(/;;;/g,';').replace(/###/g,'#').replace(/^\*$/,'');
+      var dept = parts[1].replace(/;;;/g,';').replace(/###/g,'#').replace(/^\*$/,'');
+      var gdata = getLocalResults(inst,dept);
+
+      redraw(inst, dept);
+};
+
+$(document).ready(function(){
+  $('a').click(function(event){
+    event.stopImmediatePropagation();
+  })
+
+      var groupPicker = $('#select-choice-1');
+      groupPicker.empty();
+      groupPicker.selectmenu('refresh');
+
+      var insts = getLocalInsts();
+      var depts = getLocalDepts();
+      $.each(getLocalGroups(), function(k,v){
+        var inst = insts[v[1]];
+        var instN = inst ? inst.name : '*';
+        var dept = v[0]; // - currently, DEPT has no key, nor data
+        var deptN = dept ? dept : '*'; // - currently, DEPT has no key, nor data
+        var instK = v[1].replace(/^$/,'*').replace(/#/g,'###').replace(/;/g,';;;');
+        var deptK = v[0].replace(/^$/,'*').replace(/#/g,'###').replace(/;/g,';;;');
+        groupPicker.append('<option value="'+instK+'#;#'+deptK+'">(tablet) '+instN+' / '+deptN+'</option>')
+      })
+      
+      $(groupPicker[0].options[0]).attr('selected',true);
+      groupPicker.selectmenu('refresh');
+
+      groupPicker.on('change', selectorChanged)
+      groupPicker.trigger('change')
+});
+
+</script>
+</body>
+</html>
+

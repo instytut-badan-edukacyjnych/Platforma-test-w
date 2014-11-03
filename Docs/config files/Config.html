@@ -1,0 +1,134 @@
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../github_markdown.css">
+</head>
+<body>
+<h1 id="config">Config</h1>
+<h2 id="config-xml">config.xml</h2>
+<p>Test configuration</p>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">config</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">suite</span> <span class="entity other attribute-name localname xml">pilot</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>yes<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">tasks</span> <span class="entity other attribute-name localname xml">change</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>TaskChangeOpaque<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">click</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>yes<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">finish</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E00<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">haptic</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>yes<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">manager</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>KttManager<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">password</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>yes<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">config</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Attribute</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+<th style="text-align:center">Possible values</th>
+<th style="text-align:center">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Tasks description</td>
+<td style="text-align:center">required once</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">change</td>
+<td style="text-align:center">Change method between tasks</td>
+<td style="text-align:center">legacy support, don't use it</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">deprecated</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">click</td>
+<td style="text-align:center">sound feedback on click</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">yes, no</td>
+<td style="text-align:center">------</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">finish</td>
+<td style="text-align:center">End task for task suite</td>
+<td style="text-align:center">legacy support, don't use it</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">deprecated</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">haptic</td>
+<td style="text-align:center">Haptic feedback on click</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">yes, no</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">manager</td>
+<td style="text-align:center">Manager for tests</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">KttManager, CatManager, CbtManager</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">tasks</td>
+<td style="text-align:center">password</td>
+<td style="text-align:center">Determines if password is required to login</td>
+<td style="text-align:center">legacy support, don't use it</td>
+<td style="text-align:center">yes,no</td>
+<td style="text-align:center">deprecated</td>
+</tr>
+<tr>
+<td style="text-align:center">suite</td>
+<td style="text-align:center">pilot</td>
+<td style="text-align:center">Determines if task suite is in pilot mode</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">yes, no</td>
+<td style="text-align:center">-----</td>
+</tr>
+</tbody>
+</table>
+<h2 id="managers-">Managers:</h2>
+<ol>
+<li>KttManager</li>
+<li>CatManager</li>
+<li>CbtManager</li>
+</ol>
+<p>You can create own manager by extending <strong>BaseManager</strong> class and using above listed
+managers as examples.</p>
+<p>After creating new manager you should create new class implementing <strong>ManagerFactory</strong>
+interface and put it in <strong>pl.edu.ibe.loremipsum.manager.managers</strong>.</p>
+<p><strong>createManager</strong> method in this interface should create new instance of your manager.</p>

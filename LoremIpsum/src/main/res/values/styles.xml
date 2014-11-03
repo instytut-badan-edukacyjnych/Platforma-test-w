@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<resources>
+
+    <style name="LoremIpsumTheme" parent="LoremTheme">
+        <item name="android:windowBackground">@color/gray_light</item>
+        <item name="android:actionBarStyle">@style/LoremIpsumActionBar</item>
+    </style>
+
+    <style name="LoremIpsumTheme.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="LoremIpsumActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/top_bar</item>
+    </style>
+
+    <style name="BackgroundLoremIpsum" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <!--<item name="android:background">@color/gray_light</item>-->
+        <!--<item name="android:text">@string/lorem_ipsum</item>-->
+    </style>
+
+    <style name="BackgroundLoginLoremIpsum" parent="BackgroundLoremIpsum">
+        <item name="android:textColor">#b2FFFFFF</item>
+        <item name="android:background">#d5d5d5</item>
+        <item name="android:text">@string/lorem_ipsum</item>
+    </style>
+
+    <style name="UeInfo" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/font_black</item>
+    </style>
+
+    <style name="Default" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/font_gray</item>
+    </style>
+
+    <style name="Default.Login" parent="android:TextAppearance">
+        <item name="android:textColor">@color/button_login_font</item>
+    </style>
+
+
+    <style name="Default.Big">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Default.Big.AllCaps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Default.Big.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Default.Big.Bold.AllCaps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Default.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Default.Small.Warning">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="Form" parent="Default">
+        <item name="android:gravity">bottom</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="Support"/>
+    <style name="Support.Response"/>
+
+    <style name="Support.Response.Details">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Support.Response.Field">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Support.Response.Field.Key"/>
+    <style name="Support.Response.Field.Value">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+</resources>

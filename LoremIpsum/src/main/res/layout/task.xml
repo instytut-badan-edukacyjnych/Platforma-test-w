@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="1280px"
+    android:layout_height="800px">
+
+    <AbsoluteLayout
+        android:id="@+id/task_layout"
+        android:layout_width="1280px"
+        android:layout_height="800px"
+        android:screenOrientation="reverseLandscape">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideOverlay">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/quit"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/men" />
+
+                <ImageButton
+                    android:id="@+id/photo"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/pho" />
+
+                <CheckBox
+                    android:id="@+id/microphone"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:button="@drawable/microphone" />
+
+                <ImageButton
+                    android:id="@+id/texp_btn"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/exp" />
+
+                <ImageButton
+                    android:id="@+id/custom_mark"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/custom_mark" />
+
+                <ImageButton
+                    android:id="@+id/zero"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/zer" />
+
+                <ImageButton
+                    android:id="@+id/one"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/one" />
+
+                <ImageButton
+                    android:id="@+id/two"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/two" />
+
+                <ImageButton
+                    android:id="@+id/previous"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/pre" />
+
+                <ImageButton
+                    android:id="@+id/next"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/nex" />
+
+                <ImageButton
+                    android:id="@+id/reload"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/rel" />
+
+                <ImageButton
+                    android:id="@+id/step"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/ste" />
+
+                <ImageButton
+                    android:id="@+id/tcom_btn"
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:src="@drawable/com" />
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:id="@+id/mark_dropdown_position_holder"
+            android:layout_width="80dp"
+            android:layout_height="10dp"
+            android:layout_x="66px"
+            android:layout_y="120px" />
+
+        <ImageView
+            android:id="@+id/fake_img"
+            android:layout_width="1130px"
+            android:layout_height="800px"
+            android:layout_x="150px"
+            android:layout_y="0px"
+            android:scaleType="fitXY" />
+
+        <FrameLayout
+            android:id="@+id/task_wrapper"
+            android:layout_width="1130px"
+            android:layout_height="wrap_content"
+            android:layout_x="150px"
+            android:layout_y="0px"
+            android:scaleType="fitXY" />
+
+
+        <ImageButton
+            android:id="@+id/cam_trig"
+            android:layout_width="90px"
+            android:layout_height="120px"
+            android:layout_x="1166px"
+            android:layout_y="309px"
+            android:src="@drawable/pho"
+            android:visibility="gone" />
+    </AbsoluteLayout>
+</FrameLayout>

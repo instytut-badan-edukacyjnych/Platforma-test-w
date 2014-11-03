@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<resources>
+    <string name="app_name">Platforma Testów IBE</string>
+    <string name="set_menu">Settings</string>
+    <string name="pup_menu">Examinees</string>
+    <string name="sch_menu">Institutions</string>
+    <string name="car_menu">Researchers</string>
+    <string name="in_menu">Logging in</string>
+    <string name="und_menu">Undo</string>
+    <string name="add_menu">Add</string>
+    <string name="del_menu">Delete</string>
+    <string name="exp_menu">Export</string>
+    <string name="sav_menu">Save</string>
+    <string name="rep_menu">Report</string>
+    <string name="vie_menu">Notes</string>
+    <string name="tab_menu">Table</string>
+    <string name="gra_menu">Graph</string>
+    <string name="ok_text">OK</string>
+    <string name="cancel_text">Anuluj</string>
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+    <string name="save_text">Save</string>
+    <string name="prev_text">Previous</string>
+    <string name="sel_text">Select</string>
+    <string name="e_fake">Function is disabled until main research is finished.</string>
+    <string name="no_tasks">&lt;no tasks></string>
+    <string name="no_tasks_title">Tasks base is empty</string>
+    <string name="no_tasks_mess">Tasks base is empty.\n\nTask suite may be selected from "Settings" option in menu.</string>
+    <string name="info_cards">Screen for researchers data edition.\n\nATTENTION. All changes, especially adding new people, should be agreed with research coordinator.</string>
+    <string name="info_login">Researcher should select her/his identifier, which will be used to sign research results. \n\nIf there is no identifier on drop-down list box or associated data are invalid, they may be changed or filled in by selecting the field "Researchers" from side menu.</string>
+    <string name="info_main">Menu in top-right corner provides access to application settings.\n\nIf the examinee does the research for the first time, it should use the Tutorial.\n\nBefore starting a research, you should select institution and examinee from lists. If institution or examinee are not visible on the list, data may be filled in by selecting "Add examinee" from this screen.</string>
+    <string name="info_pupils">Examinees data edition screen.\n\nATTENTION. All changes, especially adding new examinees should be agreed with research coordinator. Every examinee must have unique identifier, otherwise research results would not be stored properly.</string>
+    <string name="info_schools">Institutions data edition screen.\n\nATTENTION. All changes, especially adding new institutions should be agreed with research coordinator.</string>
+    <string name="info_settings">Configuration files and task suite edition screen.\n\nTo select task suite to conduct research, please select the button next to "Tasks location" field and choose directory, where task suite has been placed.\n\nATTENTION. Changes of configuration files in this screen may cause abnormal behvaiour of application.</string>
+    <string name="mes_wait">Please wait…</string>
+    <string name="mes_abort_title">Research has been interrupted</string>
+    <string name="mes_abort">Please describe reason for reseach interruption in research\'s notes.</string>
+    <string name="mes_task">Select notebook with tasks</string>
+    <string name="mes_badpas">Invalid password.</string>
+    <string name="mes_close_ask">Do you want to quit application?</string>
+    <string name="mes_bank_err">[ERROR] Not all tasks has been loaded: </string>
+    <string name="mes_change">Do you want to change existing data?</string>
+    <string name="mes_save_change">Do you want to save provided changes?</string>
+    <string name="mes_new_id">Do you want to create a new card?</string>
+    <string name="mes_enter_id">New identifier</string>
+    <string name="mes_delete_id">Do you want to delete this identifier?</string>
+    <string name="mes_pass_no_equ">Password in both fields is not that same</string>
+    <string name="password_too_short">Password must be at least 6 characters long</string>
+    <string name="login_too_short">Login must be at least 6 characters long</string>
+    <string name="mes_empty">Field can not be empty</string>
+    <string name="mes_exist">Selected identifier is already in use</string>
+    <string name="mes_last_res">Last research has been conducted</string>
+    <string name="mes_no_note">There were no notes attached to this research.</string>
+    <string name="mes_bad_nam">ERROR - Invalid file name.</string>
+    <string name="mes_empty_dir">Directory is empty</string>
+    <string name="mes_prev_dir">Previous directory</string>
+    <string name="mes_set_info">ATTENTION: Please make changes very carefully. Changes may cause abnormal behaviour of application.</string>
+    <string name="mes_dir_empty">-- empty ---</string>
+    <string name="mes_del_school">Do you want to remove institution?</string>
+    <string name="mes_del_card">Do you want to remove researcher?</string>
+    <string name="mes_del_pupil">Do you want to remove examinee?</string>
+    <string name="mes_enter_new_id">Identifier</string>
+    <string name="mes_enter_new_group">Department name</string>
+    <string name="mes_enter_new_gender">Gender</string>
+    <string name="mes_enter_new_birthday">Birth date</string>
+    <string name="mes_no_data">Found no results to show</string>
+    <string name="login_title">Logging in</string>
+    <string name="login_mess">Before starting research please log in.</string>
+    <string name="login_short_mess">Please log in.</string>
+    <string name="login_no_mess">Please select an identifier from the list.</string>
+    <string name="note_title">Notes for research</string>
+    <string name="pass_title">Enter password</string>
+    <string name="about_title">Test Umiejętności na Starcie Szkolnym</string>
+    <string name="about_version">Version: </string>
+    <string name="about_update">Updates: </string>
+    <string name="about_signature">Task suite: </string>
+    <string name="about_serial">Tablet: </string>
+    <string name="err_load_data">An error occurred during data loading\n.Check if content of selected file is correct.</string>
+    <string name="result_group">Department: </string>
+    <string name="result_pupil">Examinee: </string>
+    <string name="result_date">Research made on: </string>
+    <string name="result_from">Since: </string>
+    <string name="result_to">To: </string>
+    <string name="result_area">Area:</string>
+    <string name="result_ref">Comparison to:</string>
+    <string name="result_sg_01_patt">Examinees from your institution in comparison to all [band1] got [equ1] result in scale for [area1] skill.</string>
+    <string name="result_sg_23_patt">Examinees from your institution in comparison to all [band1] got [equ1] result in scale for [area1] skill.</string>
+    <string name="result_st_01_patt">[equ2] [part1] examinees from your institution are on three highest skill levels required for [area2] learning. [equ3] [part2] examinees are average in this range. [equ4] [part3] examinees are on two lowest levels. Differences between percentage of examinees from your institution and [band2] in given skill level are marked by arrows.</string>
+    <string name="result_st_23_patt">[equ2] [part1] examinees from your institution are on three highest skill levels required for [area2] learning. [equ3] [part2] examinees are average in this range. [equ4] [part3] examinees are on two lowest levels. Differences between percentage of examinees from your instituion and [band2] in given skill level are marked by arrows.</string>
+    <string name="result_p_01_patt">Examinee has [sel1] level of mathematics skills, [sel2] level of skills required for writing learning and [sel3] level of skills required for reading learning. Results are compared to [band3].</string>
+    <string name="result_p_23_patt">Examinee has [sel1] level of mathematics skills, [sel2] level of skills required for writing learning and [sel3] level of skills required for reading learning, Results are compared to [band3].</string>
+    <string name="result_band1_0">examinees being five years old attending to last groups of kindergartens</string>
+    <string name="result_band1_1">examinese being in reception classes in kindergartens</string>
+    <string name="result_band1_2">examinees being in reception classes in primary schools</string>
+    <string name="result_band1_3">examinees being in first classes in primary schools</string>
+    <string name="result_band2_0">examinees begin five years old attending to last groups of kindergartens</string>
+    <string name="result_band2_1">examinees being in reception classes in kindergartens</string>
+    <string name="result_band2_2">examinees being in reception classes in primary schools</string>
+    <string name="result_band2_3">examinees being in first classes in primary schools</string>
+    <string name="result_band3_0">groups of five years old examinees being in last group of kindergarten</string>
+    <string name="result_band3_1">groups of examinees from reception class in kindergarten</string>
+    <string name="result_band3_2">examinees from reception class in primary school</string>
+    <string name="result_band3_3">examinees from first class in primary school</string>
+    <string name="result_band4_0">five years old examinees from last groups of kindergartens.</string>
+    <string name="result_band4_1">examinees from reception classes in kindergartens.</string>
+    <string name="result_band4_2">examinees from reception classes in schools.</string>
+    <string name="result_band4_3">examinees from first class in primary school.</string>
+    <string name="result_equ1_true">higher</string>
+    <string name="result_equ1_false">lower</string>
+    <string name="result_equ2_true"></string>
+    <string name="result_equ2_false"></string>
+    <string name="result_equ3_true">It is better result than usual</string>
+    <string name="result_equ3_false"></string>
+    <string name="result_equ4_true">Only</string>
+    <string name="result_equ4_false"></string>
+    <string name="result_area1_m">mathematics</string>
+    <string name="result_area1_p">required for writing learning</string>
+    <string name="result_area1_c">required for reading learning</string>
+    <string name="result_area2_m">mathematics</string>
+    <string name="result_area2_p">writing</string>
+    <string name="result_area2_c">reading</string>
+    <string name="result_sel_a">high</string>
+    <string name="result_sel_b">normal</string>
+    <string name="result_sel_c">low</string>
+    <string name="result_test">research made on</string>
+    <string name="set_lot_title">Select location directory for tasks</string>
+    <string name="set_lor_title">Select location directory for results</string>
+    <string name="set_lcs_title">Select file with researchers identifiers</string>
+    <string name="set_lsh_title">Select file with institutions identifiers</string>
+    <string name="set_lpu_title">Select file with examinees identifiers</string>
+    <string name="emp">---</string>
+    <string name="sch">Institution</string>
+    <string name="department">Department</string>
+    <string name="pup">Examinee</string>
+    <string name="sal">Show all</string>
+    <string name="res">Results</string>
+    <string name="tes">Research</string>
+    <string name="not">Notes for research</string>
+    <string name="man">Tutorial</string>
+    <string name="id">Identifier</string>
+    <string name="nam">Name</string>
+    <string name="sur">Surname</string>
+    <string name="log">Entrance</string>
+    <string name="pas">Password</string>
+    <string name="pas_rep">Repeat password</string>
+    <string name="pas_off">Without password</string>
+    <string name="lot">Tasks localization (legacy!)</string>
+    <string name="lor">Results localization</string>
+    <string name="lca">Researchers list</string>
+    <string name="lsh">Institutions list</string>
+    <string name="lpu">Examinees list</string>
+    <string name="dot">...</string>
+    <string name="pid">Identifier of examinee</string>
+    <string name="gen">Gender</string>
+    <string name="bir">Birth date</string>
+    <string name="yea">Class</string>
+    <string name="car">Researcher</string>
+    <string name="are">Researcher</string>
+    <string name="sid">Idenfifier of school</string>
+    <string name="adr">Address</string>
+    <string name="street">Street</string>
+    <string name="postal_code">Postal code</string>
+    <string name="city">City</string>
+    <string name="province">Province</string>
+    <string name="sna">Name</string>
+    <string name="e_task">Can not start task: </string>
+    <string name="cari">Researcher</string>
+    <string name="inf_men">boy</string>
+    <string name="inf_wom">girl</string>
+    <string name="back_door">Hello</string>
+    <string name="no_pupils_title">Examinees list is empty</string>
+    <string name="no_pupils_mess">Examinees list is empty.\n\nExaminees can be attached to researcher in "Examinees" command in menu".</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="demo_mode">Demo</string>
+    <string name="login">Log in to Lorem Ipsum!</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_repeat_password">Repeat password</string>
+    <string name="perform_login">Log in</string>
+    <string name="create_account">Create account</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_examined_manager">ExaminedManagerActivity</string>
+    <string name="add_new">Add new</string>
+    <string name="save_and_exit">Save and exit</string>
+    <string name="title_activity_test_config">TestConfigActivity</string>
+    <string name="department_choose_or_add">Choose department which examinee belong to, or add new.</string>
+    <string name="add_new_examinee">Examinee</string>
+    <string name="choose_researcher">Select researcher, which institution and examinee will be assigned to.</string>
+    <string name="begin_test">Begin a test</string>
+    <string name="begin_tutorial_and_test">Begin a tutorial</string>
+    <string name="wrong_password_or_id">Wrong login or password</string>
+    <string name="error_user_duplicate">Critical error. Two or more researchers exist with same password and id.</string>
+    <string name="error_unknown">Unknown error. </string>
+    <string name="add_note">Do you want to add a note to the task?</string>
+    <string name="no_note">No note</string>
+    <string name="add_error">An error occurred during adding.</string>
+    <string name="id_exists">Idendifier exists!</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_suite_select">SuiteSelectActivity</string>
+    <string name="add_task_suite">Add task suite</string>
+    <string name="version">version</string>
+    <string name="perform_login_to_old_version">Log in to old system\'s version</string>
+    <string name="hint_task_suite_url">task suite address</string>
+    <string name="install">Install</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_task_suite">Select task suite</string>
+    <string name="task_suite_installation_failed">Task suite installation failed. Please check if provided data were correct.</string>
+    <string name="loading">Loading…</string>
+    <string name="disable_network">Please turn-on airplane mode (offline mode) before starting a test</string>
+    <string name="offline_mode_error">Switching to airplane mode failed!</string>
+    <string name="no_institutions">You do not have any assigned institutions!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_details">Error details:</string>
+    <string name="installing_title">Installing…</string>
+    <string name="preparing_download">Preparing download…</string>
+    <string name="downloading">Downloading</string>
+    <string name="downloading_with_estimation_seconds">Downloading (%1$s left, download speed %2$s)</string>
+    <string name="malformed_url">Given address is not a valid URL address</string>
+    <string name="could_not_find_task_suite">Task suite not found</string>
+    <string name="preparing_task_suite">Preparing task suite…</string>
+    <string name="research_has_been_finished">Research has been finished</string>
+    <string name="action_print">Save as PDF</string>
+    <string name="current_picked_date">Currently picked date</string>
+    <string name="error_loading_test">Error loading test</string>
+    <string name="examinee_id_empty">Please provide examinee\'s identifier!</string>
+    <string name="add_success">Examinee adding succeeded</string>
+    <string name="choose_gender">Choose gender</string>
+    <string name="add_birthday">Birth date</string>
+    <string name="choose_institution">Choose institution</string>
+    <string name="choose_department">Choose department</string>
+    <string name="choose_examined">Choose examinee</string>
+    <string name="report_request">Selected task suite asks for submitting following data:</string>
+    <string name="agree">I agree</string>
+    <string name="nagree">I do not agree</string>
+    <string name="examinee_birthday">Examinee\'s birth date</string>
+    <string name="examinee_gender">Examinee\'s gender</string>
+    <string name="examinee_id">Examinee\'s identifier</string>
+    <string name="institution_id">Institution\'s identifier</string>
+    <string name="researcher_id">Researcher\'s identifier</string>
+    <string name="task_and_summary_result">Detailed research results</string>
+    <string name="summary_result">Research summary</string>
+    <string name="change_raport_agreement">Change submitting reports settings</string>
+    <string name="reports_sending_allowed">Reports submitting allowed</string>
+    <string name="report_sending_not_allowed">Reports submitting declined</string>
+    <string name="action_report_bug">Report error/bug</string>
+    <string name="checking_updates">Checking for updates…</string>
+    <string name="checking">Checking</string>
+    <string name="no_update_for">There are no available updates for task suite %1$s</string>
+    <string name="do_you_want_to_update">Do you want to update task suite %1$s to version %2$s? (you currently have version %3$s)</string>
+    <string name="updating_title">Updating…</string>
+    <string name="task_suite_update_check_failed">An error occurred during update cheking</string>
+    <string name="action_check_update">Check for updates</string>
+    <string name="describe_bug">Describe an error/bug in details. If it is possible, describe how to reproduce it.</string>
+    <string name="bug_description">Error/bug description</string>
+    <string name="email_address">E-mail address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="select_demo_test">Select demo test</string>
+    <string name="checking_demo_failed">An error occurred during looking for demo task suites: %1$s</string>
+    <string name="no_demo_suites">There are no task suites installed that contains demo mode</string>
+    <string name="pilot_task_suite">pilot task suite</string>
+    <string name="field_must_be_filled">Field must be filled</string>
+    <string name="demo_start_failed">An error occurred during launching demo mode</string>
+    <string name="preparing_report">Preparing a report…</string>
+    <string name="report_preparing_failed">An error occurred during report generating</string>
+    <string name="login_success">Success! Your account has been created, you have been logged in!</string>
+    <string name="export_data">Export data</string>
+    <string name="import_data">Import data</string>
+    <string name="perform_test">Test</string>
+    <string name="examinee">Add examinee</string>
+    <string name="reports">Report</string>
+    <string name="demo">Demo version</string>
+    <string name="create_new_accoutn">Create new account</string>
+    <string name="printing">Processing…</string>
+    <string name="preparing_pdf">Preparing PDF file…</string>
+    <string name="printing_failed">An error occurred during writing PDF file</string>
+    <string name="printing_completed">Writing completed</string>
+    <string name="printing_output">Generated file has been saved on SD card under name %1$s</string>
+    <string name="broken">broken</string>
+    <string name="unable_to_run_broken_task_suite">Selected task suite is broken and could not be started</string>
+    <string name="add_department_id">Add department identifier</string>
+    <string name="add_institution_id">Add institution identifier</string>
+    <string name="share">Share</string>
+    <string name="action_generate_pdf">Generate PDF</string>
+    <string name="action_pdf_save_to_sdcard">Save on SD card</string>
+    <string name="action_pdf_send_email">Send through an e-mail</string>
+    <string name="action_pdf_save_to_google_drive">Save in Google Drive</string>
+    <string name="action_pdf_print_in_google_cloud_print">Print through Google Cloud Print</string>
+    <string name="close_task_view">Closing task view</string>
+    <string name="do_you_really_want_to_close_research">Do you really want to close test?</string>
+    <string name="could_not_start_demo">An error occurred during launching demo mode</string>
+    <string name="task_suite_has_no_demo">Task suite does not provide demo mode</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="preparing_application_start">Preparing to application launch…</string>
+    <string name="preparing_first_application_start">Preparing to first application launch…</string>
+    <string name="error">An error occurred</string>
+    <string name="application_preparing_failed_details">Application launching failed</string>
+    <string name="interrupting_download">Interrupting download</string>
+    <string name="do_you_really_want_to_interrupt_download_of">Do you really want to interrupt download of task suite "%1$s" (version %2$s)?</string>
+    <string name="unknown_task_suite">Unknown task suite</string>
+    <string name="unknown_version">unknown version</string>
+    <string name="uninstall_task_suite">Uninstall task suite</string>
+    <string name="uninstalling_task_suite">Uninstalling task suite</string>
+    <string name="do_you_really_want_to_uninstall_task_suite">Do you really want to uninstall task suite %1$s (version %2$s)?</string>
+    <string name="uninstalling_task_suite_message">Uninstalling task suite %1$s (version %2$s)</string>
+    <string name="uninstall_failed">Uninstalling failed</string>
+    <string name="no_task_suite_on_list">There is no task suite on the list :(</string>
+    <string name="add_new_now">Add new now!</string>
+    <string name="go_to_settings">Go to settings</string>
+    <string name="offline_mode_enabled">Plane mode (offline mode) is enabled.</string>
+    <string name="disable_offline_mode">It will be impossible to download task suite in this mode. Please turn off plane mode (offline mode) to continue.</string>
+    <string name="network_not_detected">Unable to detect internet connection. Please try again later.</string>
+    <string name="rotate_task_view">Rotate task view</string>
+    <string name="bug_report_sent_title">Report sent.</string>
+    <string name="bug_report_sent_details">Your report has been sent. In case of further contact, please note following report identifier:</string>
+    <string name="error_during_submitting_report">Error during submitting report: %1$s</string>
+    <string name="disable_offline_mode_to_report_bug">It will be impossible to report an issue in this mode. Please turn off plane mode (offline mode) to continue.</string>
+    <string name="report_mail_subject">Report "%1$s"</string>
+    <string name="report_mail_text">Report is attached to this e-mail.</string>
+    <string name="send_mail">Send mail…</string>
+    <string name="could_not_connect_with_google_drive">Could not connect with Google Drive: %1$s</string>
+    <string name="disable_offline_mode_to_use_google_drive">It will be impossible to use Google Drive in this mode. Please turn off plane mode (offline mode) to continue</string>
+    <plurals name="expected_hours">
+        <item quantity="one">one hour</item>
+        <item quantity="other">%1$s hours</item>
+    </plurals>
+    <string name="retrieve_failed">retrieval failed</string>
+    <string name="expected_time_to_response">Expected time to response:</string>
+    <string name="in_case_of_no_response">In case of no response within given time range, you can use following ways to contact support:</string>
+    <string name="email_address_colon">E-mail address:</string>
+    <string name="phone_number_colon">Phone number:</string>
+    <string name="note_colon">Note:</string>
+    <string name="repair_task_suite">Repair task suite</string>
+    <string name="ue_info">Application co-financed by European Union under European Social Fund</string>
+    <string name="report_error_issue">Report error/issue</string>
+    <string name="repair_task_suite_title">Repair task suite?</string>
+    <string name="repair_task_suite_message">This will redownload task suite. No data associated with the suite will be lost"</string>
+    <string name="show_additional_test_info">show additional task details</string>
+    <string name="name">Name</string>
+    <string name="area">Area</string>
+    <string name="mark">Mark</string>
+    <string name="answer">Answer</string>
+    <string name="number">Number</string>
+    <string name="theta">Theta</string>
+    <string name="se_theta">Se Theta</string>
+    <string name="test_manager">Test manager</string>
+    <string name="test_type">Task type</string>
+    <string name="test_properties">Task properties</string>
+    <string name="submit">Send</string>
+    <string name="save_log">Save logs to SD card</string>
+    <string name="attach_logs">Attach logs</string>
+    <string name="copying_logs">Copying logs…</string>
+    <string name="logs_copying_done">Logs copying done</string>
+    <string name="logs_are_on_sdcard">Logs are available on SD card, in "%1$s" directory</string>
+    <string name="submitting_report">Submitting report…</string>
+    <string name="send_failure">Send failure</string>
+    <string name="field_can_not_be_empty">This field can not be empty</string>
+    <string name="show_correct_answers">Show correct answers</string>
+    <string name="click_to_continue">Continue</string>
+    <string name="successButton">Start</string>
+    <string name="failureButton">Continue</string>
+</resources>

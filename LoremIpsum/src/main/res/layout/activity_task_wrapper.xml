@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:id="@+id/test_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#66000000"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/test_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/test_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/test_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/test_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <CheckBox
+            android:id="@+id/additional_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_additional_test_info" />
+
+        <LinearLayout
+            android:id="@+id/parameters_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#66000000"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/name" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/area" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_mark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/mark" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/answer" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="A" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="B" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="c" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/number" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_theta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="Theta" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_se_theta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="Se Theta" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_manager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/test_manager" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/test_type" />
+
+            <pl.edu.ibe.loremipsum.TestParameterView
+                android:id="@+id/test_properties"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/test_properties" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_name"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:padding="16dp" />
+
+    <LinearLayout
+        android:id="@+id/tpr_2_container"
+        android:orientation="horizontal"
+        android:paddingTop="60dp"
+        android:paddingLeft="200dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:id="@+id/conting_container"
+            android:gravity="center_horizontal|top"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/item_counts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:id="@+id/auto_tutorial_end_task"
+            android:paddingBottom="150dp"
+            android:gravity="center_horizontal|bottom"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mark"
+                android:layout_margin="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="@string/show_correct_answers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_marks" />
+
+            <Button
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_margin="8dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mark"
+                android:text="@string/click_to_continue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/continue_button" />
+
+            <Button
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginRight="16dp"
+                android:minHeight="20dp"
+                android:minWidth="50dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mark"
+                android:text="@string/successButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:id="@+id/successButton" />
+
+            <Button
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal|bottom"
+                tools:visibility="visible"
+                android:paddingTop="16dp"
+                android:layout_marginRight="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:minHeight="20dp"
+                android:minWidth="50dp"
+                android:layout_margin="8dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mark"
+                android:text="@string/failureButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/failureButton" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

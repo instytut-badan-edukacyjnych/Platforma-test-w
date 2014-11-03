@@ -1,0 +1,212 @@
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../github_markdown.css">
+</head>
+<body>
+<h1 id="cat-configuration-files-structure">Cat configuration files structure</h1>
+<h2 id="cat-xml">cat.xml</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">cat</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>CAT<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">D</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.702<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">order</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>mix<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">step</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.618<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">theta_eps</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">noise</span> <span class="entity other attribute-name localname xml">base</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.2<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">termination</span> <span class="entity other attribute-name localname xml">criterion</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>max<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>10<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">termination</span> <span class="entity other attribute-name localname xml">criterion</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>min<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>5<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">termination</span> <span class="entity other attribute-name localname xml">criterion</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>deviation<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.3<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">cat</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Attribute</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+<th style="text-align:center">Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cat</td>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Name of algorithm</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">cat</td>
+<td style="text-align:center">D</td>
+<td style="text-align:center">IRT factor</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">cat</td>
+<td style="text-align:center">order</td>
+<td style="text-align:center">task order</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">mix, one_by_one</td>
+</tr>
+<tr>
+<td style="text-align:center">cat</td>
+<td style="text-align:center">step</td>
+<td style="text-align:center">Used to calculate examinee skill level</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">cat</td>
+<td style="text-align:center">theta_eps</td>
+<td style="text-align:center">Used to calculate examinee skill level</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">noise</td>
+<td style="text-align:center">base</td>
+<td style="text-align:center">Noise used to differ results</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">termination</td>
+<td style="text-align:center">criterion</td>
+<td style="text-align:center">Stop condition type</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">max,min,deviation</td>
+</tr>
+<tr>
+<td style="text-align:center">termination</td>
+<td style="text-align:center">value</td>
+<td style="text-align:center">Stop condition value</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">integer, double</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cat-data-xml">cat-data.xml</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">cat-data</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">area</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>m<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>-0.8256<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>71<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>m<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>-0.8287<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>71<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>k<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>-0.0564<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>72<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>83<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>m<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>-0.0782<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>72<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>83<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>k<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.4972<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>84<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>9990000000000000<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>m<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">scope</span> <span class="entity other attribute-name localname xml">score</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.5413<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-age</span> <span class="entity other attribute-name localname xml">from</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>84<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">to</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>9990000000000000<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee-gender</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>k<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">institution-city</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>Gdynia<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">            <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">institution-postal</span> <span class="entity other attribute-name localname xml">value</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>81-123<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">scope</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">area</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">cat-data</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Attribute</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+<th style="text-align:center">Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">area</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">area tag</td>
+<td style="text-align:center">required,at least one</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">area</td>
+<td style="text-align:center">name</td>
+<td style="text-align:center">name of area</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">character</td>
+</tr>
+<tr>
+<td style="text-align:center">scope</td>
+<td style="text-align:center">score</td>
+<td style="text-align:center">base theta value</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee-age</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">scope selector</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee-age</td>
+<td style="text-align:center">from</td>
+<td style="text-align:center">examinee age limits</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">integer</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee-age</td>
+<td style="text-align:center">to</td>
+<td style="text-align:center">examinee age limits</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">integer</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee-gender</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">scope selector</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee-gender</td>
+<td style="text-align:center">value</td>
+<td style="text-align:center">gender limits</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">m,k</td>
+</tr>
+<tr>
+<td style="text-align:center">institution-postal</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">scope selector</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">institution-postal</td>
+<td style="text-align:center">value</td>
+<td style="text-align:center">postal code selector</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">institution-city</td>
+<td style="text-align:center">------</td>
+<td style="text-align:center">scope selector</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">institution-city</td>
+<td style="text-align:center">value</td>
+<td style="text-align:center">city selector</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">string</td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,912 @@
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../github_markdown.css">
+</head>
+<body>
+<h1 id="task-creation">Task Creation</h1>
+<p>This document describes how to create particular tasks in tasks suites.</p>
+<h2 id="described-tasks-types">Described tasks types</h2>
+<ol>
+<li><a href="#task-group">Task Group</a></li>
+<li><a href="#look-task">Look Task</a></li>
+<li><a href="#choose-nx-task">Choose Nx Task</a></li>
+<li><a href="#choose-1x-task">Choose 1x Task</a></li>
+<li><a href="#mark-flex-nx-task">Mark Flex Nx Task</a></li>
+<li><a href="#mark-nx-task">Mark Nx Task</a></li>
+<li><a href="#move-n-task">Move N Task</a></li>
+<li><a href="#move-task">Move Task</a></li>
+<li><a href="#clock-task">Clock Task</a></li>
+<li><a href="#select-task">Select Task</a></li>
+<li><a href="#multi-select-task">Multi Select Task</a></li>
+</ol>
+<p>You can create own task by extending <strong>BaseTask</strong> class and
+putting it in <strong>pl.edu.ibe.loremipsum.task</strong> package.</p>
+<p>You can use above listed tasks as example.</p>
+<h2 id="arbiters">Arbiters</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">External</td>
+<td style="text-align:center">Leaves task mark completely to researcher</td>
+</tr>
+<tr>
+<td style="text-align:center">Puzzle</td>
+<td style="text-align:center">Marks puzzle tasks</td>
+</tr>
+<tr>
+<td style="text-align:center">Place</td>
+<td style="text-align:center">Gives mark depending on elements locations</td>
+</tr>
+<tr>
+<td style="text-align:center">Count</td>
+<td style="text-align:center">Gives mark depending on number of elements</td>
+</tr>
+<tr>
+<td style="text-align:center">Time select</td>
+<td style="text-align:center">Gives mark depending on task completion time</td>
+</tr>
+<tr>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">Gives mark depending on number of elements</td>
+</tr>
+<tr>
+<td style="text-align:center">Position</td>
+<td style="text-align:center">Gives mark depending on elements locations</td>
+</tr>
+<tr>
+<td style="text-align:center">Order</td>
+<td style="text-align:center">Gives mark depending on elements order</td>
+</tr>
+<tr>
+<td style="text-align:center">Location</td>
+<td style="text-align:center">Gives mark depending on elements locations</td>
+</tr>
+<tr>
+<td style="text-align:center">Clock</td>
+<td style="text-align:center">Gives mark depending selected time on clock</td>
+</tr>
+<tr>
+<td style="text-align:center">Select</td>
+<td style="text-align:center">Gives mark depending on selected item</td>
+</tr>
+</tbody>
+</table>
+<p>You can create own arbiters by extending <strong>BaseArbiter</strong> and
+putting it in <strong>pl.edu.ibe.loremipsum.arbiter</strong> package.</p>
+<p>You can use above listed tasks as example.</p>
+<h2 id="common-file-structure">Common file structure</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>TASK NAME<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">  <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>TASK CLASS<span class="punctuation definition string end xml">"</span></span>  ..... <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Attribute</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+<th style="text-align:center">Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">details</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Container for task elements</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">details</td>
+<td style="text-align:center">name</td>
+<td style="text-align:center">name of task</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Task description</td>
+<td style="text-align:center">required at least once</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">class</td>
+<td style="text-align:center">Task class. May require some additional attributes in task tag depending on this value</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">Task type name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">arbiter</td>
+<td style="text-align:center">Arbiter for this class</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">arbiter name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">sound</td>
+<td style="text-align:center">Sound for this task</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">sound file name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">property</td>
+<td style="text-align:center">Properties of this task.</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">see <a href="#property-attribute">Property attribute</a></td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">main</td>
+<td style="text-align:center">Main image of this task</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">image file name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">place</td>
+<td style="text-align:center">Drop place mask for move tasks</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">image file name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">marker</td>
+<td style="text-align:center">Marker mask for select tasks</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">image file name</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">bgcolor</td>
+<td style="text-align:center">Background color for task</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">color in hex format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="property-attribute">Property attribute</h3>
+<p>Avalible flags:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Flag</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">Expand marks button</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">Enable voice recording in this task</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">Disable auto voice recording</td>
+</tr>
+<tr>
+<td style="text-align:center">P</td>
+<td style="text-align:center">Enable photo capture</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">Mark range 0-1</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Mark range 0-1-2</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td style="text-align:center">Mark range 0 - unlimited. Note that this flag requires range value from task.xml file and corresponding number of  mark modifiers.</td>
+</tr>
+<tr>
+<td style="text-align:center">R</td>
+<td style="text-align:center">Reload task button</td>
+</tr>
+<tr>
+<td style="text-align:center">S</td>
+<td style="text-align:center">Step to next task button. More: <a href="#task-group">Task Group</a></td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">Replay command</td>
+</tr>
+<tr>
+<td style="text-align:center">N</td>
+<td style="text-align:center">Open next task after sound</td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">This and next task is alternative</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">Loop point in sequence tasks</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">Additional sound for next task in sequence</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td style="text-align:center">Continue sequence after answer</td>
+</tr>
+<tr>
+<td style="text-align:center">U</td>
+<td style="text-align:center">Pull items to selected localization</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">Align base line</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">Align brink</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">After release item is deselected</td>
+</tr>
+</tbody>
+</table>
+<h2 id="task-group">Task Group</h2>
+<p>Example:</p>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>TaskGroup<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="comment block xml"><span class="punctuation definition comment xml">&lt;!--</span> example next task <span class="punctuation definition comment xml">--&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>LookTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SL<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001a.m4a<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>LookTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002a.m4a<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>First task tag with attribute <em>TaskGroup</em> informs that a sequence of tasks is included in this file.
+All next tasks can be various types. Note that to allow user to step into next task in sequence you <strong>must</strong> include at least <em>S</em> flag in property attribute of task.
+Task Group <strong>does not</strong> require any other additional attributes.</p>
+<h2 id="look-task">Look Task</h2>
+<p>Example:</p>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>LookTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SL<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001a.m4a<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">main</td>
+<td style="text-align:center">background image</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">sound</td>
+<td style="text-align:center">background sound</td>
+<td style="text-align:center">optional</td>
+</tr>
+</tbody>
+</table>
+<h2 id="choose-nx-task">Choose Nx Task</h2>
+<p>Example:</p>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>ChooseNxTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>8<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A B<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mA.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mB.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mC.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mD.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mE.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>F<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mF.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>G<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mG.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>H<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>P01mH.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">mask</td>
+<td style="text-align:center">Selected field mask. Note that size of mask should be same size as main image.</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="choose-1x-task">Choose 1x Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>Choose1xTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>5<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001b.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001mA.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001mB.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001mC.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001mD.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001mE.png<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answer name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">mask</td>
+<td style="text-align:center">Selected field mask. Note that size of mask should be same size as main image.</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="select-task">Select Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>211<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>398<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>587<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answer name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mark-flex-nx-task">Mark Flex Nx Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A D E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MarkFlexNxTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>6<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>370<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>300<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>70<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>95<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>400<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>616<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>102<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>407<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>714<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>380<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>415<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>117<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>700<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>720<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>408<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>517<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1050<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>330<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>757<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>126<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>F<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1040<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>640<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>748<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>436<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">Begin X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Begin Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">px</td>
+<td style="text-align:center">End X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">py</td>
+<td style="text-align:center">End  Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mark-flex-1x-task">Mark Flex 1x Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MarkFlex1xTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>6<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>002.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>370<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>300<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>70<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>95<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>400<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>616<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>102<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>407<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>714<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>380<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>415<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>117<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>700<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>720<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>408<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>517<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1050<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>330<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>757<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>126<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>F<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1040<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>640<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>748<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>436<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">Begin X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Begin Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">px</td>
+<td style="text-align:center">End X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">py</td>
+<td style="text-align:center">End  Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mark-nx-task">Mark Nx Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>058<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>CountArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MarkNxTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>058.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>058m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>058.m4a<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sx</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>138<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sy</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>132<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>86<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>459<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>278<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>463<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>494<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>464<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>689<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>463<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct number of marked items</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="move-n-task">Move N Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>ExternalArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MoveNTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">pattern</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003s%s.m4a<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">place</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003p.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>M2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003mA.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>89<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>116<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003mB.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>119<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>270<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003mC.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>89<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>390<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>003mD.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>107<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>584<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">place</td>
+<td style="text-align:center">Drop field for elements</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">mask</td>
+<td style="text-align:center">Element image mask</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="move-task">Move Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>054<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>NumberArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MoveTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">item</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>054i.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>054.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>8<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">place</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>054p.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2CU<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>054.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>141<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>136<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>94<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>260<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>233<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>135<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>185<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>260<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>332<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>136<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>286<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>260<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>449<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>135<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>400<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>260<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">place</td>
+<td style="text-align:center">Drop field for elements</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">px</td>
+<td style="text-align:center">end X coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">py</td>
+<td style="text-align:center">end Y coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">begin X coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">begin Y coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">mask</td>
+<td style="text-align:center">Element image mask</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="clock-task">Clock Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>005<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>17:25<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>ClockArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>ClockTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>005.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2CU<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>005.m4a<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sx</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>538<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sy</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>395<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>005h.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>15<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>180<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>19<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>164<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">mask</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>005m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">px</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>15<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">py</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>60<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>19<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>220<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Task answer in HH:MM format</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">sx</td>
+<td style="text-align:center">x coordinate of clock hands</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">sy</td>
+<td style="text-align:center">y coordinate of clock hands</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Clock hands</td>
+<td style="text-align:center">required 2 times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">clock hand name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">mask</td>
+<td style="text-align:center">clock hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">px</td>
+<td style="text-align:center">end X coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">py</td>
+<td style="text-align:center">end Y coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">begin X coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">begin Y coordinate of hand mask</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="select-task">Select Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>211<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>398<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>942<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>587<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answer name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multi-select-task">Multi Select Task</h2>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">details</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>066<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">answer</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">arbiter</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectArbiter<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">bgcolor</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>#FFF2F2F2<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>MultiSelectTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">main</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>066.png<span class="punctuation definition string end xml">"</span></span></span></span></div><div><span class="text xml"><span class="meta tag xml">        <span class="entity other attribute-name localname xml">marker</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>066m.png<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">number</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>4<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">property</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>E2C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">sound</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>066.m4a<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>A<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>24<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>B<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>214<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>C<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>406<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">field</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>D<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">x</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>22<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">y</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>596<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">details</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<p>Task specific elements:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">number</td>
+<td style="text-align:center">Number of fields to select</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">answer</td>
+<td style="text-align:center">Correct answers names</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">Field to select</td>
+<td style="text-align:center">required <strong>number attribute value</strong> times</td>
+</tr>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Field name</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">X element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">Y element coordinate</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>
+<h1 id="task-xml">task.xml</h1>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>utf-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">task</span> <span class="entity other attribute-name localname xml">name</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">area</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>m<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">class</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>SelectTask<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">family</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>001<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">range</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">irt</span> <span class="entity other attribute-name localname xml">a</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.2340<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">b</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>-1.124<span class="punctuation definition string end xml">"</span></span> <span class="entity other attribute-name localname xml">c</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>0.10<span class="punctuation definition string end xml">"</span></span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">task</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">Name of task corresponding to name in details.xml</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">area</td>
+<td style="text-align:center">Test area for this task</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">family</td>
+<td style="text-align:center">Task family, groups tasks</td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">range</td>
+<td style="text-align:center">mark range depends on <strong>1</strong> or <strong>2</strong> or <strong>O</strong></td>
+<td style="text-align:center">required</td>
+</tr>
+<tr>
+<td style="text-align:center">a, b ,c aX, bX, cX</td>
+<td style="text-align:center">IRT mark modifiers. X depends on range 1-range value</td>
+<td style="text-align:center">required</td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,139 @@
+<!--
+  ~ This file is part of Test Platform.
+  ~
+  ~ Test Platform is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Test Platform is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Test Platform; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  ~
+  ~ Ten plik jest częścią Platformy Testów.
+  ~
+  ~ Platforma Testów jest wolnym oprogramowaniem; możesz go rozprowadzać dalej
+  ~ i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU,
+  ~ wydanej przez Fundację Wolnego Oprogramowania - według wersji 2 tej
+  ~ Licencji lub (według twojego wyboru) którejś z późniejszych wersji.
+  ~
+  ~ Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
+  ~ użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
+  ~ gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
+  ~ ZASTOSOWAŃ. W celu uzyskania bliższych informacji sięgnij do
+  ~ Powszechnej Licencji Publicznej GNU.
+  ~
+  ~ Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
+  ~ Powszechnej Licencji Publicznej GNU (GNU General Public License);
+  ~ jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
+  ~ Place, Fifth Floor, Boston, MA  02110-1301  USA
+  -->
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../github_markdown.css">
+</head>
+<body>
+<h1 id="reporting-file-structure">Reporting file structure</h1>
+<h2 id="raporting-xml">raporting.xml</h2>
+<p>File existance is optional.</p>
+<pre class="editor-colors"><code class="lang-xml"><div><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag xml">&lt;?</span><span class="entity name tag xml">xml</span><span class="entity other attribute-name xml"> version</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>1.0<span class="punctuation definition string end xml">"</span></span><span class="entity other attribute-name xml"> encoding</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span>UTF-8<span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">?&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">raporting</span> <span class="entity other attribute-name localname xml">url</span>=<span class="string quoted double xml"><span class="punctuation definition string begin xml">"</span><span class="markup underline link https hyperlink">https://8.8.8.8/</span><span class="punctuation definition string end xml">"</span></span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">researcher</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">id</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">researcher</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">examinee</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">id</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">gender</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">birthday</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">examinee</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">institution</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">id</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">institution</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">raport_content</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">summary</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">        <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;</span><span class="entity name tag localname xml">tasks</span> <span class="punctuation definition tag xml">/&gt;</span></span></span></div><div><span class="text xml">    <span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">raport_content</span><span class="punctuation definition tag xml">&gt;</span></span></span></div><div><span class="text xml"><span class="meta tag xml"><span class="punctuation definition tag xml">&lt;/</span><span class="entity name tag localname xml">raporting</span><span class="punctuation definition tag xml">&gt;</span></span></span></div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Element</th>
+<th style="text-align:center">Attribute</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Comments</th>
+<th style="text-align:center">Possible values</th>
+<th style="text-align:center">Possible sub tags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">raporting</td>
+<td style="text-align:center">url</td>
+<td style="text-align:center">url where to send report</td>
+<td style="text-align:center">required</td>
+<td style="text-align:center">valid url to reporting server</td>
+<td style="text-align:center">-----</td>
+</tr>
+<tr>
+<td style="text-align:center">researcher</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Elements needed to be included with researcher data in report</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">id</td>
+</tr>
+<tr>
+<td style="text-align:center">examinee</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Elements needed to be included with examinee data in report</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">id,gender,birthday</td>
+</tr>
+<tr>
+<td style="text-align:center">institution</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Elements needed to be included with institution data in report</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">id</td>
+</tr>
+<tr>
+<td style="text-align:center">raport_content</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Required parts of report</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">summary, tasks</td>
+</tr>
+<tr>
+<td style="text-align:center">id</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Id of element will be send</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">------</td>
+</tr>
+<tr>
+<td style="text-align:center">gender</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Gender of element will be send</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">------</td>
+</tr>
+<tr>
+<td style="text-align:center">birthday</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Birthday of element will be send</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">------</td>
+</tr>
+<tr>
+<td style="text-align:center">summary</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Summary report will be send</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">------</td>
+</tr>
+<tr>
+<td style="text-align:center">task</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">Task report will be send</td>
+<td style="text-align:center">optional</td>
+<td style="text-align:center">-----</td>
+<td style="text-align:center">------</td>
+</tr>
+</tbody>
+</table>
