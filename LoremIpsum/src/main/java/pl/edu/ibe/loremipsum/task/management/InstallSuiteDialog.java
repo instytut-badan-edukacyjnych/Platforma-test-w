@@ -48,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnFocusChange;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceDialogFragment;
+import pl.edu.ibe.testplatform.BuildConfig;
 import pl.edu.ibe.testplatform.R;
 
 /**
@@ -90,6 +91,13 @@ public abstract class InstallSuiteDialog extends ServiceDialogFragment {
             return false;
         });
 
+        if (BuildConfig.DEBUG) {
+            username.setText("alice");
+            password.setText("password");
+            manifestUrl.setText("https://46.29.20.95:55061");
+        }
+
+
         return new AlertDialog.Builder(getActivity())
                 .setView(dialogView)
                 .setTitle(R.string.add_task_suite)
@@ -109,7 +117,7 @@ public abstract class InstallSuiteDialog extends ServiceDialogFragment {
         String password = ((EditText) dialogView.findViewById(R.id.password)).getText().toString();
 
 
-        dialogDismissed(manifestUrl, username,password,accepted);
+        dialogDismissed(manifestUrl, username, password, accepted);
     }
 
     protected abstract void dialogDismissed(String manifestUrl, String username, String password, boolean accepted);

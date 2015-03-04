@@ -39,6 +39,7 @@ package pl.edu.ibe.loremipsum.task.management.collector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.NumberFormat;
@@ -51,8 +52,11 @@ import javax.xml.transform.TransformerException;
 import pl.edu.ibe.loremipsum.configuration.CollectorConfig;
 import pl.edu.ibe.loremipsum.configuration.TaskSuiteConfig;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
+import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.tablet.task.mark.TestResult;
 import pl.edu.ibe.loremipsum.tablet.test.CurrentTaskSuiteService;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
+import pl.edu.ibe.loremipsum.tools.StringUtils;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
 import pl.edu.ibe.loremipsum.tools.XmlHelper;
 
@@ -61,6 +65,7 @@ import pl.edu.ibe.loremipsum.tools.XmlHelper;
  */
 public class RaportPreparator {
 
+    private static final String TAG = RaportPreparator.class.getCanonicalName();
     private final CollectorConfig collectorConfig;
     private final CurrentTaskSuiteService.TestRunData testRunData;
     private final TestResult testResult;
@@ -75,8 +80,22 @@ public class RaportPreparator {
         ZipOutputStream zipStream = new ZipOutputStream(os);
         saveReports(zipStream);
         addXmlFile(zipStream, makeUserData(), "user.xml");
-
+        addFile(zipStream, makeUserDataCsv(), "results.csv");
+        addFile(zipStream, testResult.m_respondent.m_noteContent, testResult.m_respondent.m_note);
         return zipStream;
+    }
+
+
+    private String makeUserDataCsv() {
+        String raportFile = "csv_report.csv";
+        testResult.SaveResultCSV(raportFile);
+        String resultsDir = ServiceProvider.obtain().currentTaskSuite().getResultsDir();
+        File dir = new File(resultsDir);
+        File file = new File(resultsDir, raportFile);
+        String string = StringUtils.readFile(file);
+        file.delete();
+        return string;
+
     }
 
     private Document makeUserData() throws IOException, ParserConfigurationException, TransformerException {
@@ -85,19 +104,33 @@ public class RaportPreparator {
         Element root = doc.createElement("data");
         doc.appendChild(root);
 
+        Element note = doc.createElement("note");
+        root.appendChild(note);
+        note.setAttribute("filename", testResult.m_respondent.m_note);
+        note.setAttribute("content", testResult.m_respondent.m_noteContent);
+
+
         if (collectorConfig.sendResearcherId) {
             Element researcher = doc.createElement("researcher");
             root.appendChild(researcher);
             researcher.setAttribute("id", testRunData.getExaminee().getResearcherJoinExamineeList().get(0).getResearcher().getTextId());// TODO AR: is this OK? how we should reach researcher?
         }
         if (collectorConfig.sendInstitutionId) {
-            Element institution = doc.createElement("institution");
-            root.appendChild(institution);
-            institution.setAttribute("id", testRunData.getInstitution().getTextId());
+            if (testRunData.getInstitution() != null) {
+                Element institution = doc.createElement("institution");
+                root.appendChild(institution);
+                institution.setAttribute("id", testRunData.getInstitution().getTextId());
+            }
         }
-        if (collectorConfig.sendExamineeId || collectorConfig.sendExamineeGender || collectorConfig.sendExamineeBirthday) {
+        if (collectorConfig.sendExamineeId || collectorConfig.sendExamineeGender || collectorConfig.sendExamineeBirthday || collectorConfig.sendExamineeFullname) {
             Element examinee = doc.createElement("examinee");
             root.appendChild(examinee);
+
+            if (collectorConfig.sendExamineeFullname) {
+                examinee.setAttribute("name", testRunData.getExaminee().getFirstName());
+                examinee.setAttribute("surname", testRunData.getExaminee().getLastName());
+            }
+
             if (collectorConfig.sendExamineeId) {
                 examinee.setAttribute("id", testRunData.getExaminee().getTextId());
             }
@@ -109,7 +142,7 @@ public class RaportPreparator {
                 try {
                     birthday = TimeUtils.dateToString(testRunData.getExaminee().getBirthday(), TimeUtils.defaultPatern);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogUtils.d(TAG, "Safe exception: ", e);
                     if (testRunData.getExaminee().getBirthday() != null) {
                         birthday = testRunData.getExaminee().getBirthday().toString();
                     }
@@ -199,6 +232,13 @@ public class RaportPreparator {
         ZipEntry ze = new ZipEntry(fileName);
         zipStream.putNextEntry(ze);
         zipStream.write(XmlHelper.convertDocumentToString(doc).getBytes());
+        zipStream.closeEntry();
+    }
+
+    private void addFile(ZipOutputStream zipStream, String string, String fileName) throws IOException {
+        ZipEntry ze = new ZipEntry(fileName);
+        zipStream.putNextEntry(ze);
+        zipStream.write(string.getBytes());
         zipStream.closeEntry();
     }
 }

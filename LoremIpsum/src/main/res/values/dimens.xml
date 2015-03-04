@@ -40,4 +40,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="home_button_padding">16dp</dimen>
     <dimen name="counting_summary_task_button">80dp</dimen>
+    <dimen name="menu_on_right_offset">1230dp</dimen>
 </resources>

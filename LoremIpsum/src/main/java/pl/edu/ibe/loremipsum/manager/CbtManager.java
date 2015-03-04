@@ -35,8 +35,6 @@
  ************************************/
 
 
-
-
 package pl.edu.ibe.loremipsum.manager;
 
 
@@ -346,7 +344,7 @@ public class CbtManager extends BaseManager {
         ManagerTestInfo info = m_taskScript.m_status.get(a_task.m_area);
         if (info == null) {
             info = new ManagerTestInfo();
-            info.m_status = LoremIpsumApp.TEST_PROGRESS;
+            info.m_status = a_mark == -7.0 ? LoremIpsumApp.TEST_PROGRESS : LoremIpsumApp.TEST_FINISHED_MAX;
             info.m_vector.m_piece.clear();
             info.m_vector.m_theta = 0.0;
             info.m_vector.m_se = 1.0;
@@ -367,6 +365,7 @@ public class CbtManager extends BaseManager {
 
     /**
      * Loads CBT config file
+     *
      * @param path Path containing file (CBT_XML_FILENAME)
      * @return true if success
      */
@@ -439,7 +438,7 @@ public class CbtManager extends BaseManager {
     }
 
     /**
-     *  Loads addtional CBT data
+     * Loads addtional CBT data
      *
      * @param xmlFile   File containing data
      * @param a_xsdFile - - xml schema file
@@ -569,9 +568,7 @@ public class CbtManager extends BaseManager {
     }
 
     /**
-     *Information about examined area
-     *
-     *
+     * Information about examined area
      */
     protected class CbtScriptInfo {
 
@@ -593,8 +590,6 @@ public class CbtManager extends BaseManager {
 
     /**
      * Task description for CBT purposes
-     *
-     *
      */
     private class CbtTaskItem {
 
@@ -604,7 +599,7 @@ public class CbtManager extends BaseManager {
         public String m_name = null;
 
         /**
-         *  task info
+         * task info
          */
         public TaskInfo m_task = null;
 

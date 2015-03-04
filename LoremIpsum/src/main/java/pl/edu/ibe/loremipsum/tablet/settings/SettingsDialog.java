@@ -60,6 +60,8 @@ public class SettingsDialog extends ServiceDialogFragment {
 
     @InjectView(R.id.task_rotation)
     CheckBox taskViewRotation;
+    @InjectView(R.id.task_menu_on_right)
+    CheckBox menuOnRight;
     @InjectView(R.id.reporting_container)
     View reportingContainer;
     @InjectView(R.id.change_raport_agreement)
@@ -90,10 +92,12 @@ public class SettingsDialog extends ServiceDialogFragment {
         ButterKnife.inject(this, view);
         updateReportSendingStatus();
         updateRotationStatus();
+        updateRightMenuStatus();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())//
                 .setCancelable(false)//
                 .setPositiveButton(R.string.ok_text, (dialog, which) -> {
                     getServiceProvider().sharedPreferences().setRotateTaskView(taskViewRotation.isChecked());
+                    getServiceProvider().sharedPreferences().setMenuOnRight(menuOnRight.isChecked());
                 })//
                 .setNegativeButton(R.string.cancel_text, (dialog, which) -> {
                 })//
@@ -108,6 +112,9 @@ public class SettingsDialog extends ServiceDialogFragment {
 
     private void updateRotationStatus() {
         taskViewRotation.setChecked(getServiceProvider().sharedPreferences().isTaskViewRotated());
+    }
+    private void updateRightMenuStatus() {
+        menuOnRight.setChecked(getServiceProvider().sharedPreferences().isMenuOnRight());
     }
 
     private void updateReportSendingStatus() {

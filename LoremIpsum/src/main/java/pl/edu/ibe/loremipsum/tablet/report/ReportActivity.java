@@ -143,7 +143,7 @@ public class ReportActivity extends BaseServiceActivity {
         reportView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Log.d("web", description);
+                LogUtils.d("web", description);
                 super.onReceivedError(view, errorCode, description, failingUrl);
             }
 
@@ -155,13 +155,13 @@ public class ReportActivity extends BaseServiceActivity {
         reportView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-                Log.d("web", consoleMessage.message());
+                LogUtils.d("web", consoleMessage.message());
                 return super.onConsoleMessage(consoleMessage);
             }
 
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                Log.d("web", message);
+                LogUtils.d("web", message);
 
                 return super.onJsAlert(view, url, message, result);
             }

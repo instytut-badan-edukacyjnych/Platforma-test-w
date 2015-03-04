@@ -813,22 +813,12 @@ public class LoremIpsumApp extends Application {
                             result.setSubmitUrl(collectorConfig.targetUrl);
                             serviceProvider.collector().addResult(result);
                         } catch (Exception e) {
-                            Log.w(TAG, "Failed to save raport for collector", e);
+                            LogUtils.w(TAG, "Failed to save raport for collector", e);
                         }
                     }
                 }
             });
         }
-    }
-
-    /**
-     * Rejstracja uruchamionego zadania. na potrzeby uruchamiania
-     *
-     * @param a_task
-     */
-    public static void TaskRegistration(TaskInfo a_task) {
-        ++TestManager.m_taskNumber;
-        TestManager.m_runTaskInfo = a_task;
     }
 
     /**
@@ -1043,70 +1033,6 @@ public class LoremIpsumApp extends Application {
         LoadResults(resultDir);
 
         LogUtils.d(TAG, " results: " + m_resultPool.size());
-    }
-
-    /**
-     * Formatuje pełna nazę szkoły
-     *
-     * @param a_id - identyfikator szkoły
-     * @return pelna nazwa szkoły
-     */
-    public static String GetSchoolFullName(String a_id) {
-
-        String name = a_id;
-
-        for (SchoolData school : LoremIpsumApp.m_schools) {
-            if (name.compareTo(school.m_id) == 0) {
-                name += " ( ";
-                name += school.m_name;
-                name += " )";
-                break;
-            }
-        }
-
-        return name;
-    }
-
-    /**
-     * Formatuje tylko nazwe szkoły
-     *
-     * @param a_id - identyfikator szkoły
-     * @return pelna nazwa szkoły
-     */
-    public static String GetSchoolName(String a_id) {
-        String name = a_id;
-
-        for (SchoolData school : LoremIpsumApp.m_schools) {
-            if (a_id.compareTo(school.m_id) == 0) {
-                name = school.m_name;
-                break;
-            }
-        }
-
-        return name;
-    }
-
-    /**
-     * Formatuje nazwe ucznia
-     *
-     * @param a_id - identyfikator ucznia
-     * @return pełna nazwa ucznia
-     */
-    public static String GetPupilName(String a_id) {
-        String name = a_id;
-
-        for (PupilData pupil : LoremIpsumApp.m_pupils) {
-            if (a_id.compareTo(pupil.m_id) == 0) {
-                name = pupil.m_name;
-                if (name.length() > 0) {
-                    name += " ";
-                    name += pupil.m_surename;
-                }
-                break;
-            }
-        }
-
-        return name;
     }
 
     /**
@@ -1377,7 +1303,7 @@ public class LoremIpsumApp extends Application {
         //        } catch (Exception e) {
         //            LogUtils.e(TAG, "cannot load task change: " + TaskSuiteConfig.m_taskChangeName, new Exception("Usually ViewChangeOpaque class is initialized here. But why? ", e));
         //        }
-        Log.wtf(TAG, "This method should not be used");
+        LogUtils.wtf(TAG, "This method should not be used");
     }
 
     /**

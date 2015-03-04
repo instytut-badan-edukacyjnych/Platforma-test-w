@@ -128,7 +128,7 @@ public class XmlHelper {
         NodeList nodes = nodesFunc.call();
         if (nodes.getLength() > 0) {
             if (nodes.getLength() > 1) {
-                Log.w(TaskSuiteConfig.class.getName(), "More than one node of " + nodeName);
+                LogUtils.w(TaskSuiteConfig.class.getName(), "More than one node of " + nodeName);
             }
             if (nodes.item(0).getNodeType() == Node.ELEMENT_NODE) {
                 collector = (Element) nodes.item(0);

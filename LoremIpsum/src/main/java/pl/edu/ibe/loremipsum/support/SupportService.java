@@ -126,7 +126,7 @@ public class SupportService extends BaseService {
                 }
             String bugReportString = getServiceProvider().getGson().toJson(bugReport);
 
-            Log.d(TAG, bugReportString);
+            LogUtils.d(TAG, bugReportString);
 
             StringUtils.stringToFile(new File(BUG_REPORT_PATH + File.separator + TimeUtils.dateToString(new Date(), TimeUtils.timePatern) + ".bugReport")
                     , bugReportString);

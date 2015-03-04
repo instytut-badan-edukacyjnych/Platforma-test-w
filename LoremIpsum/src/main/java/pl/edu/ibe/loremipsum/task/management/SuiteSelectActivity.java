@@ -50,21 +50,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import pl.edu.ibe.loremipsum.db.schema.Researcher;
 import pl.edu.ibe.loremipsum.db.schema.ResearchersSuite;
-import pl.edu.ibe.loremipsum.network.Auth;
-import pl.edu.ibe.loremipsum.network.HttpBasicAuth;
 import pl.edu.ibe.loremipsum.tablet.MainActivity;
 import pl.edu.ibe.loremipsum.tablet.base.BaseServiceActivity;
 import pl.edu.ibe.loremipsum.tablet.base.LoremIpsumSimpleAdapter;
@@ -72,25 +68,20 @@ import pl.edu.ibe.loremipsum.tablet.base.ServiceDialogFragment;
 import pl.edu.ibe.loremipsum.tablet.support.SupportDialog;
 import pl.edu.ibe.loremipsum.task.management.collector.CollectorAgreementDialog;
 import pl.edu.ibe.loremipsum.task.management.installation.InstallationProgress;
-import pl.edu.ibe.loremipsum.task.management.storage.TaskSuiteVersion;
 import pl.edu.ibe.loremipsum.tools.ExecutionException;
+import pl.edu.ibe.loremipsum.tools.InstallationIdentifier;
 import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.NetworkUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
-import pl.edu.ibe.loremipsum.tools.Tuple;
 import pl.edu.ibe.testplatform.BuildConfig;
 import pl.edu.ibe.testplatform.R;
 import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import rx.subjects.Subject;
 
 public class SuiteSelectActivity extends BaseServiceActivity {
 
     private static final String TAG = SuiteSelectActivity.class.toString();
-
+    public static final String SHOULD_CHECK_UPDATES = "should_check_updates";
     @InjectView(R.id.suite_list)
     ListView suiteList;
 
@@ -101,7 +92,7 @@ public class SuiteSelectActivity extends BaseServiceActivity {
 
 
     private Adapter adapter;
-    private Researcher researcher;
+    private static Researcher researcher;
     private boolean updateCheckInProgress = false;
     private int updateInProgress = 0;
     private int installInProgress = 0;
@@ -122,16 +113,36 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         researcher = getServiceProvider().login().currentLoggedInUser;
 
         adapter = new Adapter(this, R.layout.row_simple_list_item_1);
+        getServiceProvider().downloadTaskSuiteService().registerAdapter(adapter);
+
         suiteList.setAdapter(adapter);
         suiteList.setOnItemClickListener(adapter);
         suiteList.setOnItemLongClickListener(adapter);
         registerForContextMenu(suiteList);
+
+
+        try {
+            ((TextView) findViewById(R.id.device_id)).setText(getString(R.string.device_id, new InstallationIdentifier(this).getDeviceId()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        checkUpdates();
+        getServiceProvider().downloadTaskSuiteService().setActivityContext(this);
+        if (getIntent().getBooleanExtra(SHOULD_CHECK_UPDATES, false)) {
+            getServiceProvider().downloadTaskSuiteService().checkUpdates(researcher);
+            getIntent().removeExtra(SHOULD_CHECK_UPDATES);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        getServiceProvider().downloadTaskSuiteService().unregister();
+        super.onStop();
     }
 
     @Override
@@ -145,7 +156,7 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         LogUtils.v(TAG, "Item selected: " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.action_check_update:
-                checkUpdates();
+                getServiceProvider().downloadTaskSuiteService().checkUpdates(researcher);
                 return true;
             case R.id.action_add_new_bank:
                 showInstallDialog();
@@ -194,6 +205,7 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         }, throwable -> {
             Toast.makeText(this, getString(R.string.error_loading_test) + " " + throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             LogUtils.e(TAG, "Exception during test loading", throwable);
+            adapter.refresh();
         });
     }
 
@@ -246,232 +258,29 @@ public class SuiteSelectActivity extends BaseServiceActivity {
 
     private void displayInstallSuiteDialog() {
         InstallSuiteDialog dialog = new InstallDialog();
-        dialog.show(getSupportFragmentManager(), "dialog");
+        if (!isFinishing()) {
+
+            dialog.show(getSupportFragmentManager(), "dialog");
+        }
     }
 
     private void showUninstallDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.uninstalling_task_suite)
-                .setMessage(getString(R.string.do_you_really_want_to_uninstall_task_suite,
-                        currentTaskSuite.getTaskSuite().getName(),
-                        currentTaskSuite.getTaskSuite().getVersion()))
-                .setPositiveButton(android.R.string.yes, (d, w) -> uninstallSuite())
-                .setNegativeButton(android.R.string.no, (d, w) -> {
-                })
-                .create().show();
-    }
-
-    private void uninstallSuite() {
-        installInProgress++;
-
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(R.string.uninstalling_task_suite);
-        progressDialog.setMessage(getString(R.string.uninstalling_task_suite_message));
-        progressDialog.setCancelable(false);
-
-        RxExecutor.runWithUiCallback(getServiceProvider().taskSuites().uninstallSuite(currentTaskSuite))
-                .subscribe(ignore -> {
-                        }, throwable -> {
-                            progressDialog.dismiss();
-                            Toast.makeText(SuiteSelectActivity.this, R.string.uninstall_failed, Toast.LENGTH_LONG).show();
-                            installInProgress--;
-                        }, () -> {
-                            progressDialog.dismiss();
-                            adapter.refresh();
-                            installInProgress--;
-                        }
-                );
-    }
-
-    private void progressInstalling(Observable<TaskSuite> operationObservable,
-                                    Observable<InstallationProgress> progressObservable) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(getResources().getString(R.string.installing_title));
-        progressDialog.setMessage(getResources().getString(R.string.preparing_download));
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.show();
-
-        StringBuffer suiteName = new StringBuffer(getString(R.string.unknown_task_suite));
-        StringBuffer suiteVersion = new StringBuffer(getString(R.string.unknown_version));
-        RxExecutor.runWithUiCallback(progressObservable.filter(progress -> progress != null))
-                .subscribe(new Action1<InstallationProgress>() { // #4
-
-                    int prevTotal;
-                    int prevTime;
-
-                    @Override
-                    public void call(InstallationProgress progress) {
-                        suiteName.setLength(0);
-                        suiteName.append(progress.getSuiteName());
-                        suiteVersion.setLength(0);
-                        suiteVersion.append(progress.getSuiteVersion());
-
-                        int count = progress.getInstalledBytes();
-                        int time = progress.getTime();
-                        int downloadSize = progress.getTotalBytes();
-
-                        LogUtils.v(TAG, "download progress: " + count + " B; " + time + " ms");
-                        if (downloadSize != 0) {
-                            progressDialog.setMax(downloadSize);
-                            progressDialog.setProgress(count);
-                            String timeLeft = null;
-                            String downloadSpeed = null;
-                            if (count != 0) {
-                                double totalTime = ((double) downloadSize) * ((double) time) / ((double) count);
-                                int leftTime = ((int) totalTime - time) / 1000;
-                                int leftHours = leftTime / 3600;
-                                int leftMinutes = (leftTime / 60) % 60;
-                                int leftSeconds = leftTime % 60;
-
-                                double bytesDiff = Math.max(count - prevTotal, 0d);
-                                prevTotal = count;
-                                double timeDiff = Math.max(time - prevTime, 0d);
-                                prevTime = time;
-                                if (bytesDiff != 0 && timeDiff != 0) {
-                                    double value = bytesDiff / timeDiff;
-                                    String unit = "kB/s";
-                                    if (value > 1024) {
-                                        value /= 1024;
-                                        unit = "MB/s";
-                                    }
-                                    downloadSpeed = String.valueOf((int) value) + " " + unit;
-                                }
-                                if (leftHours > 0) {
-                                    timeLeft = leftHours + ":" + String.format("%02d", leftMinutes) + ":" + String.format("%02d", leftSeconds);
-                                } else if (leftMinutes > 0) {
-                                    timeLeft = leftMinutes + ":" + String.format("%02d", leftSeconds);
-                                } else {
-                                    timeLeft = String.valueOf(leftSeconds) + " s";
-                                }
-                            }
-                            if (timeLeft != null) {
-                                progressDialog.setMessage(getString(R.string.downloading_with_estimation_seconds, timeLeft, downloadSpeed));
-                            } else {
-                                progressDialog.setMessage(getString(R.string.downloading));
-                            }
-                        }
-                    }
-                });
-        boolean[] done = {false};
-        Subscription subscription = RxExecutor.runWithUiCallback(operationObservable).subscribe(
-                ignore -> {
-                },
-                throwable -> {
-                    progressDialog.dismiss();
-                    String message = getResources().getString(R.string.task_suite_installation_failed);
-                    message += "\n";
-                    message += getResources().getString(R.string.error_details) + " ";
-                    message += throwable.getMessage();
-                    Toast.makeText(SuiteSelectActivity.this, message, Toast.LENGTH_LONG).show();
-                    LogUtils.e(TAG, "installing failed", throwable);
-                },
-                () -> {
-                    done[0] = true;
-                    progressDialog.dismiss();
-                    adapter.refresh();
-                    LogUtils.i(TAG, "downloading finished");
-                    getServiceProvider().taskSuites().clearDownloadData();
-                }
-        );
-
-        progressDialog.setOnCancelListener(dialogInterface -> {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.interrupting_download)
-                    .setMessage(getString(R.string.do_you_really_want_to_interrupt_download_of, suiteName, suiteVersion))
-                    .setPositiveButton(android.R.string.yes, (d, w) -> subscription.unsubscribe())
-                    .setNegativeButton(android.R.string.no, (d, w) -> {
-                        if (!done[0]) {
-                            progressDialog.show();
-                        }
-                    })
-                    .setCancelable(false)
-                    .create()
-                    .show();
-        });
-    }
-
-    private void installSuite(String manifestUrl, String username, String password) {
-        installInProgress++;
-        try {
-            URL url = new URL(manifestUrl);
-            Auth auth = new HttpBasicAuth(username, password);
-            LogUtils.i(TAG, "Installing new task suite: " + manifestUrl + " (" + username + ":*****)");
-            Pair<Subject<InstallationProgress, InstallationProgress>, Observable<TaskSuiteVersion>> installation =
-                    getServiceProvider().taskSuites().installSuite(researcher, url, auth);
-            Observable<InstallationProgress> p = installation.first;
-            progressInstalling(installation.second.flatMap(v -> {
-                String name = v.getTaskSuite().getName();
-                String version = v.getIdentifier();
-                return getServiceProvider().taskSuites().getTaskSuite(name, version);
-            }), installation.first);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            if (progressDialog != null) {
-                progressDialog.dismiss();
+        if (currentTaskSuite != null) {
+            pl.edu.ibe.loremipsum.db.schema.TaskSuite suite = currentTaskSuite.getTaskSuite();
+            if (suite != null) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.uninstalling_task_suite)
+                        .setMessage(getString(R.string.do_you_really_want_to_uninstall_task_suite,
+                                suite.getName(),
+                                suite.getVersion()))
+                        .setPositiveButton(android.R.string.yes, (d, w) -> getServiceProvider().downloadTaskSuiteService().uninstallSuite(currentTaskSuite))
+                        .setNegativeButton(android.R.string.no, (d, w) -> {
+                        })
+                        .create().show();
             }
-            Toast.makeText(this, R.string.malformed_url, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void checkUpdates() {
-        if (installInProgress > 0 || updateCheckInProgress || updateInProgress > 0) {
-            return;
-        }
-
-        updateCheckInProgress = true;
-
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(R.string.checking_updates);
-        progressDialog.show();
-
-        Tuple.Two<Observable<TaskSuiteUpdate>, Observable<String>> check = getServiceProvider().taskSuites().checkUpdates(researcher);
-        check.second.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(name -> progressDialog.setMessage(getResources().getString(R.string.checking) + " " + name));
-
-        check.first.observeOn(AndroidSchedulers.mainThread()).subscribe(
-                update -> {
-                    if (!update.isUpdate()) {
-                        Toast.makeText(this, String.format(
-                                getResources().getString(R.string.no_update_for),
-                                update.getName()
-                        ), Toast.LENGTH_SHORT).show();
-                    } else {
-                        new AlertDialog.Builder(this)
-                                .setCancelable(false)
-                                .setPositiveButton(R.string.ok_text, (dialogInterface, which) -> {
-                                    installUpdate(update);
-                                }).setNegativeButton(R.string.cancel_text, (dialogInterface, which) -> {
-                        }).setTitle(String.format(
-                                getResources().getString(R.string.do_you_want_to_update),
-                                update.getName(), update.getNewTaskSuite().getVersion(),
-                                update.getOldTaskSuite().getTaskSuite().getVersion()
-                        )).create().show();
-                    }
-                },
-                throwable -> {
-                    progressDialog.dismiss();
-                    String message = getResources().getString(R.string.task_suite_update_check_failed);
-                    message += "\n";
-                    message += getResources().getString(R.string.error_details) + " ";
-                    message += throwable.getMessage();
-                    Toast.makeText(SuiteSelectActivity.this, message, Toast.LENGTH_LONG).show();
-                    LogUtils.e(TAG, "checking update of suite failed", ExecutionException.wrap(throwable));
-                },
-                () -> {
-                    progressDialog.dismiss();
-                    adapter.refresh();
-                    LogUtils.i(TAG, "update check finished");
-                    updateCheckInProgress = false;
-                }
-        );
-    }
-
-    private void installUpdate(TaskSuiteUpdate update) {
-        updateInProgress++;
-        Pair<Observable<TaskSuite>, Observable<InstallationProgress>> process
-                = getServiceProvider().taskSuites().installUpdate(update);
-        progressInstalling(process.first, process.second);
-    }
 
     private void repairSuite() {
         RepairDialog dialog = new RepairDialog();
@@ -482,12 +291,14 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         updateInProgress++;
         Pair<Observable<TaskSuite>, Observable<InstallationProgress>> process
                 = getServiceProvider().taskSuites().repairSuite(currentTaskSuite);
-        progressInstalling(process.first, process.second);
+        getServiceProvider().downloadTaskSuiteService().progressInstalling(process.first, process.second);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         LogUtils.v(TAG, "onContextItemSelected");
+
+
         switch (item.getItemId()) {
             case R.id.repair_task_suite:
                 repairSuite();
@@ -504,6 +315,9 @@ public class SuiteSelectActivity extends BaseServiceActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         LogUtils.v(TAG, "onCreateContextMenu");
         super.onCreateContextMenu(menu, v, menuInfo);
+        if (currentTaskSuite != null) {
+            menu.setHeaderTitle(getString(R.string.suite_context_menu, currentTaskSuite.getCredential().getUser(), currentTaskSuite.getCredential().getManifestUrl()));
+        }
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.suite_menu, menu);
     }
@@ -526,7 +340,9 @@ public class SuiteSelectActivity extends BaseServiceActivity {
 
         @Override
         protected void dialogDismissed(String manifestUrl, String username, String password, boolean accepted) {
-            ((SuiteSelectActivity) getActivity()).installSuite( manifestUrl,  username,  password);
+            if (accepted) {
+                getServiceProvider().downloadTaskSuiteService().installSuite(manifestUrl, username, password, researcher);
+            }
         }
     }
 
@@ -548,7 +364,7 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         }
     }
 
-    private class Adapter extends LoremIpsumSimpleAdapter<TaskSuite>
+    class Adapter extends LoremIpsumSimpleAdapter<TaskSuite>
             implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
         Adapter(Context context, int resource) {
@@ -596,8 +412,7 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             TaskSuite suite = getItem(position);
             if (!suite.isDownloaded()) {
-                Toast.makeText(SuiteSelectActivity.this, R.string.unable_to_run_broken_task_suite,
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(SuiteSelectActivity.this, R.string.unable_to_run_broken_task_suite, Toast.LENGTH_LONG).show();
             } else {
                 returnSuite(getItem(position));
             }
@@ -605,7 +420,11 @@ public class SuiteSelectActivity extends BaseServiceActivity {
 
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            currentTaskSuite = getServiceProvider().taskSuites().getResearchersSuite(getItem(position), researcher).toBlockingObservable().single();
+            currentTaskSuite = getServiceProvider().taskSuites().getResearchersSuite(getItem(position), researcher).toBlockingObservable().singleOrDefault(null);
+            if (currentTaskSuite == null) {
+                adapter.refresh();
+                Toast.makeText(SuiteSelectActivity.this, "Błąd operacji na banku zadań", Toast.LENGTH_SHORT).show();
+            }
             openContextMenu(suiteList);
             return true;
         }

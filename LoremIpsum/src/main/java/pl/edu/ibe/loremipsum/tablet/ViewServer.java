@@ -43,6 +43,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import pl.edu.ibe.loremipsum.tools.LogUtils;
+
 /**
  * <p>
  * This class can be used to enable the use of HierarchyViewer inside an application. HierarchyViewer is an Android SDK
@@ -206,7 +208,7 @@ public class ViewServer implements Runnable {
                 try {
                     sServer.start();
                 } catch (IOException e) {
-                    Log.d(LOG_TAG, "Error:", e);
+                    LogUtils.d(LOG_TAG, "Error:", e);
                 }
             }
         } else {
@@ -276,7 +278,7 @@ public class ViewServer implements Runnable {
                 try {
                     mThreadPool.shutdownNow();
                 } catch (SecurityException e) {
-                    Log.w(LOG_TAG, "Could not stop all view server threads");
+                    LogUtils.w(LOG_TAG, "Could not stop all view server threads");
                 }
             }
 
@@ -288,7 +290,7 @@ public class ViewServer implements Runnable {
                 mServer = null;
                 return true;
             } catch (IOException e) {
-                Log.w(LOG_TAG, "Could not close the view server");
+                LogUtils.w(LOG_TAG, "Could not close the view server");
             }
         }
 
@@ -413,7 +415,7 @@ public class ViewServer implements Runnable {
         try {
             mServer = new ServerSocket(mPort, VIEW_SERVER_MAX_CONNECTIONS, InetAddress.getLocalHost());
         } catch (Exception e) {
-            Log.w(LOG_TAG, "Starting ServerSocket error: ", e);
+            LogUtils.w(LOG_TAG, "Starting ServerSocket error: ", e);
         }
 
         while (mServer != null && Thread.currentThread() == mThread) {
@@ -430,7 +432,7 @@ public class ViewServer implements Runnable {
                     }
                 }
             } catch (Exception e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
+                LogUtils.w(LOG_TAG, "Connection error: ", e);
             }
         }
     }
@@ -602,10 +604,10 @@ public class ViewServer implements Runnable {
                 }
 
                 if (!result) {
-                    Log.w(LOG_TAG, "An error occurred with the command: " + command);
+                    LogUtils.w(LOG_TAG, "An error occurred with the command: " + command);
                 }
             } catch (IOException e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
+                LogUtils.w(LOG_TAG, "Connection error: ", e);
             } finally {
                 if (in != null) {
                     try {
@@ -663,7 +665,7 @@ public class ViewServer implements Runnable {
                 }
 
             } catch (Exception e) {
-                Log.w(LOG_TAG, "Could not send command " + command + " with parameters " + parameters, e);
+                LogUtils.w(LOG_TAG, "Could not send command " + command + " with parameters " + parameters, e);
                 success = false;
             } finally {
                 if (out != null) {
@@ -832,7 +834,7 @@ public class ViewServer implements Runnable {
                     }
                 }
             } catch (Exception e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
+                LogUtils.w(LOG_TAG, "Connection error: ", e);
             } finally {
                 if (out != null) {
                     try {

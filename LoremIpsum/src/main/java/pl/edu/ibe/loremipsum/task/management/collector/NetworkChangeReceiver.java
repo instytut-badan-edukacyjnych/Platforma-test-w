@@ -74,7 +74,6 @@ public class NetworkChangeReceiver extends WakefulBroadcastReceiver {
                 }
                 if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
                     return TYPE_WIFI;
-
                 if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
                     return TYPE_MOBILE;
             }

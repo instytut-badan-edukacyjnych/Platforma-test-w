@@ -48,6 +48,7 @@ import pl.edu.ibe.loremipsum.arbiter.tpr.actionscript.GridArbiter;
 import pl.edu.ibe.loremipsum.task.TaskInfo;
 import pl.edu.ibe.loremipsum.task.tpr.AutoTutorialEndTask;
 import pl.edu.ibe.loremipsum.task.tpr.TPR2TaskGroup;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.testplatform.BuildConfig;
 
 /**
@@ -87,7 +88,7 @@ public class GridTaskGroup extends TPR2TaskGroup {
             gridTaskResult.taskEnd = System.currentTimeMillis();
             gridTaskResult.time = gridTaskResult.taskEnd - gridTaskResult.taskStart;
             gridTaskResults.add(gridTaskResult);
-            Log.e(TAG, "ADD DATA (Next task)!" + gridTaskResults.size() + "  " + gridTaskResult.isTutorial + " result = " + gridTaskResult);
+            LogUtils.e(TAG, "ADD DATA (Next task)!" + gridTaskResults.size() + "  " + gridTaskResult.isTutorial + " result = " + gridTaskResult);
         }
 
         boolean returnValue = super.NextTask();

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ This file is part of Test Platform.
   ~
   ~ Test Platform is free software; you can redistribute it and/or modify
@@ -45,96 +44,99 @@
         android:layout_height="800px"
         android:screenOrientation="reverseLandscape">
 
-        <ScrollView
+
+        <LinearLayout
+            android:id="@+id/buttons_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scrollbarStyle="insideOverlay">
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-            <LinearLayout
+            <Space android:id="@+id/buttons_position"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="0dp" />
 
-                <ImageButton
-                    android:id="@+id/quit"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/men" />
+            <ImageButton
+                android:id="@+id/quit"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/men" />
 
-                <ImageButton
-                    android:id="@+id/photo"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/pho" />
+            <ImageButton
+                android:id="@+id/photo"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/pho" />
 
-                <CheckBox
-                    android:id="@+id/microphone"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:button="@drawable/microphone" />
+            <CheckBox
+                android:id="@+id/microphone"
+                style="@android:style/Widget.Button"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:button="@drawable/microphone" />
 
-                <ImageButton
-                    android:id="@+id/texp_btn"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/exp" />
+            <ImageButton
+                android:id="@+id/texp_btn"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/exp" />
 
-                <ImageButton
-                    android:id="@+id/custom_mark"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/custom_mark" />
+            <ImageButton
+                android:id="@+id/custom_mark"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/custom_mark" />
 
-                <ImageButton
-                    android:id="@+id/zero"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/zer" />
+            <ImageButton
+                android:id="@+id/zero"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/zer" />
 
-                <ImageButton
-                    android:id="@+id/one"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/one" />
+            <ImageButton
+                android:id="@+id/one"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/one" />
 
-                <ImageButton
-                    android:id="@+id/two"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/two" />
+            <ImageButton
+                android:id="@+id/two"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/two" />
 
-                <ImageButton
-                    android:id="@+id/previous"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/pre" />
+            <ImageButton
+                android:id="@+id/previous"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/pre" />
 
-                <ImageButton
-                    android:id="@+id/next"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/nex" />
+            <ImageButton
+                android:id="@+id/next"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/nex" />
 
-                <ImageButton
-                    android:id="@+id/reload"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/rel" />
+            <ImageButton
+                android:id="@+id/reload"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/rel" />
 
-                <ImageButton
-                    android:id="@+id/step"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/ste" />
+            <ImageButton
+                android:id="@+id/step"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/ste" />
 
-                <ImageButton
-                    android:id="@+id/tcom_btn"
-                    android:layout_width="64px"
-                    android:layout_height="64px"
-                    android:src="@drawable/com" />
-            </LinearLayout>
-        </ScrollView>
+            <ImageButton
+                android:id="@+id/tcom_btn"
+                android:layout_width="64px"
+                android:layout_height="64px"
+                android:src="@drawable/com" />
+        </LinearLayout>
+
 
         <View
             android:id="@+id/mark_dropdown_position_holder"

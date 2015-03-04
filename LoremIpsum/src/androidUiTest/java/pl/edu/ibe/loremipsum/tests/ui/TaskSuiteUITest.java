@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.lang.ProcessBuilder;
 import java.lang.RuntimeException;
 
+import pl.edu.ibe.loremipsum.tools.LogUtils;
+
 public class TaskSuiteUITest extends UiAutomatorTestCase {
     private static final String serverAddress = "46.29.20.95:55062/";
     private static final String testmodePath = "testmode/";
@@ -24,7 +26,7 @@ public class TaskSuiteUITest extends UiAutomatorTestCase {
         String scmd = new String();
         for (String pcmd : cmd)
             scmd += pcmd + " ";
-        Log.v("UI testing", "Running command: " + scmd);
+        LogUtils.v("UI testing", "Running command: " + scmd);
 
         try {
             ProcessBuilder pb = new ProcessBuilder(cmd);

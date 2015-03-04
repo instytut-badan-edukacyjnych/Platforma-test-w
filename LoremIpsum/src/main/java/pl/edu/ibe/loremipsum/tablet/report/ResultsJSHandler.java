@@ -43,12 +43,15 @@ import android.webkit.WebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.tools.ExecutionException;
 import pl.edu.ibe.loremipsum.tools.LogUtils;
+import pl.edu.ibe.loremipsum.tools.StringUtils;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
+import pl.edu.ibe.testplatform.BuildConfig;
 
 /**
  * Allows to communicate with @link{android.webkit.WebView}
@@ -82,6 +85,10 @@ public class ResultsJSHandler {
 
     @JavascriptInterface
     public String getExaminee(String textId) {
+        if (BuildConfig.SHOW_FAKE_DATA_IN_REPORT) {
+            return "{\"birthday\":\"11-11-2014\",\"surname\":\"Test\",\"name\":\"" + textId + "\"}";
+        }
+
         LogUtils.v(TAG, "getExaminee(textId = " + textId + ")");
         String r = serviceProvider.examinee().getExamineeByTextId(textId).map(examinee -> {
             try {
@@ -125,6 +132,14 @@ public class ResultsJSHandler {
         LogUtils.d(TAG, "getTprResults");
         String s = serviceProvider.results().getTprResults().toBlockingObservable().singleOrDefault("error");
         LogUtils.d(TAG, s);
+
+        if (BuildConfig.SHOW_FAKE_DATA_IN_REPORT) {
+            try {
+                return StringUtils.inputStreamToString(activity.getAssets().open("tprResults.js"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return s;
     }
 }

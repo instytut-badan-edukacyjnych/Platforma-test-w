@@ -78,8 +78,18 @@ public abstract class LoremIpsumSimpleAdapter<T> extends ArrayAdapter<T> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        if (view == null)
-            view = inflater.inflate(resource, parent, false);
+        if (view == null) {
+            try {
+                view = inflater.inflate(resource, parent, false);
+            } catch (Exception e) {
+                try {
+                    throw new InflateException(getContext().getResources().getResourceName(resource), e);
+                } catch (Exception e1) {
+                    throw new IllegalStateException("Could not get resource name: " + resource, e1);
+                }
+            }
+
+        }
         if (view == null)
             throw new IllegalStateException("Could not inflate resource: " + resource);
 
@@ -139,5 +149,17 @@ public abstract class LoremIpsumSimpleAdapter<T> extends ArrayAdapter<T> {
      * @return String displayed in @link{TextView}
      */
     protected abstract String populateItem(T item);
+
+
+    public static class InflateException extends RuntimeException {
+
+
+        public InflateException(String resourceName, Exception e) {
+            super(resourceName, e);
+
+        }
+
+
+    }
 
 }

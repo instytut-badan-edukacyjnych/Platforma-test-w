@@ -58,19 +58,19 @@ public class IEExamineeWrapper extends XmlEntityFile {
     public static class IEExaminee {
         @Attribute
         public String id;
-        @Attribute
+        @Attribute(required=false)
         public String gender;
-        @Attribute
+        @Attribute(required=false)
         public String birth;
-        @Attribute
+        @Attribute(required=false)
         public String group;
-        @Attribute
+        @Attribute(required=false)
         public String school;
         @Attribute
         public String name;
         @Attribute
         public String surname;
-        @Attribute
+        @Attribute(required=false)
         public String assign;
         @Attribute(required = false)
         public String note;

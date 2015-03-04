@@ -61,7 +61,7 @@ import rx.Observable;
  */
 public class Collector extends BaseService {
 
-    private static final String TAG = Collector.class.getSimpleName();
+    private static final String TAG = Collector.class.getCanonicalName();
     private final String collector = "Collector";
 
     public Collector(ServiceProvider services) {

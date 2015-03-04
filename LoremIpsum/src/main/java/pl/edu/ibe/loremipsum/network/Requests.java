@@ -48,6 +48,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import pl.edu.ibe.loremipsum.tools.LogUtils;
+
 /**
  * @author Mariusz Pluciński
  */
@@ -95,7 +97,7 @@ public class Requests {
                     }
                     return new URL(url);
                 } catch (MalformedURLException e) {
-                    Log.e("Requests", "Invalid url: " + url, e);
+                    LogUtils.e("Requests", "Invalid url: " + url, e);
                     throw e;
                 }
             }

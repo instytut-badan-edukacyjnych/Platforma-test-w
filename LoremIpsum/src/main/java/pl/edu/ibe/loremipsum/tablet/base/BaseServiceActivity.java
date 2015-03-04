@@ -37,6 +37,7 @@
 package pl.edu.ibe.loremipsum.tablet.base;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import pl.edu.ibe.loremipsum.db.schema.Researcher;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
@@ -68,6 +69,10 @@ public abstract class BaseServiceActivity extends BaseLoremIpsumActivity {
     @Override
     public void setTitle(CharSequence title) {
         String titleString = title.toString();
+        if (getServiceProvider() == null || getServiceProvider().login() == null) {
+            Toast.makeText(this, "Błąd logowania", Toast.LENGTH_LONG).show();
+            finish();
+        }
         Researcher researcher = getServiceProvider().login().currentLoggedInUser;
         if (researcher != null) {
             if (!StringUtils.isEmpty(researcher.getFirstName()) && !StringUtils.isEmpty(researcher.getSurName())) {

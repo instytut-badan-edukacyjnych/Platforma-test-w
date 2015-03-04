@@ -215,6 +215,8 @@ public class TaskSuitesService extends BaseService {
             LogUtils.v(TAG, "Removing suite " + name + ":" + version + " from researcher "
                     + oldTaskSuite.getResearcher().getTextId());
             dbAccess().getDaoSession().getResearchersSuiteDao().delete(oldTaskSuite);
+            LogUtils.v(TAG, "Removed suite " + name + ":" + version + " from researcher "
+                    + oldTaskSuite.getResearcher().getTextId());
 
             try {
                 //this may fail if other researchers suites have this suite. This is normal situation
@@ -222,6 +224,7 @@ public class TaskSuitesService extends BaseService {
                 //but, if it has succeeded, we now need to delete suite from storage
                 getTaskStorage().getSuite(name).getVersion(version).uninstall();
             } catch (Throwable t) {
+                LogUtils.e(TAG, "SAFE EXCEPTION", t);
                 t.printStackTrace();
             }
 
@@ -229,6 +232,7 @@ public class TaskSuitesService extends BaseService {
                 //this may fail if other researchers suites have this credential. This is normal situation
                 dbAccess().getDaoSession().getCredentialDao().delete(oldTaskSuite.getCredential());
             } catch (Throwable t) {
+                LogUtils.e(TAG, "SAFE EXCEPTION", t);
                 t.printStackTrace();
             }
 

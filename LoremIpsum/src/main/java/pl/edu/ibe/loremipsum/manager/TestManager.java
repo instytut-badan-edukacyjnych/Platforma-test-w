@@ -80,20 +80,6 @@ public class TestManager {
      */
     public static TestResult m_result = new TestResult();
 
-    private static BaseManager getManager() {
-        switch (m_runTestFlag) {
-            case NORMAL:
-                if (LoremIpsumApp.obtain().getServiceProvider().currentTaskSuite().getCurrentTaskSuiteConfig().disableCatAlgoritm)
-                    return LoremIpsumApp.m_manualManager;
-                return LoremIpsumApp.m_testManager;
-            case TUTORIAL:
-                return LoremIpsumApp.m_manualManager;
-            case DEMO:
-                return LoremIpsumApp.demoManager;
-        }
-        throw new IllegalStateException("It shouldn't happen. Flag: " + m_runTestFlag);
-    }
-
     /**
      * Prepares test
      *
@@ -108,27 +94,17 @@ public class TestManager {
         m_runTestFlag = testMode;
         LoremIpsumApp.m_taskOrder.clear();
 
+        m_runTaskInfo = null;
+        m_taskNumber = 0;
+        m_prevTaskInfo = null;
+        LoremIpsumApp.m_finishFlag = false;
+
         if (m_runTestFlag == CurrentTaskSuiteService.TestMode.NORMAL) {
             if ((LoremIpsumApp.m_areas.size() > 0) && (examined != null)) {
                 m_result.Assign(examined, LoremIpsumApp.m_testManager.m_name);
                 m_result.Start(true);
 
                 LoremIpsumApp.m_testManager.Restart("");
-
-                m_runTaskInfo = null;
-                m_taskNumber = 0;
-                m_prevTaskInfo = null;
-
-                if (LoremIpsumApp.BROWSER_FLAG) {
-                    for (LoremIpsumApp.AreaWrapper area : LoremIpsumApp.m_areas) {
-                        for (TaskInfo task : area.m_tasks) {
-                            LoremIpsumApp.m_taskOrder.add(LoremIpsumApp.loremIpsumApp.new TaskWrapper(task));
-                        }
-                    }
-                }
-
-                LoremIpsumApp.m_finishFlag = false;
-
                 return true;
             }
         } else if (m_runTestFlag == CurrentTaskSuiteService.TestMode.TUTORIAL) {
@@ -137,7 +113,6 @@ public class TestManager {
                 m_result.Start(false);
 
                 LoremIpsumApp.m_manualManager.Restart("");
-
                 return true;
             }
         } else if (m_runTestFlag == CurrentTaskSuiteService.TestMode.DEMO) {
@@ -146,7 +121,6 @@ public class TestManager {
                 m_result.Start(false);
 
                 LoremIpsumApp.demoManager.Restart("");
-
                 return true;
             }
         }
@@ -193,6 +167,7 @@ public class TestManager {
                     .getCurrentTestRunData().setTestMode(CurrentTaskSuiteService.TestMode.NORMAL);
             onModeChanged.modeChanged(CurrentTaskSuiteService.TestMode.NORMAL);
             LoremIpsumApp.m_testManager.Restart("");
+            m_result.Enable(true);
             return GetNextTask(onModeChanged);
         } else if (m_runTestFlag == CurrentTaskSuiteService.TestMode.DEMO) {
             return LoremIpsumApp.demoManager.GetNextTask();

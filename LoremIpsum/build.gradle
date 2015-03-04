@@ -67,6 +67,14 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 19
+        buildConfigField "boolean", "OMIT_NETWORK_CHECK", "false"
+        buildConfigField "boolean", "AUTO_LOGIN", "false"
+        buildConfigField "boolean", "AUTO_LOAD_TASK_SUITE_FROM_ASSETS", "false"
+        buildConfigField "boolean", "ENABLE_TEST_DRAWINGS", "false"
+        buildConfigField "boolean", "ENABLE_FAKE_RANDOM", "false"
+        buildConfigField "boolean", "ENABLE_GRID_POSITIONS", "false"
+        buildConfigField "boolean", "SHOW_DEBUG_INFO", "false"
+        buildConfigField "boolean", "SHOW_FAKE_DATA_IN_REPORT", "false"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -89,61 +97,38 @@ android {
             }
         }
     }
-
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            buildConfigField "boolean", "OMIT_NETWORK_CHECK", "false"
-            buildConfigField "boolean", "AUTO_LOGIN", "false"
+        }
+        debug {
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    productFlavors {
+        flavorClient {
+        }
+        flavorDevel {
+            buildConfigField "boolean", "SHOW_DEBUG_INFO", "true"
+            buildConfigField "boolean", "OMIT_NETWORK_CHECK", "true"
+            buildConfigField "boolean", "AUTO_LOGIN", "true"
             buildConfigField "boolean", "AUTO_LOAD_TASK_SUITE_FROM_ASSETS", "false"
             buildConfigField "boolean", "ENABLE_TEST_DRAWINGS", "false"
             buildConfigField "boolean", "ENABLE_FAKE_RANDOM", "false"
             buildConfigField "boolean", "ENABLE_GRID_POSITIONS", "false"
+            buildConfigField "boolean", "SHOW_FAKE_DATA_IN_REPORT", "false"
         }
-        debug {
-            buildConfigField "boolean", "OMIT_NETWORK_CHECK", "true"
-            buildConfigField "boolean", "AUTO_LOGIN", "false"
-            buildConfigField "boolean", "AUTO_LOAD_TASK_SUITE_FROM_ASSETS", "false"
-            buildConfigField "boolean", "ENABLE_TEST_DRAWINGS", "false"
-            buildConfigField "boolean", "ENABLE_FAKE_RANDOM", "false"
-            buildConfigField "boolean", "ENABLE_GRID_POSITIONS", "true"
-
-        }
-    }
-
-
-
-
-
-    lintOptions {
-        abortOnError false
-    }
-}
-
-retrolambda {
-    if (!System.properties.getProperty("os.name").toLowerCase().contains("windows")) {
-        if (System.getenv("JAVA8_HOME") == null || System.getenv("JAVA7_HOME") == null) {
-            throw new GradleException('Required system environments are null (JAVA8_HOME && JAVA7_HOME).' +
-                    ' Try to run Android Studio from console. Android studio does not look into .bashrc file running from console should fix it.')
-        }
-        println(System.getenv("JAVA8_HOME"))
-        println(System.getenv("JAVA7_HOME"))
-        jdk System.getenv("JAVA8_HOME")
-        oldJdk System.getenv("JAVA7_HOME")
-        javaVersion JavaVersion.VERSION_1_7
-
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-//TODO MP check androidTestCompile instead compile
+    compile fileTree(include: '*.jar', dir: 'libs')
+    //TODO MP check androidTestCompile instead compile
     // TODO include those only in tests
     compile 'org.mockito:mockito-core:1.9.5'
     compile 'com.google.dexmaker:dexmaker:1.0'
     compile 'com.google.dexmaker:dexmaker-mockito:1.0'
-
     compile 'com.android.support:support-v4:19.+'
     compile 'com.squareup.mimecraft:mimecraft:1.1.0'
     compile 'com.jakewharton:butterknife:5.1.+'
@@ -164,18 +149,16 @@ dependencies {
     compile('com.google.android.gms:play-services:4.3.+') {
         exclude module: 'support-v4'
     }
-
     // TODO this dependency is needed only for UI tests
-    compile files(getSdkPath() + '/platforms/android-19/uiautomator.jar')
 }
 
 assembleDebug.dependsOn(':DbGen:regenerate')
 assembleRelease.dependsOn(':DbGen:regenerate')
 
 // updating version information in manifest
-assembleRelease.doLast {
-    copyResult('release')
-}
+//assembleRelease.doLast {
+//    copyResult('release')
+//}
 
 assembleDebug.doLast {
     //  updateVersionCode()
@@ -191,18 +174,18 @@ def getVersionName() {
     return matcherVersionNumber.group(1);
 }
 
-def copyResult(variant) {
-    def releasesDir = new File(project.projectDir, 'release')
-    releasesDir.mkdirs()
-    android.applicationVariants.each { v ->
-        if (v.name.equals(variant)) {
-            def src = v.outputFile
-            def dst = new File(releasesDir, project.name + '-' + getVersionName() + '.apk')
-            println 'Copying latest release to ' + dst
-            src.withInputStream { is -> dst << is }
-        }
-    }
-}
+//def copyResult(variant) {
+//    def releasesDir = new File(project.projectDir, 'release')
+//    releasesDir.mkdirs()
+//    android.applicationVariants.each { v ->
+//        if (v.name.equals(variant)) {
+//            def src = v.name
+//            def dst = new File(releasesDir, project.name + '-' + getVersionName() + '.apk')
+//            println 'Copying latest release to ' + dst
+//            src.withInputStream { is -> dst << is }
+//        }
+//    }
+//}
 
 def getProjectPackage() {
     def manifestFile = file("src/main/AndroidManifest.xml")

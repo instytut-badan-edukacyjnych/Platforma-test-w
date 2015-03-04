@@ -4,6 +4,7 @@ import android.util.Log;
 
 import pl.edu.ibe.loremipsum.configuration.Gender;
 import pl.edu.ibe.loremipsum.manager.MappingDependency;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.Tuple;
 import pl.edu.ibe.loremipsum.tools.XmlHelper;
 import pl.edu.ibe.loremipsum.tools.io.VirtualFile;
@@ -177,7 +178,7 @@ public class CatMapperParserTest extends TestCase {
     private VirtualFile prepareFile() throws IOException, TransformerException {
         VirtualFile mappingFile = mock(VirtualFile.class);
         when(mappingFile.getInputStream()).thenReturn(XmlHelper.convertDocumentToStream(doc));
-        Log.v("test", XmlHelper.convertDocumentToString(doc));
+        LogUtils.v("test", XmlHelper.convertDocumentToString(doc));
         return mappingFile;
     }
 

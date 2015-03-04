@@ -44,9 +44,9 @@ import android.view.LayoutInflater;
 import android.widget.ListView;
 
 import pl.edu.ibe.loremipsum.configuration.CollectorConfig;
-import pl.edu.ibe.testplatform.R;
 import pl.edu.ibe.loremipsum.tablet.base.LoremIpsumSimpleAdapter;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceDialogFragment;
+import pl.edu.ibe.testplatform.R;
 
 /**
  * Created by adam on 17.04.14.
@@ -79,6 +79,9 @@ public abstract class CollectorAgreementDialog extends ServiceDialogFragment {
     }
 
     private void fillAdapter(CollectorConfig collectorConfig, PermissionAdapted permissionAdapted) {
+        if (collectorConfig.sendExamineeFullname) {
+            permissionAdapted.add(getActivity().getString(R.string.examinee_fullname));
+        }
         if (collectorConfig.sendExamineeBirthday) {
             permissionAdapted.add(getActivity().getString(R.string.examinee_birthday));
         }

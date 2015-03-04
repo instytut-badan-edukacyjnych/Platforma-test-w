@@ -442,6 +442,11 @@ public class GridTask extends LookTask {
     public GridTaskResult getData() {
         GridTaskResult gridTaskResult = new GridTaskResult();
         gridTaskResult.taskStart = startTime;
+
+        while (calculatedDistancesFromClosestProperPosition.size() < itemList.size()) {
+            calculatedDistancesFromClosestProperPosition.add(10d);
+        }
+
         gridTaskResult.results = calculatedDistancesFromClosestProperPosition;
         gridTaskResult.area = area;
         gridTaskResult.numOfItems = itemList.size();

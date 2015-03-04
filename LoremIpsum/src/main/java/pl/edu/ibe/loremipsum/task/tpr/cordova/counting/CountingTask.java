@@ -201,7 +201,7 @@ public class CountingTask extends LookTask {
             }
         }
 
-        Log.d("Container", container.flattenToString());
+        LogUtils.d("Container", container.flattenToString());
 
 
         if (timeout != -1) {

@@ -60,7 +60,7 @@ public class IEInstitutionWrapper extends XmlEntityFile {
         public String name;
         @Attribute
         public String address;
-        @Attribute
+        @Attribute(required=false)
         public String assign;
         @ElementList(required = false)
         public ArrayList<String> assignedResearchers = new ArrayList<>();

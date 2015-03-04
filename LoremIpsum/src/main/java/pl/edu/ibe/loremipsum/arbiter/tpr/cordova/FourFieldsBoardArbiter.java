@@ -108,7 +108,7 @@ public class FourFieldsBoardArbiter extends Tpr1Arbiter {
 
     @Override
     public double getPercentageMark() {
-        if (data == null || data.size() != 48) {
+        if (data == null || data.size() != 49) {
             return -7;
         }
         return (userCorrectAnswers * 1.0) / (maxCorrectAnswersCount * 1.0);

@@ -454,12 +454,12 @@ public class GridTask extends LookTask {
                     if (taskMode == TaskMode.normal && touches.size() == itemList.size()) {
                         ((TaskAct) getContext()).getTaskHandler().sendEmptyMessageDelayed(BaseTask.TASK_MESS_NEXT_TASK, 500);
                         nextTaskRequested = true;
-                        Log.d(TAG, "next task request: touches = " + touches + "  itemList = " + itemList + " tutorial = " + taskMode);
+                        LogUtils.d(TAG, "next task request: touches = " + touches + "  itemList = " + itemList + " tutorial = " + taskMode);
                     } else if ((taskMode == TaskMode.tutorial || taskMode == TaskMode.demo) && touches.size() == itemList.size()) {
                         currentItemIndex = -2;
                         m_animateHandler.sendEmptyMessageDelayed(currentItemIndex, 250);
                         ((TaskAct) getContext()).getTaskHandler().sendEmptyMessageDelayed(BaseTask.TASK_MESS_NEXT_TASK, 750);
-                        Log.d(TAG, "next task request: touches = " + touches + "  itemList = " + itemList + " tutorial = " + taskMode);
+                        LogUtils.d(TAG, "next task request: touches = " + touches + "  itemList = " + itemList + " tutorial = " + taskMode);
                         nextTaskRequested = true;
                     }
                 }
@@ -476,7 +476,7 @@ public class GridTask extends LookTask {
     }
 
     public GridTaskResult getData() {
-        Log.e(TAG, "GET DATA!");
+        LogUtils.e(TAG, "GET DATA!");
         GridTaskResult gridTaskResult = new GridTaskResult();
         gridTaskResult.taskStart = startTime;
         gridTaskResult.results = calculatedDistancesFromClosestProperPosition;

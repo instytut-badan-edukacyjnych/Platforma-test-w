@@ -36,5 +36,5 @@
   -->
 
 <resources>
-   <string name="support_server_address" translatable="false">http://46.29.20.95:55065/submit</string>
+   <string name="support_server_address" translatable="false">http://ptsupport.speednet.pl/submit</string>
 </resources>

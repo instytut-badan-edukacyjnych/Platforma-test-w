@@ -1,4 +1,3 @@
-
 /************************************
  * This file is part of Test Platform.
  *
@@ -46,7 +45,6 @@ import java.util.List;
 import pl.edu.ibe.loremipsum.configuration.Gender;
 import pl.edu.ibe.loremipsum.configuration.TaskSuiteConfig;
 import pl.edu.ibe.loremipsum.data.dataexport.DataExporter;
-import pl.edu.ibe.loremipsum.data.dataexport.ExportException;
 import pl.edu.ibe.loremipsum.data.dataimport.DataImporter;
 import pl.edu.ibe.loremipsum.db.schema.Department;
 import pl.edu.ibe.loremipsum.db.schema.Examinee;
@@ -60,6 +58,7 @@ import pl.edu.ibe.loremipsum.db.schema.ResearcherJoinInstitution;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.tools.BaseService;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
 import rx.Observable;
@@ -75,6 +74,7 @@ public class ImportExportService extends BaseService {
      * Separator for address institution elements
      */
     private static final String INSTITUTION_ADDRESS_SEPARATOR = "::";
+    private static final String TAG = ImportExportService.class.getCanonicalName();
     protected String researchersPath;
     protected String examinedPath;
     protected String institutionPath;
@@ -114,6 +114,7 @@ public class ImportExportService extends BaseService {
                 List<Examinee> examineds = convertIEExaminee(ieExamineeWrapper, researchers, institutions);
                 dbAccess().getDaoSession().clear();
             } catch (Exception e) {
+                LogUtils.d(TAG, "Import failure", e);
                 e.printStackTrace();
                 success = false;
             }
@@ -149,6 +150,7 @@ public class ImportExportService extends BaseService {
             try {
                 examined.setBirthday(TimeUtils.stringToDate(ieExaminee.birth, TimeUtils.defaultPatern));
             } catch (ParseException e) {
+                LogUtils.d(TAG, "Birthday ", e);
                 e.printStackTrace();
             }
 
@@ -171,14 +173,17 @@ public class ImportExportService extends BaseService {
 
             ResearcherJoinExaminee researcherJoinExaminee;
             if (ieExaminee.assignedResearchers == null || ieExaminee.assignedResearchers.size() == 0) {
-                Researcher researcher = dbAccess().getDaoSession().getResearcherDao().
-                        queryBuilder().where(ResearcherDao.Properties.TextId.eq(ieExaminee.assign)).list().get(0);
-                researcherJoinExaminee = new ResearcherJoinExaminee();
-                researcherJoinExaminee.setResearcher(researcher);
-                researcherJoinExaminee.setExaminee(examined);
-                dbAccess().getDaoSession().getResearcherJoinExamineeDao().insert(researcherJoinExaminee);
-                researcher.resetResearcherJoinExamineeList();
-                examined.resetResearcherJoinExamineeList();
+                List<Researcher> researcherList = dbAccess().getDaoSession().getResearcherDao().
+                        queryBuilder().where(ResearcherDao.Properties.TextId.eq(ieExaminee.assign)).list();
+                if (researcherList.size() > 0) {
+                    Researcher researcher = researcherList.get(0);
+                    researcherJoinExaminee = new ResearcherJoinExaminee();
+                    researcherJoinExaminee.setResearcher(researcher);
+                    researcherJoinExaminee.setExaminee(examined);
+                    dbAccess().getDaoSession().getResearcherJoinExamineeDao().insert(researcherJoinExaminee);
+                    researcher.resetResearcherJoinExamineeList();
+                    examined.resetResearcherJoinExamineeList();
+                }
             } else {
                 for (String assignedResearcher : ieExaminee.assignedResearchers) {
                     for (Researcher researcher : researchers) {
@@ -261,15 +266,18 @@ public class ImportExportService extends BaseService {
 
             ResearcherJoinInstitution researcherJoinInstitution;
             if (ieInstitution.assignedResearchers == null || ieInstitution.assignedResearchers.size() == 0) {
-                Researcher researcher = dbAccess().getDaoSession().getResearcherDao().
-                        queryBuilder().where(ResearcherDao.Properties.TextId.eq(ieInstitution.assign)).list().get(0);
-                researcherJoinInstitution = new ResearcherJoinInstitution();
-                researcherJoinInstitution.setResearcher(researcher);
-                researcherJoinInstitution.setInstitution(institution);
+                Researcher researcher;
+                List<Researcher> list = dbAccess().getDaoSession().getResearcherDao().queryBuilder().where(ResearcherDao.Properties.TextId.eq(ieInstitution.assign)).list();
+                if (list.size() > 0) {
+                    researcher = list.get(0);
+                    researcherJoinInstitution = new ResearcherJoinInstitution();
+                    researcherJoinInstitution.setResearcher(researcher);
+                    researcherJoinInstitution.setInstitution(institution);
 
-                dbAccess().getDaoSession().getResearcherJoinInstitutionDao().insert(researcherJoinInstitution);
-                institution.resetResearcherJoinInstitutionList();
-                researcher.resetResearcherJoinInstitutionList();
+                    dbAccess().getDaoSession().getResearcherJoinInstitutionDao().insert(researcherJoinInstitution);
+                    institution.resetResearcherJoinInstitutionList();
+                    researcher.resetResearcherJoinInstitutionList();
+                }
             } else {
                 for (String researcherTextId : ieInstitution.assignedResearchers) {
                     for (Researcher researcher : researchers) {
@@ -340,7 +348,8 @@ public class ImportExportService extends BaseService {
                 dataExporter.exportToXml(ieInstitutionWrapper, institutionPath);
                 dataExporter.exportToXml(ieExamineeWrapper, examinedPath);
                 dataExporter.exportToXml(ieResearcherWrapper, researchersPath);
-            } catch (ExportException e) {
+            } catch (Exception e) {
+                LogUtils.d(TAG, "Export failure", e);
                 e.printStackTrace();
                 success = false;
             }
@@ -365,15 +374,21 @@ public class ImportExportService extends BaseService {
             ieExaminee.id = examined.getTextId();
             ieExaminee.name = examined.getFirstName();
             ieExaminee.surname = examined.getLastName();
-            ieExaminee.assign = examined.getResearcherJoinExamineeList().get(0).getResearcher().getTextId();
+            if (examined.getResearcherJoinExamineeList().size() > 0) {
+                ieExaminee.assign = examined.getResearcherJoinExamineeList().get(0).getResearcher().getTextId();
+            }
             try {
                 ieExaminee.birth = TimeUtils.dateToString(examined.getBirthday(), TimeUtils.defaultPatern);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                LogUtils.d(TAG, "error", e);
             }
             ieExaminee.gender = examined.getGender();
-            ieExaminee.group = examined.getDepartment().getName();
-            ieExaminee.school = examined.getInstitution().getTextId();
+            if (examined.getDepartment() != null) {
+                ieExaminee.group = examined.getDepartment().getName();
+            }
+            if (examined.getInstitution() != null) {
+                ieExaminee.school = examined.getInstitution().getTextId();
+            }
             ieExaminee.additionalData = examined.getAdditionalData();
             for (ResearcherJoinExaminee researcherJoinExaminee : examined.getResearcherJoinExamineeList()) {
                 ieExaminee.assignedResearchers.add(researcherJoinExaminee.getResearcher().getTextId());
@@ -433,7 +448,9 @@ public class ImportExportService extends BaseService {
                         + institution.getCity() + INSTITUTION_ADDRESS_SEPARATOR + institution.getProvince();
             }
             ieInstitution.id = institution.getTextId();
-            ieInstitution.assign = institution.getResearcherJoinInstitutionList().get(0).getResearcher().getTextId();
+            if (institution.getResearcherJoinInstitutionList().size() > 0) {
+                ieInstitution.assign = institution.getResearcherJoinInstitutionList().get(0).getResearcher().getTextId();
+            }
             ieInstitution.name = institution.getName();
             for (ResearcherJoinInstitution researcherJoinInstitution : institution.getResearcherJoinInstitutionList()) {
                 ieInstitution.assignedResearchers.add(researcherJoinInstitution.getResearcher().getTextId());

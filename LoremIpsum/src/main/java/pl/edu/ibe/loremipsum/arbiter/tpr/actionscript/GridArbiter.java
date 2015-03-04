@@ -291,7 +291,7 @@ public class GridArbiter extends Tpr2Arbiter {
 
                 for (int j = 0; j < gridTaskResult.results.size(); j++) {
                     targetArray[33 + j + summaryOffset] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_P" + (j + 1) + "_" + typeLetter, gridTaskResult.results.get(j) + "");
-                    Log.d(TAG, "i = " + i + " j = " + j + " summaryOffset = " + summaryOffset + " sum = " + (33 + j + summaryOffset) + " value = " + gridTaskResult.results.get(j));
+                    LogUtils.d(TAG, "i = " + i + " j = " + j + " summaryOffset = " + summaryOffset + " sum = " + (33 + j + summaryOffset) + " value = " + gridTaskResult.results.get(j));
                 }
                 summaryOffset += gridTaskResult.results.size();
             }

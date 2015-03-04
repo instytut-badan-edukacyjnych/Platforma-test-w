@@ -56,6 +56,7 @@ public class LoremIpsumResponse {
 
     public LoremIpsumResponse(URL url, Map<String, List<String>> headers, InputStream stream) {
         LogUtils.i(TAG, "Constructing response from " + url);
+        LogUtils.i(TAG, "headers: " + headers);
         this.headers = headers;
         this.stream = stream;
         this.url = url;

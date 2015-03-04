@@ -41,8 +41,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // TODO: may be updated to 0.10 on the next retrolambda release
-        classpath 'com.android.tools.build:gradle:0.14.0'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
         classpath 'me.tatarka:gradle-retrolambda:2.4.0'
     }

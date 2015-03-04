@@ -78,6 +78,7 @@ import pl.edu.ibe.loremipsum.manager.TestManager;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.task.TaskGroup;
 import pl.edu.ibe.loremipsum.task.tpr.cordova.counting.CountingSummaryTask;
+import pl.edu.ibe.testplatform.BuildConfig;
 import pl.edu.ibe.testplatform.R;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.tablet.handler.AppHandlerService;
@@ -651,7 +652,7 @@ public class TaskAct extends TaskWrapperActivity {
             }
         }
 
-        if (LoremIpsumApp.SHOW_IRT_FLAG) {
+        if (LoremIpsumApp.SHOW_IRT_FLAG || BuildConfig.SHOW_DEBUG_INFO) {
             if (m_exeTask != null) {
                 ManagerTestInfo info = LoremIpsumApp.m_testManager.GetTestInfo(m_exeTask.m_taskInfo.m_area);
                 if (info != null) {
@@ -874,7 +875,7 @@ public class TaskAct extends TaskWrapperActivity {
 
             switch (a_msg.what) {
                 case BaseTask.TASK_MESS_REFRESH_VIEW:
-                    Log.d(TAG,"refresh");
+                    LogUtils.d(TAG,"refresh");
                     m_foreView.invalidate();
                     break;
 

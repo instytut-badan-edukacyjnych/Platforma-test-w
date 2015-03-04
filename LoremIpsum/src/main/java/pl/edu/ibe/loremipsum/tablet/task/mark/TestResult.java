@@ -1,5 +1,3 @@
-
-
 /*
  * This file is part of Test Platform.
  *
@@ -55,6 +53,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Vector;
@@ -67,6 +66,8 @@ import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.task.TaskInfo;
 import pl.edu.ibe.loremipsum.tools.LogUtils;
+import pl.edu.ibe.loremipsum.tools.StringUtils;
+import pl.edu.ibe.loremipsum.tools.TimeUtils;
 
 /**
  * Klasa przechowywania wyników badania
@@ -144,6 +145,7 @@ public class TestResult extends BaseXMLFile {
             FLAG_RESULT_CFG_TASK_AREA |
             FLAG_RESULT_CFG_TASK_NR |
             FLAG_RESULT_CFG_TASK_ANSWER |
+            FLAG_RESULT_CFG_TASK_MARK |
             FLAG_RESULT_CFG_TASK_DURATION |
             FLAG_RESULT_CFG_TASK_THETA |
             FLAG_RESULT_CFG_TASK_SE |
@@ -445,7 +447,6 @@ public class TestResult extends BaseXMLFile {
      * Usuwa informację o zadaniu
      *
      * @param a_task - informacja o zadaniu
-     *
      * @return true jeżeli informacja zaostała usunieta
      */
     public boolean Del(TaskInfo a_task) {
@@ -484,175 +485,16 @@ public class TestResult extends BaseXMLFile {
             item.m_status = info.m_status;
             item.m_theta = info.m_vector.m_theta;
             item.m_se = info.m_vector.m_se;
-
+            LogUtils.d(TAG, "Result : " + item);
             m_result.put(a_name, item);
         }
     }
 
 
     /**
-     * Odczytuje wyniki z pliku xml
-     *
-     * @param a_fileName - nazwa pliku
-     *
-     * @return true - odczyt zakończony powodzeniem
-     */
-    public boolean LoadResultXML(String a_fileName) throws FileNotFoundException {
-        LogUtils.d(TAG, "LoadResultXML");
-        String inputDir = LoremIpsumApp.m_legacyInputDir;
-        Document doc = OpenXMLFile(a_fileName,
-                inputDir + LoremIpsumApp.SYS_FILE_SEPARATOR + RESULT_XSD_FILENAME);
-        if (doc == null) {
-            return false;
-        }
-
-        m_valid = true;
-        m_result.clear();
-        m_tasks.clear();
-        m_respondent = new PupilData();
-
-        NodeList list = doc.getElementsByTagName(XML_TEST_RESPONDENT);
-        if (list != null) {
-            if (list.getLength() > 0) {
-                // W pliku powinien być tylko jeden tak element
-                NamedNodeMap map = list.item(0).getAttributes();
-                if (map != null) {
-                    try {
-                        // znacznik czasu poczatku badania
-                        m_timestamp = GetLong(map, XML_TEST_RESPONDENT_TIMESTAMP);
-
-                        // identyfikator badanego
-                        m_respondent.m_id = GetString(map, XML_TEST_RESPONDENT_ID);
-
-                        // płeć
-                        m_respondent.m_gender = getString(map, XML_TEST_RESPONDENT_GENDER, "");
-
-                        // data urodzenia
-                        m_respondent.m_birthday = getString(map, XML_TEST_RESPONDENT_BIRTHDAY, "");
-
-                        // identyfikator placówki
-                        m_respondent.m_schoolId = getString(map, XML_TEST_RESPONDENT_SCHOOL, "");
-
-                        // identyfikator prowadzącego badanie
-                        m_respondent.m_assignTo = getString(map, XML_TEST_RESPONDENT_RESEARCHER, "");
-
-                        // oddział w placówce
-                        m_respondent.m_group = getString(map, XML_TEST_RESPONDENT_GROUP, "");
-
-                        // metoda prowadzenia badania
-                        m_method = getString(map, XML_TEST_RESPONDENT_METHOD, "");
-
-                        // czas trwania testu
-                        m_duration = GetInteger(map, XML_TEST_RESPONDENT_DURATION, 0);
-
-                        // uwagi do badania
-                        m_respondent.m_note = getString(map, XML_TEST_RESPONDENT_NOTE_FILE, "");
-
-                        // sygnatura banku zadań
-                        m_signature = getString(map, XML_TEST_RESPONDENT_SIGNATURE, "");
-
-                        // wersja oprogramowania
-                        m_version = getString(map, XML_TEST_RESPONDENT_VERSION, "");
-
-                        // numer seryjny tabletu
-                        m_serial = getString(map, XML_TEST_RESPONDENT_SERIAL, "");
-                    } catch (XMLFileException e) {
-                        LogUtils.d(TAG, "result discard: " + a_fileName, e);
-                        m_valid = false;
-                    }
-                }
-            }
-        }
-
-        // wyniki
-        list = doc.getElementsByTagName(XML_TEST_RESULT);
-        if (list != null) {
-            if (list.getLength() > 0) {
-                for (int index = 0; index < list.getLength(); ++index) {
-                    NamedNodeMap map = list.item(index).getAttributes();
-                    if (map != null) {
-                        ResultItem item = new ResultItem();
-
-                        try {
-                            // obszar
-                            item.m_area = GetString(map, XML_TEST_RESULT_AREA);
-
-                            // status
-                            item.m_status = LoremIpsumApp.StringToTestStatus(getString(map, XML_TEST_RESULT_STATUS, LoremIpsumApp.TEST_STATUS_ERROR));
-
-                            // liczba zadań
-                            item.m_length = GetInteger(map, XML_TEST_RESULT_LENGTH, 0);
-
-                            // theta
-                            item.m_theta = GetDouble(map, XML_TEST_RESULT_THETA, 0.0);
-
-                            // se
-                            item.m_se = GetDouble(map, XML_TEST_RESULT_SE, 0.0);
-
-                            m_result.put(item.m_area, item);
-                        } catch (XMLFileException e) {
-                            LogUtils.d(TAG, "result discard: " + index + " " + a_fileName, e);
-                            m_valid = false;
-                        }
-                    }
-                }
-            }
-        }
-
-        // informacja o zadaniach
-        list = doc.getElementsByTagName(XML_TEST_TASKS);
-        if (list != null) {
-            if (list.getLength() > 0) {
-                for (int index = 0; index < list.getLength(); ++index) {
-                    NamedNodeMap map = list.item(index).getAttributes();
-                    if (map != null) {
-                        ResultTaskItem item = new ResultTaskItem();
-
-                        try {
-                            // zadanie
-                            item.m_taskName = GetString(map, XML_TEST_TASKS_NAME);
-
-                            // obszar
-                            item.m_area = GetString(map, XML_TEST_TASKS_AREA);
-
-                            // numer
-                            item.m_nr = GetInteger(map, XML_TEST_TASKS_NR);
-
-                            // ocena
-                            item.m_mark = GetInteger(map, XML_TEST_TASKS_MARK);
-
-                            // odpowiedź
-                            item.m_answer = getString(map, XML_TEST_TASKS_ANSWER, LoremIpsumApp.APP_NO_FILL_FIELD);
-
-                            // czas rozwiązywania zdania
-                            item.m_taskDuration = GetInteger(map, XML_TEST_TASKS_DURATION, -1);
-
-                            // theta
-                            item.m_theta = GetInteger(map, XML_TEST_TASKS_THETA);
-
-                            // se
-                            item.m_se = GetInteger(map, XML_TEST_TASKS_SE);
-
-                            // nie wczytujemy informacji o plikach
-
-                            m_tasks.add(item);
-                        } catch (XMLFileException e) {
-                            LogUtils.d(TAG, "result discard: " + index + " " + a_fileName);
-                            m_valid = false;
-                        }
-                    }
-                }
-            }
-        }
-
-        return m_valid;
-    }
-
-    /**
      * Odczytuje nagłowek wyników z pliku xml
      *
      * @param a_fileName - nazwa pliku
-     *
      * @return true - odczyt zakończony powodzeniem
      */
     public boolean LoadResultStubXML(String a_fileName) throws FileNotFoundException {
@@ -764,7 +606,6 @@ public class TestResult extends BaseXMLFile {
      * Zapisuje wyniki badania w pliku xml
      *
      * @param a_fileName - nazwa pliku
-     *
      * @return true - zapis zakończony powodzeniem
      */
     public boolean SaveResultXML(String a_fileName) {
@@ -914,7 +755,7 @@ public class TestResult extends BaseXMLFile {
      * @return true if succeded
      */
     public boolean SaveNote() {
-        if (TextUtils.isEmpty(m_respondent.m_note) || TextUtils.isEmpty(m_respondent.m_noteContent)){
+        if (TextUtils.isEmpty(m_respondent.m_note) || TextUtils.isEmpty(m_respondent.m_noteContent)) {
             return true;
         }
         try {
@@ -941,13 +782,131 @@ public class TestResult extends BaseXMLFile {
      * Zapisuje wyniki badania w pliku csv
      *
      * @param a_fileName - nazwa pliku
-     *
      * @return true - zapis zakończony powodzeniem
      */
     public boolean SaveResultCSV(String a_fileName) {
 
         boolean result = false;
+        if (m_tasks.size() > 0 && m_tasks.get(0).isTPRTest) {
+            result = saveTPRCsvResult(a_fileName);
+        } else {
+            result = saveTunssCsvResult(a_fileName);
+        }
+        return result;
+    }
 
+    private boolean saveTPRCsvResult(String a_fileName) {
+        boolean result = false;
+        StringBuilder headerLineBuilder = new StringBuilder();
+        StringBuilder bottomLineBuilder = new StringBuilder();
+
+
+        try {
+            headerLineBuilder.append(XML_TEST_RESPONDENT_TIMESTAMP);
+            bottomLineBuilder.append(TimeUtils.dateToString(new Date(), TimeUtils.dateTimeFileNamePattern));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_ID);
+        bottomLineBuilder.append(m_respondent.m_id);
+
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_BIRTHDAY);
+        bottomLineBuilder.append(m_respondent.m_birthday);
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_GENDER);
+        bottomLineBuilder.append(m_respondent.m_gender);
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_RESEARCHER);
+        bottomLineBuilder.append(m_respondent.m_assignTo);
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_GROUP);
+        bottomLineBuilder.append(m_respondent.m_group);
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_SCHOOL);
+        bottomLineBuilder.append(m_respondent.m_schoolId);
+
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_DURATION);
+        bottomLineBuilder.append(m_duration);
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+        headerLineBuilder.append(XML_TEST_RESPONDENT_NOTE_FILE);
+        bottomLineBuilder.append(m_respondent.m_note);
+
+
+        headerLineBuilder.append(CSV_FIELD_SEPARATOR);
+        bottomLineBuilder.append(CSV_FIELD_SEPARATOR);
+
+
+        String resultsDir = ServiceProvider.obtain().currentTaskSuite().getResultsDir();
+        File dir = new File(resultsDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+
+        String[] answerLines;
+        for (ResultTaskItem m_task : m_tasks) {
+            answerLines = m_task.m_answer.split("\n");
+            if (answerLines.length == 2) {
+                headerLineBuilder.append(answerLines[0]);
+                bottomLineBuilder.append(answerLines[1]);
+
+                headerLineBuilder.append("TASK_SEPARATOR;");
+                bottomLineBuilder.append("TASK_SEPARATOR;");
+            } else {
+                StringUtils.stringToFile(new File(resultsDir, "unexpected_data_" + m_task.m_taskName + "_" + new Date() + ".log"), "Expected 2 lines, got:" +
+                        answerLines.length + "\n\nDUMP:\n\n" + m_task.toString());
+                LogUtils.d(TAG, "Unexpected data, more than 2 lines " + m_task.toString());
+            }
+        }
+        StringBuilder data = new StringBuilder();
+
+        data.append(headerLineBuilder);
+        data.append("\n");
+        data.append(bottomLineBuilder);
+        try {
+            File file = new File(resultsDir, a_fileName);
+            FileWriter writer = new FileWriter(file);
+            writer.write(data.toString());
+            writer.flush();
+            writer.close();
+
+            result = true;
+        } catch (IOException e) {
+            LogUtils.e(TAG, e);
+        }
+
+
+        return false;
+    }
+
+    private boolean saveTunssCsvResult(String a_fileName) {
+        boolean result = false;
         StringBuffer data = new StringBuffer();
         NumberFormat formatter = NumberFormat.getInstance();
         formatter.setMaximumFractionDigits(4);
@@ -1362,7 +1321,6 @@ public class TestResult extends BaseXMLFile {
         } catch (IOException e) {
             LogUtils.e(TAG, e);
         }
-
         return result;
     }
 
@@ -1370,7 +1328,6 @@ public class TestResult extends BaseXMLFile {
      * Zapisuje wyniki badania w pliku txt
      *
      * @param a_fileName - nazwa pliku
-     *
      * @return true - zapis zakończony powodzeniem
      */
     public boolean SaveResultTXT(String a_fileName) {
@@ -1614,6 +1571,16 @@ public class TestResult extends BaseXMLFile {
          */
         public double m_se = 0.0;
 
+        @Override
+        public String toString() {
+            return "ResultItem{" +
+                    "m_area='" + m_area + '\'' +
+                    ", m_length=" + m_length +
+                    ", m_status=" + m_status +
+                    ", m_theta=" + m_theta +
+                    ", m_se=" + m_se +
+                    '}';
+        }
     }
 
 
@@ -1661,6 +1628,23 @@ public class TestResult extends BaseXMLFile {
          */
         public Vector<String> m_files = new Vector<String>();
 
+        public boolean isTPRTest = false;
+
+        @Override
+        public String toString() {
+            return "ResultTaskItem{" +
+                    "m_taskName='" + m_taskName + '\'' +
+                    ", m_area='" + m_area + '\'' +
+                    ", m_nr=" + m_nr +
+                    ", m_mark=" + m_mark +
+                    ", m_answer='" + m_answer + '\'' +
+                    ", m_taskDuration=" + m_taskDuration +
+                    ", m_theta=" + m_theta +
+                    ", m_se=" + m_se +
+                    ", m_files=" + m_files +
+                    ", isTPRTest=" + isTPRTest +
+                    '}';
+        }
     }
 
 }

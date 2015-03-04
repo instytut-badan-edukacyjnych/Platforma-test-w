@@ -51,7 +51,9 @@ public class CollectorConfig {
     public boolean sendExamineeGender;
     public boolean sendExamineeBirthday;
     public boolean sendInstitutionId;
+    public boolean sendExamineeFullname;
     public RaportType raportType = RaportType.NONE;
+
 
     public enum RaportType {
         TASKS_AND_SUMMARY, JUST_SUMMARY, NONE;

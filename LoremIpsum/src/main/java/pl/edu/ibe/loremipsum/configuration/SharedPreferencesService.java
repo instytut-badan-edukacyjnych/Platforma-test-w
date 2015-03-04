@@ -50,8 +50,10 @@ import pl.edu.ibe.loremipsum.tools.BaseService;
  */
 public class SharedPreferencesService extends BaseService {
     private static final String ROTATE_TASK_VIEW = "rotateTaskView";
+    private static final String MENU_ON_RIGHT = "menuOnRight";
     private final SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+
 
     /**
      * Creates service with @link{ServiceProvider}
@@ -80,4 +82,12 @@ public class SharedPreferencesService extends BaseService {
     }
 
 
+    public boolean isMenuOnRight() {
+        return preferences.getBoolean(MENU_ON_RIGHT, false);
+    }
+
+    public void setMenuOnRight(boolean menuOnRight) {
+        editor.putBoolean(MENU_ON_RIGHT, menuOnRight);
+        editor.commit();
+    }
 }

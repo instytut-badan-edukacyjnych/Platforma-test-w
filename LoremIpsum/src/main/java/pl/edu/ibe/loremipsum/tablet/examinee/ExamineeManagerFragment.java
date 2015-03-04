@@ -72,6 +72,7 @@ import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.tablet.base.BaseServiceFragment;
 import pl.edu.ibe.loremipsum.tablet.base.LoremIpsumSimpleAdapter;
 import pl.edu.ibe.loremipsum.tablet.examinee.data.Field;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
 import pl.edu.ibe.loremipsum.tools.StringUtils;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
@@ -564,7 +565,7 @@ public class ExamineeManagerFragment extends BaseServiceFragment {
                     instituitionCity.setError(null);
                 }
             } else {
-                Log.e(TAG, "selectedInstitution is null. ");
+                LogUtils.e(TAG, "selectedInstitution is null. ");
             }
         }
 
@@ -578,7 +579,7 @@ public class ExamineeManagerFragment extends BaseServiceFragment {
                     institutionPostalCode.setError(null);
                 }
             } else {
-                Log.e(TAG, "selectedDepartment is null but it shouldn't");
+                LogUtils.e(TAG, "selectedDepartment is null but it shouldn't");
             }
         }
         return isValid;

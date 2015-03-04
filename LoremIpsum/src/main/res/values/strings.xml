@@ -272,6 +272,7 @@
     <string name="agree">I agree</string>
     <string name="nagree">I do not agree</string>
     <string name="examinee_birthday">Examinee\'s birth date</string>
+    <string name="examinee_fullname">Examinee\'s full name</string>
     <string name="examinee_gender">Examinee\'s gender</string>
     <string name="examinee_id">Examinee\'s identifier</string>
     <string name="institution_id">Institution\'s identifier</string>
@@ -349,6 +350,7 @@
     <string name="disable_offline_mode">It will be impossible to download task suite in this mode. Please turn off plane mode (offline mode) to continue.</string>
     <string name="network_not_detected">Unable to detect internet connection. Please try again later.</string>
     <string name="rotate_task_view">Rotate task view</string>
+    <string name="menu_on_riight_task_view">Move menu on right side</string>
     <string name="bug_report_sent_title">Report sent.</string>
     <string name="bug_report_sent_details">Your report has been sent. In case of further contact, please note following report identifier:</string>
     <string name="error_during_submitting_report">Error during submitting report: %1$s</string>
@@ -397,4 +399,6 @@
     <string name="click_to_continue">Continue</string>
     <string name="successButton">Start</string>
     <string name="failureButton">Continue</string>
+    <string name="device_id">Device id:\n %1$s</string>
+    <string name="suite_context_menu">Login: %1$s, server: %2$s.</string>
 </resources>

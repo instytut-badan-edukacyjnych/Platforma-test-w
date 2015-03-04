@@ -281,7 +281,6 @@ public class CatManager extends BaseManager {
                     break;
                 }
                 area = null;
-
             }
         }
 
@@ -301,7 +300,6 @@ public class CatManager extends BaseManager {
                             if (m_task.m_task.m_area.equals(stringIntegerEntry.getKey())) {
                                 if (!m_task.m_used) {
                                     areaUsageCounter.put(catAreaInfo.name, areaUsageCounter.get(catAreaInfo.name) + 1);
-                                    area = catAreaInfo;
                                     m_task.m_used = true;
                                     task = m_task.m_task;
                                     return task;

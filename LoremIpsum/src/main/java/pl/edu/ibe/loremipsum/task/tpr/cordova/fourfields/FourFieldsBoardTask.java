@@ -452,7 +452,7 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
                         int y = yPos.intValue();
 
                         if (touchCorrect.contains(x, y)) {
-                            Log.d(TAG, "positive button clicked");
+                            LogUtils.d(TAG, "positive button clicked");
                             currentItemHandler.clickTime = System.currentTimeMillis();
                             currentItemHandler.userAnswer = true;
                             hide = true;
@@ -463,7 +463,7 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
                             activateButtons = false;
                             drawButtons = true;
                         } else if (touchWrong.contains(x, y)) {
-                            Log.d(TAG, "negative button clicked");
+                            LogUtils.d(TAG, "negative button clicked");
                             currentItemHandler.clickTime = System.currentTimeMillis();
                             currentItemHandler.userAnswer = false;
                             hide = true;
@@ -494,7 +494,7 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
         if (type == 5 || type == 1 || type == 3) {
             return answerChange(last_answer);
         } else if (type == 2 || type == 4) {
-            Log.d(TAG, "zmiana odpowiedzi");
+            LogUtils.d(TAG, "zmiana odpowiedzi");
             if (last_answer) {
                 last_answer = false;
             } else {

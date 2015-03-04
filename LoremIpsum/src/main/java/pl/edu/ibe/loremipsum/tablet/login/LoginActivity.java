@@ -222,6 +222,7 @@ public class LoginActivity extends BaseServiceActivity {
                         Researcher researcher = loggedIn.get(0);
                         getServiceProvider().login().currentLoggedInUser = researcher;
                         Intent intent = new Intent();
+                        intent.putExtra(SuiteSelectActivity.SHOULD_CHECK_UPDATES, true);
                         intent.setClass(this, SuiteSelectActivity.class);
                         startActivity(intent);
                         finish();

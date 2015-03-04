@@ -36,8 +36,6 @@
 
 package pl.edu.ibe.loremipsum.tablet.report;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -65,6 +63,7 @@ import pl.edu.ibe.loremipsum.tablet.task.mark.TestResult;
 import pl.edu.ibe.loremipsum.tablet.test.CurrentTaskSuiteService;
 import pl.edu.ibe.loremipsum.tools.BaseService;
 import pl.edu.ibe.loremipsum.tools.ExecutionException;
+import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
 import rx.Observable;
@@ -118,7 +117,11 @@ public class ResultsService extends BaseService {
                     } catch (JSONException | ParseException e) {
                         throw ExecutionException.wrap(e);
                     }
-                    return array.toString();
+
+                    String s = array.toString();
+                    LogUtils.d(ResultsService.class.getName(), "getResults " + s);
+
+                    return s;
                 });
     }
 
@@ -162,9 +165,11 @@ public class ResultsService extends BaseService {
                     }
                     result.resetResultAreaList();
                     suite.resetResultList();
+                    LogUtils.d(ResultsService.class.getName(), "Result saved successfully:" + result.getId() + " examinee id = " + result.getExaminee_text_id() + "Resultarea count=" + result.getResultAreaList().size());
+
                     return true;
                 })
-                .doOnError(t -> Log.e(ResultsService.class.getName(), "Error during result save", t));
+                .doOnError(t -> LogUtils.e(ResultsService.class.getName(), "Error during result save", t));
     }
 
     public Observable<Long> storeTprResults(MarkData markData) {
@@ -190,8 +195,9 @@ public class ResultsService extends BaseService {
             examineeTprResults.setResearcher(getServiceProvider().login().currentLoggedInUser);
 
             examineeTprResults.setTest_id(getServiceProvider().currentTaskSuite().getRandomTestIdentifier());
-
-            return dbAccess().getDaoSession().getExamineeTprResultsDao().insert(examineeTprResults);
+            long i = dbAccess().getDaoSession().getExamineeTprResultsDao().insert(examineeTprResults);
+            LogUtils.d(ResultsService.class.getName(), "TPR results succesfully stored:" + i);
+            return i;
         });
     }
 
@@ -234,9 +240,9 @@ public class ResultsService extends BaseService {
                 tprResultInfo.departmentName = examinee.getDepartment().getName();
                 tprResults.add(tprResultInfo);
             }
-
-
-            return gson.toJson(tprResults);
+            String s = gson.toJson(tprResults);
+            LogUtils.d(ResultsService.class.getName(), "getTprResults returning tpr result: " + s);
+            return s;
         });
     }
 

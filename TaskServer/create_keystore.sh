@@ -1,3 +1,7 @@
+
+#!/bin/sh
+
+
 #This file is part of Test Platform.
 #
 #Test Platform is free software; you can redistribute it and/or modify
@@ -32,7 +36,10 @@
 #jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
 #Place, Fifth Floor, Boston, MA  02110-1301  USA
 
-#!/bin/sh
+
+
+
+
 rm server.key server.csr certs.bks config.gen.cfg
 
 (

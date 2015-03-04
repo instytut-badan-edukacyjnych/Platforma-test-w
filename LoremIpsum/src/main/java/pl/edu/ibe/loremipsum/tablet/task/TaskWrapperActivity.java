@@ -119,6 +119,7 @@ public abstract class TaskWrapperActivity extends BaseServiceActivity {
     private CurrentTaskSuiteService.TestRunData testRunData;
     private TaskSuiteConfig taskSuiteConfig;
     private boolean shouldRotateTaskView;
+    private boolean isMenuOnRight;
 
     @OnCheckedChanged(R.id.additional_info)
     public void onCheckedChangeListener(boolean checked) {
@@ -202,14 +203,27 @@ public abstract class TaskWrapperActivity extends BaseServiceActivity {
 
         View taskView = view.findViewById(R.id.task_wrapper);
         shouldRotateTaskView = getServiceProvider().sharedPreferences().isTaskViewRotated();
+        isMenuOnRight = getServiceProvider().sharedPreferences().isMenuOnRight();
         ViewTreeObserver viewTreeObserver = frameLayout.getViewTreeObserver();
         assert viewTreeObserver != null;
         viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                View butonPosition = view.findViewById(R.id.buttons_position);
                 if (shouldRotateTaskView && getServiceProvider().currentTaskSuite().isAllowedScreenRotation()) {
                     taskView.setRotation(180);
+                    butonPosition.setVisibility(View.VISIBLE);
+                } else {
+                    butonPosition.setVisibility(View.GONE);
                 }
+                if (isMenuOnRight) {
+                    View buttonsContainer = view.findViewById(R.id.buttons_container);
+                    buttonsContainer.setX(getResources().getDimension(R.dimen.menu_on_right_offset));
+                    buttonsContainer.bringToFront();
+                    view.refreshDrawableState();
+                }
+
+
                 float frameWidth = frameLayout.getWidth();
                 float viewWidth = 1280;
                 float ratioWidth = frameWidth / viewWidth;

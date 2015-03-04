@@ -78,6 +78,7 @@ public class CurrentTaskSuiteService extends BaseService {
     private Long randomTestIdentifier;
 
     private boolean allowScreenRotation;
+    private boolean menuOnRight;
 
     /**
      * Creates service with context
@@ -96,6 +97,8 @@ public class CurrentTaskSuiteService extends BaseService {
     public void setAllowScreenRotation(boolean allowScreenRotation) {
         this.allowScreenRotation = allowScreenRotation;
     }
+
+
 
     public TestRunData getCurrentTestRunData() {
         if (currentTestRunData == null) {
@@ -148,7 +151,7 @@ public class CurrentTaskSuiteService extends BaseService {
         } catch (Exception e) {
             e.printStackTrace();
             //TODO Cat algorithm needs birth date.
-            pupilData.m_birthday = "10-10-1999";
+            pupilData.m_birthday = "01-01-1970";
         }
 
         pupilData.m_gender = currentTestRunData.getExaminee().getGender();
@@ -170,9 +173,13 @@ public class CurrentTaskSuiteService extends BaseService {
             if (examinee.getBirthday() != null) {
                 mappingDependency.set(MappingDependency.EXAMINEE_AGE, examinee.getBirthday().getTime());
             }
-            mappingDependency.set(MappingDependency.EXAMINEE_GENDER, examinee.getGender().toString());
-            mappingDependency.set(MappingDependency.INSTITUTION_CITY, institution.getCity());
-            mappingDependency.set(MappingDependency.INSTITUTION_POSTAL, institution.getPostalCode());
+            if (examinee.getGender() != null) {
+                mappingDependency.set(MappingDependency.EXAMINEE_GENDER, examinee.getGender().toString());
+            }
+            if (institution != null) {
+                mappingDependency.set(MappingDependency.INSTITUTION_CITY, institution.getCity());
+                mappingDependency.set(MappingDependency.INSTITUTION_POSTAL, institution.getPostalCode());
+            }
             mappingDependency.checkRequiredFieldsFilled();
             getServiceProvider().examinee().setExamineeToEdit(examinee, null);
             getServiceProvider().examinee().checkIfRequiredFieldsAreFilled();
@@ -209,12 +216,15 @@ public class CurrentTaskSuiteService extends BaseService {
         return getCurrentTestRunData().getTaskSuite().getLocalization();
     }
 
+
     public static enum TestMode {
         DEMO, TUTORIAL, NORMAL
     }
+
     public Long getRandomTestIdentifier() {
         return randomTestIdentifier;
     }
+
     public class TestRunData {
 
         private TestMode testMode;
@@ -272,7 +282,6 @@ public class CurrentTaskSuiteService extends BaseService {
             this.examined = examined;
             return this;
         }
-
 
 
         public int runTest(Activity parentActivity) throws AssertionError, Exception {

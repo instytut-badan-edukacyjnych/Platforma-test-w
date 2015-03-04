@@ -272,6 +272,7 @@
     <string name="agree">Zgadzam się</string>
     <string name="nagree">Nie zgadzam się</string>
     <string name="examinee_birthday">Data urodzin badanego</string>
+    <string name="examinee_fullname">Imię i nazwisko badanego</string>
     <string name="examinee_gender">Płeć badanego</string>
     <string name="examinee_id">Identyfikator badanego</string>
     <string name="institution_id">Identyfikator placówki</string>
@@ -349,6 +350,7 @@
     <string name="disable_offline_mode">Pobranie banku zadań w tym trybie nie jest możliwe. Proszę wyłączyć tryb samolotowy (tryb offline) aby kontynuować.</string>
     <string name="network_not_detected">Nie wykryto połączenia internetowego. Spróbuj ponownie za chwile.</string>
     <string name="rotate_task_view">Obróć ekran zadania</string>
+    <string name="menu_on_riight_task_view">Przenieś menu na prawą stronę</string>
     <string name="bug_report_sent_title">Zgłoszenie wysłane</string>
     <string name="bug_report_sent_details">Twoje zgłoszenie zostało wysłane. W razie przyszłych konsultacji powołuj się na numer zgłoszenia:</string>
     <string name="error_during_submitting_report">Błąd podczas wysyłania zgłoszenia błędu: %1$s</string>
@@ -398,4 +400,6 @@
     <string name="click_to_continue">Dalej</string>
     <string name="successButton">Start</string>
     <string name="failureButton">Dalej</string>
+    <string name="device_id">Identyfikator urządzenia:\n %1$s</string>
+    <string name="suite_context_menu">Login: %1$s, serwer: %2$s.</string>
 </resources>

@@ -122,6 +122,7 @@ public class TaskSuiteConfig {
     public static final String XML_RAPORTING_EXAMINEE = "examinee";
     public static final String XML_RAPORTING_EXAMINEE_GENDER = "gender";
     public static final String XML_RAPORTING_EXAMINEE_BIRTHDAY = "birthday";
+    public static final String XML_RAPORTING_EXAMINEE_FULLNAME = "fullname";
     public static final String XML_RAPORTING_INSTITUTION = "institution";
     public static final String XML_RAPORTING_RAPORT_CONTENT = "raport_content";
     public static final String XML_RAPORTING_RAPORT_SUMMARY = "summary";
@@ -204,7 +205,8 @@ public class TaskSuiteConfig {
      */
     @Deprecated
     public static boolean m_passwordFlag = false;
-    public static int maxTasksNumerPerTest = 30;
+    public static final int MAX_TASKS_NUMBER_PER_TEST = 33;
+    public static int maxTasksNumerPerTest = MAX_TASKS_NUMBER_PER_TEST;
     public CollectorConfig collectorConfig = new CollectorConfig();
     /**
      * Config: disable developer options flag
@@ -292,10 +294,10 @@ public class TaskSuiteConfig {
                 disableInstitutions = BaseXMLFile.GetFlag(map, TaskSuiteConfig.XML_CONFIG_TASKS_DISABLE_INSTITUTIONS, TaskSuiteConfig.XML_CONFIG_TASKS_YES, false);
                 disableDepartments = BaseXMLFile.GetFlag(map, TaskSuiteConfig.XML_CONFIG_TASKS_DISABLE_DEPARTMENTS, TaskSuiteConfig.XML_CONFIG_TASKS_YES, false);
                 try {
-                    maxTasksNumerPerTest = Integer.valueOf(BaseXMLFile.getString(map, TaskSuiteConfig.XML_CONFIG_TASK_MAX_NUMBER, "30"));
+                    maxTasksNumerPerTest = Integer.valueOf(BaseXMLFile.getString(map, TaskSuiteConfig.XML_CONFIG_TASK_MAX_NUMBER, MAX_TASKS_NUMBER_PER_TEST + ""));
                 } catch (Exception e) {
                     LogUtils.e(TaskSuiteConfig.class.getSimpleName(), "string parse ex", e);
-                    maxTasksNumerPerTest = 30;
+                    maxTasksNumerPerTest = MAX_TASKS_NUMBER_PER_TEST;
                 }
                 testType = TestType.valueOf(BaseXMLFile.getString(map, TaskSuiteConfig.TEST_MODE, "TUNSS"));
 
@@ -341,6 +343,9 @@ public class TaskSuiteConfig {
                 if (XmlHelper.getSingleElement(examinee, TaskSuiteConfig.XML_RAPORTING_EXAMINEE_BIRTHDAY) != null) {
                     collectorConfig.sendExamineeBirthday = true;
                 }
+                if (XmlHelper.getSingleElement(examinee, TaskSuiteConfig.XML_RAPORTING_EXAMINEE_FULLNAME) != null) {
+                    collectorConfig.sendExamineeFullname = true;
+                }
                 if (XmlHelper.getSingleElement(examinee, TaskSuiteConfig.XML_RAPORTING_EXAMINEE_GENDER) != null) {
                     collectorConfig.sendExamineeGender = true;
                 }
@@ -370,7 +375,7 @@ public class TaskSuiteConfig {
         }
     }
 
-    public enum TestType{
+    public enum TestType {
         TUNSS, TPR1, TPR2
     }
 }

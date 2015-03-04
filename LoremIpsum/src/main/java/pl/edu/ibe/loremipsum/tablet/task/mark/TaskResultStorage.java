@@ -62,6 +62,12 @@ public class TaskResultStorage {
             result.m_area = TestManager.m_runTaskInfo.m_area;
             result.m_nr = TestManager.m_taskNumber;
             result.m_mark = a_mark.m_mark;
+
+            if (LoremIpsumApp.obtain().getServiceProvider().currentTaskSuite().getCurrentTaskSuiteConfig().testType == TaskSuiteConfig.TestType.TPR1 || LoremIpsumApp.obtain().getServiceProvider().currentTaskSuite().getCurrentTaskSuiteConfig().testType == TaskSuiteConfig.TestType.TPR2) {
+                result.isTPRTest = true;
+            }
+
+
             result.m_answer = a_mark.m_answer;
             result.m_taskDuration = (int) a_mark.m_solveTime;
             BaseManager.ManagerTestInfo info = LoremIpsumApp.m_testManager.GetTestInfo(TestManager.m_runTaskInfo.m_area);

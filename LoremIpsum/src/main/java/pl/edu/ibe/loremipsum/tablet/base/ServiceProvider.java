@@ -65,6 +65,7 @@ import pl.edu.ibe.loremipsum.tablet.report.ResultsService;
 import pl.edu.ibe.loremipsum.tablet.researcher.ResearcherService;
 import pl.edu.ibe.loremipsum.tablet.task.TaskService;
 import pl.edu.ibe.loremipsum.tablet.test.CurrentTaskSuiteService;
+import pl.edu.ibe.loremipsum.task.management.DownloadTaskSuiteService;
 import pl.edu.ibe.loremipsum.task.management.TaskSuitesService;
 import pl.edu.ibe.loremipsum.task.management.collector.Collector;
 import pl.edu.ibe.loremipsum.task.management.collector.NetworkChangeReceiver;
@@ -101,6 +102,7 @@ public class ServiceProvider {
     private ImportExportService importExportService;
     private SharedPreferencesService sharedPreferencesService;
     private TestDataService testDataService;
+    private DownloadTaskSuiteService downloadTaskSuiteService;
     private SupportService supportService;
     private DemoService demoService;
     private TaskService taskService;
@@ -187,7 +189,7 @@ public class ServiceProvider {
                         if (file.exists() && file.isDirectory()) {
                             try {
                                 FileUtils.deleteRecursive(file);
-                                Log.i(ServiceProvider.class.getSimpleName(), "File deleted: " + suiteData[0]);
+                                LogUtils.i(ServiceProvider.class.getSimpleName(), "File deleted: " + suiteData[0]);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -238,7 +240,7 @@ public class ServiceProvider {
      *
      * @return @link{loginService}
      */
-    public LoginService login() {
+    public synchronized LoginService login() {
         if (loginService == null)
             loginService = new LoginService(this);
         return loginService;
@@ -399,6 +401,14 @@ public class ServiceProvider {
         }
         return testDataService;
     }
+
+    public DownloadTaskSuiteService downloadTaskSuiteService() {
+        if (downloadTaskSuiteService == null) {
+            downloadTaskSuiteService = new DownloadTaskSuiteService(this);
+        }
+        return downloadTaskSuiteService;
+    }
+
 
     public Persister getXMLPersister() {
         return persister;

@@ -50,6 +50,14 @@
         android:layout_height="wrap_content"
         android:text="@string/rotate_task_view" />
 
+    <CheckBox
+        android:id="@+id/task_menu_on_right"
+        style="@style/Default"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_on_riight_task_view" />
+
     <LinearLayout
         android:id="@+id/reporting_container"
         android:layout_width="match_parent"

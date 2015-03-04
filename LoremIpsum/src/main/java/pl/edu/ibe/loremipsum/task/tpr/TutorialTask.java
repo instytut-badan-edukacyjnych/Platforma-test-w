@@ -168,7 +168,7 @@ public class TutorialTask extends LookTask {
         });
 
         for (ItemHolder itemHolder : itemList) {
-            Log.d(TAG, itemHolder.toString());
+            LogUtils.d(TAG, itemHolder.toString());
         }
 
 //        m_animateHandler = new AnimateHandler();
@@ -183,7 +183,7 @@ public class TutorialTask extends LookTask {
     @Override
     public void Draw(Canvas canvas) {
         super.Draw(canvas);
-        Log.d(TAG, "draw, refreshTime =" + refreshTime);
+        LogUtils.d(TAG, "draw, refreshTime =" + refreshTime);
         if (BuildConfig.ENABLE_TEST_DRAWINGS) {
             Paint myPaint;
             myPaint = new Paint();
@@ -198,7 +198,7 @@ public class TutorialTask extends LookTask {
         for (ItemHolder itemHolder : itemList) {
             if (System.currentTimeMillis() > taskStartTime + itemHolder.displayStart && System.currentTimeMillis() < taskStartTime + itemHolder.displayStart + itemHolder.displayTime) {
                 canvas.drawBitmap(itemHolder.bitmap, null, itemHolder.displayRect, m_paint);
-                Log.d(TAG, "item to draw= " + itemHolder);
+                LogUtils.d(TAG, "item to draw= " + itemHolder);
             }
         }
 
@@ -238,7 +238,7 @@ public class TutorialTask extends LookTask {
                 taskStartTime = System.currentTimeMillis();
                 firstRun = false;
             }
-            Log.d(TAG, "sending refresh request -> " + m_actHandler + "success = " + m_actHandler.sendEmptyMessage(TASK_MESS_REFRESH_VIEW));
+            LogUtils.d(TAG, "sending refresh request -> " + m_actHandler + "success = " + m_actHandler.sendEmptyMessage(TASK_MESS_REFRESH_VIEW));
             timer.schedule(new Looper(), refreshTime);
         }
     }

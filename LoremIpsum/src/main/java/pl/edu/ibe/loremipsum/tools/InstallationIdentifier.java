@@ -73,6 +73,7 @@ public class InstallationIdentifier {
             firstRun = false;
         }
         deviceId = readInstallationFile(installation);
+        LogUtils.v(TAG, "device id= " + deviceId);
     }
 
     /**

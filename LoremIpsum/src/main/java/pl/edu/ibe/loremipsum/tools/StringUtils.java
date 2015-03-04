@@ -38,15 +38,21 @@ package pl.edu.ibe.loremipsum.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 /**
  * Created by adam on 11.03.14.
  */
 public class StringUtils {
+
+
+    private static final String TAG = StringUtils.class.getCanonicalName();
+
     /**
      * Checks if string is empty
      *
@@ -135,7 +141,36 @@ public class StringUtils {
         }
 
         return sb.toString();
+    }
 
+    public static String readFile(File file) {
+        StringBuilder builder = null;
+        builder = new StringBuilder();
+        FileInputStream stream = null;
+
+        try {
+            stream = new FileInputStream(file);
+            Reader reader = new BufferedReader(new InputStreamReader(stream));
+
+
+            char[] buffer = new char[8192];
+            int read;
+            while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+                builder.append(buffer, 0, read);
+            }
+            return builder.toString();
+        } catch (Exception e) {
+            LogUtils.d(TAG, "failed to read file ", e);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    LogUtils.d(TAG, "failed to read file ", e);
+                }
+            }
+        }
+        return builder.toString();
     }
 
 }

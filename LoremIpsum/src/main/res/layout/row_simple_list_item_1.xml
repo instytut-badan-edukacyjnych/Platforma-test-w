@@ -37,6 +37,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -63,11 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:minHeight="?android:attr/listPreferredItemHeightSmall"
-            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:minHeight="48dp"
             android:paddingLeft="16dp"
-            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-            android:text="aaaaa"
+            tools:text="aaaaa"
             android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 
     </LinearLayout>
