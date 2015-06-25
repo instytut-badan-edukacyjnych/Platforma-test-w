@@ -45,7 +45,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import org.w3c.dom.NamedNodeMap;
@@ -130,7 +129,7 @@ public class GridTask extends LookTask {
         int y = 10 - decimal;
 
 
-        return Tuple.Two.create(x, y);
+        return Tuple.create(x, y);
     }
 
     @Override

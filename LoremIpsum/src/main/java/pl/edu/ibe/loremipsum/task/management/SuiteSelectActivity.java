@@ -412,7 +412,8 @@ public class SuiteSelectActivity extends BaseServiceActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             TaskSuite suite = getItem(position);
             if (!suite.isDownloaded()) {
-                Toast.makeText(SuiteSelectActivity.this, R.string.unable_to_run_broken_task_suite, Toast.LENGTH_LONG).show();
+                Toast.makeText(SuiteSelectActivity.this, R.string.unable_to_run_broken_task_suite,
+                        Toast.LENGTH_LONG).show();
             } else {
                 returnSuite(getItem(position));
             }

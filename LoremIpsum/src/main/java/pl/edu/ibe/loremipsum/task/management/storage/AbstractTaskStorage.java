@@ -96,7 +96,7 @@ public abstract class AbstractTaskStorage implements TaskStorage {
             Observable<ZipEntry>
             > wrapOutputStream(OutputStream stream) throws Exceptions.TaskStorageException {
         RepackagingOutputStream output = new RepackagingOutputStream(stream);
-        return Tuple.Three.create(output, output.getSingleProgress(), output.getTotalProgress());
+        return Tuple.create(output, output.getSingleProgress(), output.getTotalProgress());
     }
 
     private class RepackagingOutputStream extends OutputStream {

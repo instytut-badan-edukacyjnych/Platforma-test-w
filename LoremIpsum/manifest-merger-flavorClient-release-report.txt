@@ -1,0 +1,182 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:37:1
+	package
+		ADDED from AndroidManifest.xml:37:11
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionName
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:38:11
+	android:versionCode
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:40:5
+	android:name
+		ADDED from AndroidManifest.xml:40:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:41:5
+	android:name
+		ADDED from AndroidManifest.xml:41:22
+uses-permission#android.permission.CAMERA
+ADDED from AndroidManifest.xml:42:5
+	android:name
+		ADDED from AndroidManifest.xml:42:22
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from AndroidManifest.xml:43:5
+	android:name
+		ADDED from AndroidManifest.xml:43:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:44:5
+	android:name
+		ADDED from AndroidManifest.xml:44:22
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:45:5
+	android:name
+		ADDED from AndroidManifest.xml:45:22
+uses-permission#android.permission.WAKE_LOCK
+ADDED from AndroidManifest.xml:46:5
+	android:name
+		ADDED from AndroidManifest.xml:46:22
+uses-feature#android.hardware.camera
+ADDED from AndroidManifest.xml:48:5
+	android:name
+		ADDED from AndroidManifest.xml:48:19
+uses-feature#android.hardware.camera.autofocus
+ADDED from AndroidManifest.xml:49:5
+	android:required
+		ADDED from AndroidManifest.xml:51:9
+	android:name
+		ADDED from AndroidManifest.xml:50:9
+supports-screens
+ADDED from AndroidManifest.xml:53:5
+	android:largeScreens
+		ADDED from AndroidManifest.xml:54:9
+	android:smallScreens
+		ADDED from AndroidManifest.xml:57:9
+	android:normalScreens
+		ADDED from AndroidManifest.xml:55:9
+	android:requiresSmallestWidthDp
+		ADDED from AndroidManifest.xml:56:9
+	android:xlargeScreens
+		ADDED from AndroidManifest.xml:58:9
+application
+ADDED from AndroidManifest.xml:60:5
+MERGED from LoremIpsum:rescuemodule:unspecified:9:5
+	android:label
+		ADDED from AndroidManifest.xml:64:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:62:9
+	android:icon
+		ADDED from AndroidManifest.xml:63:9
+	android:largeHeap
+		ADDED from AndroidManifest.xml:65:9
+	android:theme
+		ADDED from AndroidManifest.xml:67:9
+	android:logo
+		ADDED from AndroidManifest.xml:66:9
+	android:name
+		ADDED from AndroidManifest.xml:61:9
+meta-data#com.google.android.gms.version
+ADDED from AndroidManifest.xml:68:9
+	android:value
+		ADDED from AndroidManifest.xml:70:13
+	android:name
+		ADDED from AndroidManifest.xml:69:13
+activity#pl.edu.ibe.loremipsum.tablet.LaunchActivity
+ADDED from AndroidManifest.xml:72:9
+	android:theme
+		ADDED from AndroidManifest.xml:74:13
+	android:name
+		ADDED from AndroidManifest.xml:73:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:75:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:76:17
+	android:name
+		ADDED from AndroidManifest.xml:76:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:77:17
+	android:name
+		ADDED from AndroidManifest.xml:77:27
+activity#pl.edu.ibe.loremipsum.tablet.login.LoginActivity
+ADDED from AndroidManifest.xml:80:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:83:13
+	android:theme
+		ADDED from AndroidManifest.xml:82:13
+	android:name
+		ADDED from AndroidManifest.xml:81:13
+activity#pl.edu.ibe.loremipsum.tablet.task.TaskAct
+ADDED from AndroidManifest.xml:84:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:86:13
+	android:name
+		ADDED from AndroidManifest.xml:85:13
+activity#pl.edu.ibe.loremipsum.tablet.MainActivity
+ADDED from AndroidManifest.xml:87:9
+	android:name
+		ADDED from AndroidManifest.xml:87:19
+activity#pl.edu.ibe.loremipsum.tablet.examinee.ExamineeManagerActivity
+ADDED from AndroidManifest.xml:88:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:90:13
+	android:name
+		ADDED from AndroidManifest.xml:89:13
+activity#pl.edu.ibe.loremipsum.tablet.test.TestConfigActivity
+ADDED from AndroidManifest.xml:91:9
+	android:name
+		ADDED from AndroidManifest.xml:91:19
+activity#pl.edu.ibe.loremipsum.tablet.report.ReportActivity
+ADDED from AndroidManifest.xml:92:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:94:13
+	android:name
+		ADDED from AndroidManifest.xml:93:13
+activity#pl.edu.ibe.loremipsum.task.management.SuiteSelectActivity
+ADDED from AndroidManifest.xml:95:9
+	android:name
+		ADDED from AndroidManifest.xml:95:19
+activity#pl.edu.ibe.loremipsum.tablet.report.PrintDialogActivity
+ADDED from AndroidManifest.xml:96:9
+	android:name
+		ADDED from AndroidManifest.xml:96:19
+service#pl.edu.ibe.loremipsum.task.management.collector.SendingService
+ADDED from AndroidManifest.xml:98:9
+	android:name
+		ADDED from AndroidManifest.xml:98:18
+receiver#pl.edu.ibe.loremipsum.task.management.collector.NetworkChangeReceiver
+ADDED from AndroidManifest.xml:99:9
+	android:label
+		ADDED from AndroidManifest.xml:101:13
+	android:name
+		ADDED from AndroidManifest.xml:100:13
+intent-filter#android.net.conn.CONNECTIVITY_CHANGE+android.net.wifi.WIFI_STATE_CHANGED
+ADDED from AndroidManifest.xml:102:13
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from AndroidManifest.xml:103:17
+	android:name
+		ADDED from AndroidManifest.xml:103:25
+action#android.net.wifi.WIFI_STATE_CHANGED
+ADDED from AndroidManifest.xml:104:17
+	android:name
+		ADDED from AndroidManifest.xml:104:25
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from LoremIpsum:rescuemodule:unspecified:5:5
+MERGED from com.google.android.gms:play-services:4.3.23:7:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+activity#pl.edu.ibe.loremipsum.RescueActivity
+ADDED from LoremIpsum:rescuemodule:unspecified:10:9
+	android:label
+		ADDED from LoremIpsum:rescuemodule:unspecified:12:13
+	android:name
+		ADDED from LoremIpsum:rescuemodule:unspecified:11:13

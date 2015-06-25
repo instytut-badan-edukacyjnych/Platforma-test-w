@@ -218,9 +218,12 @@ public class LoginActivity extends BaseServiceActivity {
                     if (loggedIn.size() == 0) {
                         login.setError(getString(R.string.wrong_password_or_id));
                         passwordEditText.setError(getString(R.string.wrong_password_or_id));
+                        LogUtils.d(TAG, "login failure: " + identifier + "   " + password);
                     } else if (loggedIn.size() == 1) {
                         Researcher researcher = loggedIn.get(0);
                         getServiceProvider().login().currentLoggedInUser = researcher;
+
+                        LogUtils.d(TAG, "login success: " + identifier + "   " + password);
                         Intent intent = new Intent();
                         intent.putExtra(SuiteSelectActivity.SHOULD_CHECK_UPDATES, true);
                         intent.setClass(this, SuiteSelectActivity.class);
@@ -228,9 +231,11 @@ public class LoginActivity extends BaseServiceActivity {
                         finish();
                     } else if (loggedIn.size() > 1) {
                         Toast.makeText(LoginActivity.this, getString(R.string.error_user_duplicate), Toast.LENGTH_SHORT).show();
+                        LogUtils.d(TAG, "two or more existing ids");
                     }
                 }, (thr) -> {
                     Toast.makeText(LoginActivity.this, getString(R.string.error_unknown) + thr.getMessage(), Toast.LENGTH_SHORT).show();
+                    LogUtils.d(TAG, "unknown login error", thr);
                 });
     }
 

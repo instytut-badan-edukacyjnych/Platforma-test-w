@@ -152,7 +152,7 @@ public class SupportDialog extends ServiceDialogFragment {
     @OnClick(R.id.button_dump_log)
     public void onDumpLogClick(View v) {
         FilesystemFile source = new FilesystemFile(LogUtils.getLogsDirectory());
-        dumpLogTargetName = getActivity().getString(R.string.app_name);
+        dumpLogTargetName = getActivity().getString(R.string.log_dir);
         FilesystemFile target = new FilesystemFile(new File(Environment.getExternalStorageDirectory(), dumpLogTargetName));
         if (dumpLogOperation == null) {
             dumpLogOperation = RxExecutor.runSingle(() -> {

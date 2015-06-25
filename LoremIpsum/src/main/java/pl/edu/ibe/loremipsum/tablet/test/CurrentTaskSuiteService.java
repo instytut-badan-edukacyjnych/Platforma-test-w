@@ -46,7 +46,7 @@ import java.util.Date;
 import java.util.Random;
 
 import pl.edu.ibe.loremipsum.configuration.TaskSuiteConfig;
-import pl.edu.ibe.loremipsum.data.PupilData;
+import pl.edu.ibe.loremipsum.resultfixer.data.PupilData;
 import pl.edu.ibe.loremipsum.db.schema.Department;
 import pl.edu.ibe.loremipsum.db.schema.Examinee;
 import pl.edu.ibe.loremipsum.db.schema.ExamineeTprResultsDao;

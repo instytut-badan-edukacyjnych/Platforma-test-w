@@ -64,12 +64,12 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
         String typeLetter = getTypeLetter(isAbstract);
 
 
-        targetArray[1] = Tuple.Two.create("Z6_VERSION" + typeLetter, typeLetter);
-        targetArray[2] = Tuple.Two.create("W_Z6_" + typeLetter, isFinished ? "1" : "0");
-        targetArray[3] = Tuple.Two.create("TC_Z6_" + typeLetter, String.valueOf(overallTime));
+        targetArray[1] = Tuple.create("Z6_VERSION" + typeLetter, typeLetter);
+        targetArray[2] = Tuple.create("W_Z6_" + typeLetter, isFinished ? "1" : "0");
+        targetArray[3] = Tuple.create("TC_Z6_" + typeLetter, String.valueOf(overallTime));
 
 
-        targetArray[5] = Tuple.Two.create("Z6_TEST_PASS_" + typeLetter, tutorialWasSuccessful ? "1" : "0");
+        targetArray[5] = Tuple.create("Z6_TEST_PASS_" + typeLetter, tutorialWasSuccessful ? "1" : "0");
 
 
         ArrayList<FourFieldsBoardTask.Entry> extractedTutorial1 = new ArrayList<>();
@@ -109,9 +109,9 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
         }
 
 
-        targetArray[0] = Tuple.Two.create("Z6_" + typeLetter, String.valueOf(sum));
+        targetArray[0] = Tuple.create("Z6_" + typeLetter, String.valueOf(sum));
 
-        targetArray[4] = Tuple.Two.create("TC_Z6_" + typeLetter, String.valueOf((96 - sum)));
+        targetArray[4] = Tuple.create("TC_Z6_" + typeLetter, String.valueOf((96 - sum)));
 
         for (Iterator<FourFieldsBoardTask.Entry> resultIterator = entries.iterator(); resultIterator.hasNext(); ) {
             if (resultIterator.next().isTutorial) {
@@ -158,12 +158,12 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                             if (targetArray[18] != null) {
                                 resultSum += Double.valueOf(targetArray[18].second);
                             }
-                            targetArray[18] = Tuple.Two.create("Z6_C" + 1 + "_T_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[18] = Tuple.create("Z6_C" + 1 + "_T_" + typeLetter, String.valueOf(resultSum));
                         } else {
                             if (targetArray[22] != null) {
                                 resultSum += Double.valueOf(targetArray[22].second);
                             }
-                            targetArray[22] = Tuple.Two.create("Z6_C" + 1 + "_N_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[22] = Tuple.create("Z6_C" + 1 + "_N_" + typeLetter, String.valueOf(resultSum));
                         }
                         break;
                     case UR:
@@ -171,12 +171,12 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                             if (targetArray[19] != null) {
                                 resultSum += Double.valueOf(targetArray[19].second);
                             }
-                            targetArray[19] = Tuple.Two.create("Z6_C" + 2 + "_T_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[19] = Tuple.create("Z6_C" + 2 + "_T_" + typeLetter, String.valueOf(resultSum));
                         } else {
                             if (targetArray[23] != null) {
                                 resultSum += Double.valueOf(targetArray[23].second);
                             }
-                            targetArray[23] = Tuple.Two.create("Z6_C" + 2 + "_N_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[23] = Tuple.create("Z6_C" + 2 + "_N_" + typeLetter, String.valueOf(resultSum));
                         }
                         break;
                     case LR:
@@ -184,12 +184,12 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                             if (targetArray[20] != null) {
                                 resultSum += Double.valueOf(targetArray[20].second);
                             }
-                            targetArray[20] = Tuple.Two.create("Z6_C" + 3 + "_T_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[20] = Tuple.create("Z6_C" + 3 + "_T_" + typeLetter, String.valueOf(resultSum));
                         } else {
                             if (targetArray[24] != null) {
                                 resultSum += Double.valueOf(targetArray[24].second);
                             }
-                            targetArray[24] = Tuple.Two.create("Z6_C" + 3 + "_N_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[24] = Tuple.create("Z6_C" + 3 + "_N_" + typeLetter, String.valueOf(resultSum));
                         }
                         break;
                     case LL:
@@ -197,12 +197,12 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                             if (targetArray[21] != null) {
                                 resultSum += Double.valueOf(targetArray[21].second);
                             }
-                            targetArray[21] = Tuple.Two.create("Z6_C" + 4 + "_T_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[21] = Tuple.create("Z6_C" + 4 + "_T_" + typeLetter, String.valueOf(resultSum));
                         } else {
                             if (targetArray[25] != null) {
                                 resultSum += Double.valueOf(targetArray[25].second);
                             }
-                            targetArray[25] = Tuple.Two.create("Z6_C" + 4 + "_N_" + typeLetter, String.valueOf(resultSum));
+                            targetArray[25] = Tuple.create("Z6_C" + 4 + "_N_" + typeLetter, String.valueOf(resultSum));
                         }
                         break;
                 }
@@ -235,19 +235,19 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                 case UL:
                     if (isCorrect) {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[26 + firstQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[26 + firstQuaterYesOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[26 + firstQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_T_" + typeLetter, "0");
+                            targetArray[26 + firstQuaterYesOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_T_" + typeLetter, "0");
                         }
-                        targetArray[122 + firstQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[122 + firstQuaterYesOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         firstQuaterYesOccurenceCounter++;
                     } else {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[38 + firstQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[38 + firstQuaterNoOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[38 + firstQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_N_" + typeLetter, "0");
+                            targetArray[38 + firstQuaterNoOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_N_" + typeLetter, "0");
                         }
-                        targetArray[134 + firstQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C1_" + quater1Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[134 + firstQuaterNoOccurenceCounter] = Tuple.create("Z6_C1_" + quater1Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         firstQuaterNoOccurenceCounter++;
                     }
                     quater1Occurence++;
@@ -255,19 +255,19 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                 case UR:
                     if (isCorrect) {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[50 + secondQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[50 + secondQuaterYesOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[50 + secondQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_T_" + typeLetter, "0");
+                            targetArray[50 + secondQuaterYesOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_T_" + typeLetter, "0");
                         }
-                        targetArray[146 + secondQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[146 + secondQuaterYesOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         secondQuaterYesOccurenceCounter++;
                     } else {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[62 + secondQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[62 + secondQuaterNoOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[62 + secondQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_N_" + typeLetter, "0");
+                            targetArray[62 + secondQuaterNoOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_N_" + typeLetter, "0");
                         }
-                        targetArray[158 + secondQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C2_" + quater2Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[158 + secondQuaterNoOccurenceCounter] = Tuple.create("Z6_C2_" + quater2Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         secondQuaterNoOccurenceCounter++;
                     }
                     quater2Occurence++;
@@ -275,19 +275,19 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                 case LR:
                     if (isCorrect) {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[74 + thirdQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[74 + thirdQuaterYesOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[74 + thirdQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_T_" + typeLetter, "0");
+                            targetArray[74 + thirdQuaterYesOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_T_" + typeLetter, "0");
                         }
-                        targetArray[170 + thirdQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[170 + thirdQuaterYesOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         thirdQuaterYesOccurenceCounter++;
                     } else {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[86 + thirdQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[86 + thirdQuaterNoOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[86 + thirdQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_N_" + typeLetter, "0");
+                            targetArray[86 + thirdQuaterNoOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_N_" + typeLetter, "0");
                         }
-                        targetArray[182 + thirdQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C3_" + quater3Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[182 + thirdQuaterNoOccurenceCounter] = Tuple.create("Z6_C3_" + quater3Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         thirdQuaterNoOccurenceCounter++;
                     }
                     quater3Occurence++;
@@ -295,19 +295,19 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                 case LL:
                     if (isCorrect) {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[98 + fourthQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[98 + fourthQuaterYesOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_T_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[98 + fourthQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_T_" + typeLetter, "0");
+                            targetArray[98 + fourthQuaterYesOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_T_" + typeLetter, "0");
                         }
-                        targetArray[194 + fourthQuaterYesOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[194 + fourthQuaterYesOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_TT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         fourthQuaterYesOccurenceCounter++;
                     } else {
                         if (taskEntry.touchTime != -7) {
-                            targetArray[110 + fourthQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                            targetArray[110 + fourthQuaterNoOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_N_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
                         } else {
-                            targetArray[110 + fourthQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_N_" + typeLetter, "0");
+                            targetArray[110 + fourthQuaterNoOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_N_" + typeLetter, "0");
                         }
-                        targetArray[206 + fourthQuaterNoOccurenceCounter] = Tuple.Two.create("Z6_C4_" + quater4Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
+                        targetArray[206 + fourthQuaterNoOccurenceCounter] = Tuple.create("Z6_C4_" + quater4Occurence + "_NT_" + typeLetter, String.valueOf(taskEntry.touchTime));
                         fourthQuaterNoOccurenceCounter++;
                     }
                     quater4Occurence++;
@@ -384,14 +384,14 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
 
             if (taskEntry.touchTime != -7) {
 //                Z6_C1_24_T_K_N
-                targetArray[218 + i] = Tuple.Two.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "_K_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
+                targetArray[218 + i] = Tuple.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "_K_" + typeLetter, taskEntry.wasAnswerCorrect ? "1" : "0");
 
             } else {
 //                Z6_C1_24_T_K_N
-                targetArray[218 + i] = Tuple.Two.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "_K_" + typeLetter, "99");
+                targetArray[218 + i] = Tuple.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "_K_" + typeLetter, "99");
             }
 //            Z6_C1_1_NT_K_N
-            targetArray[314 + i] = Tuple.Two.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "T_K_" + typeLetter, String.valueOf(taskEntry.touchTime));
+            targetArray[314 + i] = Tuple.create("Z6_C" + quaterIndex + "_" + currentOccurence + "_" + (taskEntry.isCorrect ? "T" : "N") + "T_K_" + typeLetter, String.valueOf(taskEntry.touchTime));
 
 
         }
@@ -508,8 +508,8 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                         sum++;
                     }
                 }
-                targetArray[12 + i] = Tuple.Two.create("Z6_TEST_T" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(time));
-                targetArray[6 + i] = Tuple.Two.create("Z6_TEST" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(sum));
+                targetArray[12 + i] = Tuple.create("Z6_TEST_T" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(time));
+                targetArray[6 + i] = Tuple.create("Z6_TEST" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(sum));
                 sum = 0;
                 time = 0;
             }
@@ -525,19 +525,19 @@ public class FourFieldsBoardArbiter extends Tpr2Arbiter {
                         sum++;
                     }
                 }
-                targetArray[15 + i] = Tuple.Two.create("Z6_TEST_T" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(time));
-                targetArray[9 + i] = Tuple.Two.create("Z6_TEST" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(sum));
+                targetArray[15 + i] = Tuple.create("Z6_TEST_T" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(time));
+                targetArray[9 + i] = Tuple.create("Z6_TEST" + tutorialIndex + "_" + (i + 1) + typeLetter, String.valueOf(sum));
                 sum = 0;
                 time = 0;
             }
         } else {
-            targetArray[9] = Tuple.Two.create("Z6_TEST" + tutorialIndex + "_" + 1 + typeLetter, "7");
-            targetArray[10] = Tuple.Two.create("Z6_TEST" + tutorialIndex + "_" + 2 + typeLetter, "7");
-            targetArray[11] = Tuple.Two.create("Z6_TEST" + tutorialIndex + "_" + 3 + typeLetter, "7");
+            targetArray[9] = Tuple.create("Z6_TEST" + tutorialIndex + "_" + 1 + typeLetter, "7");
+            targetArray[10] = Tuple.create("Z6_TEST" + tutorialIndex + "_" + 2 + typeLetter, "7");
+            targetArray[11] = Tuple.create("Z6_TEST" + tutorialIndex + "_" + 3 + typeLetter, "7");
 
-            targetArray[15] = Tuple.Two.create("Z6_TEST_T" + tutorialIndex + "_" + 1 + typeLetter, "7");
-            targetArray[16] = Tuple.Two.create("Z6_TEST_T" + tutorialIndex + "_" + 2 + typeLetter, "7");
-            targetArray[17] = Tuple.Two.create("Z6_TEST_T" + tutorialIndex + "_" + 3 + typeLetter, "7");
+            targetArray[15] = Tuple.create("Z6_TEST_T" + tutorialIndex + "_" + 1 + typeLetter, "7");
+            targetArray[16] = Tuple.create("Z6_TEST_T" + tutorialIndex + "_" + 2 + typeLetter, "7");
+            targetArray[17] = Tuple.create("Z6_TEST_T" + tutorialIndex + "_" + 3 + typeLetter, "7");
         }
 
     }

@@ -43,9 +43,9 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 
-import pl.edu.ibe.loremipsum.data.CardData;
-import pl.edu.ibe.loremipsum.data.PupilData;
-import pl.edu.ibe.loremipsum.data.SchoolData;
+import pl.edu.ibe.loremipsum.resultfixer.data.CardData;
+import pl.edu.ibe.loremipsum.resultfixer.data.PupilData;
+import pl.edu.ibe.loremipsum.resultfixer.data.SchoolData;
 import pl.edu.ibe.loremipsum.tablet.BaseXMLFile;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.tools.LogUtils;

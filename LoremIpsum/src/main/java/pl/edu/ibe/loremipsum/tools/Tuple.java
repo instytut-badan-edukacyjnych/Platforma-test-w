@@ -40,16 +40,24 @@ package pl.edu.ibe.loremipsum.tools;
  * @author Mariusz Pluciński
  */
 public class Tuple {
+    public static <T1, T2> Two<T1, T2> create(T1 first, T2 second) {
+        Two<T1, T2> t = new Two<>();
+        t.first = first;
+        t.second = second;
+        return t;
+    }
+
+    public static <T1, T2, T3> Three<T1, T2, T3> create(T1 first, T2 second, T3 third) {
+        Three<T1, T2, T3> t = new Three<>();
+        t.first = first;
+        t.second = second;
+        t.third = third;
+        return t;
+    }
+
     public static class Two<T1, T2> {
         public T1 first;
         public T2 second;
-
-        public static <T1, T2> Two<T1, T2> create(T1 first, T2 second) {
-            Two<T1, T2> t = new Two<>();
-            t.first = first;
-            t.second = second;
-            return t;
-        }
 
         @Override
         public String toString() {
@@ -64,13 +72,5 @@ public class Tuple {
         public T1 first;
         public T2 second;
         public T3 third;
-
-        public static <T1, T2, T3> Three<T1, T2, T3> create(T1 first, T2 second, T3 third) {
-            Three<T1, T2, T3> t = new Three<>();
-            t.first = first;
-            t.second = second;
-            t.third = third;
-            return t;
-        }
     }
 }

@@ -37,8 +37,6 @@
 
 package pl.edu.ibe.loremipsum.arbiter.tpr.actionscript;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -181,28 +179,28 @@ public class GridArbiter extends Tpr2Arbiter {
         });
 
 
-        targetArray[1] = Tuple.Two.create("Z7_VERSION_" + typeLetter, typeLetter);
-        targetArray[2] = Tuple.Two.create("W_Z7_" + typeLetter, isFinished ? "1" : "0");
-        targetArray[3] = Tuple.Two.create("TC_Z7_" + typeLetter, totalTime + "");
+        targetArray[1] = Tuple.create("Z7_VERSION_" + typeLetter, typeLetter);
+        targetArray[2] = Tuple.create("W_Z7_" + typeLetter, isFinished ? "1" : "0");
+        targetArray[3] = Tuple.create("TC_Z7_" + typeLetter, totalTime + "");
 
         int tutorialStartOffsetAnswers = 5;
         int tutorialStartOffsetTimes = 13;
         if (tutorialWasSuccesful) {
-            targetArray[4] = Tuple.Two.create("Z7_TEST_PASS_" + typeLetter, "1");
+            targetArray[4] = Tuple.create("Z7_TEST_PASS_" + typeLetter, "1");
 
-            targetArray[9] = Tuple.Two.create("Z7_S12_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[10] = Tuple.Two.create("Z7_S23_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[11] = Tuple.Two.create("Z7_S24_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[12] = Tuple.Two.create("Z7_S32_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[9] = Tuple.create("Z7_S12_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[10] = Tuple.create("Z7_S23_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[11] = Tuple.create("Z7_S24_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[12] = Tuple.create("Z7_S32_TEST_" + typeLetter, NOT_IMPORTANT);
 
             //czasy
-            targetArray[17] = Tuple.Two.create("Z7_T12_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[18] = Tuple.Two.create("Z7_T23_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[19] = Tuple.Two.create("Z7_T24_TEST_" + typeLetter, NOT_IMPORTANT);
-            targetArray[20] = Tuple.Two.create("Z7_T32_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[17] = Tuple.create("Z7_T12_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[18] = Tuple.create("Z7_T23_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[19] = Tuple.create("Z7_T24_TEST_" + typeLetter, NOT_IMPORTANT);
+            targetArray[20] = Tuple.create("Z7_T32_TEST_" + typeLetter, NOT_IMPORTANT);
 
         } else {
-            targetArray[4] = Tuple.Two.create("Z7_TEST_PASS_" + typeLetter, "0");
+            targetArray[4] = Tuple.create("Z7_TEST_PASS_" + typeLetter, "0");
         }
 
 
@@ -222,8 +220,8 @@ public class GridArbiter extends Tpr2Arbiter {
                 itemCounter++;
                 itemsOccurence.put(gridTaskResult.results.size(), itemCounter);
 
-                targetArray[tutorialStartOffsetAnswers] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_TEST_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
-                targetArray[tutorialStartOffsetTimes] = Tuple.Two.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_TEST_" + typeLetter, gridTaskResult.time + "");
+                targetArray[tutorialStartOffsetAnswers] = Tuple.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_TEST_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
+                targetArray[tutorialStartOffsetTimes] = Tuple.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_TEST_" + typeLetter, gridTaskResult.time + "");
 
                 if (tutorialStartOffsetAnswers > 8) {//keep additional tutorial data
                     additionalTutorialArray.add(gridTaskResult);
@@ -236,7 +234,7 @@ public class GridArbiter extends Tpr2Arbiter {
 
         //Sprawdzamy ponownie czy tutorial się udał
         if (!tutorialWasSuccesful) {
-            targetArray[4] = Tuple.Two.create("Z7_TEST_PASS_" + typeLetter, isTutorialSuccesfull(additionalTutorialArray) ? "1" : "0");
+            targetArray[4] = Tuple.create("Z7_TEST_PASS_" + typeLetter, isTutorialSuccesfull(additionalTutorialArray) ? "1" : "0");
 
         }
 //koniec tutoriala
@@ -270,7 +268,7 @@ public class GridArbiter extends Tpr2Arbiter {
                 itemsOccurence.put(gridTaskResult.results.size(), itemCounter);
 
                 //4 plansze tutoriala
-                targetArray[21 + i] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
+                targetArray[21 + i] = Tuple.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
             }
         }
 //Poszczególne wyniki z plansz w posortowanej kolejności. Zaczynamy od komórki 33.
@@ -290,7 +288,7 @@ public class GridArbiter extends Tpr2Arbiter {
 
 
                 for (int j = 0; j < gridTaskResult.results.size(); j++) {
-                    targetArray[33 + j + summaryOffset] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_P" + (j + 1) + "_" + typeLetter, gridTaskResult.results.get(j) + "");
+                    targetArray[33 + j + summaryOffset] = Tuple.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_P" + (j + 1) + "_" + typeLetter, gridTaskResult.results.get(j) + "");
                     LogUtils.d(TAG, "i = " + i + " j = " + j + " summaryOffset = " + summaryOffset + " sum = " + (33 + j + summaryOffset) + " value = " + gridTaskResult.results.get(j));
                 }
                 summaryOffset += gridTaskResult.results.size();
@@ -312,7 +310,7 @@ public class GridArbiter extends Tpr2Arbiter {
                 itemsOccurence.put(gridTaskResult.results.size(), itemCounter);
 
 
-                targetArray[75 + i] = Tuple.Two.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_" + typeLetter, gridTaskResult.time + "");
+                targetArray[75 + i] = Tuple.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_" + typeLetter, gridTaskResult.time + "");
             }
         }
 
@@ -331,7 +329,7 @@ public class GridArbiter extends Tpr2Arbiter {
                 itemsOccurence.put(gridTaskResult.results.size(), itemCounter);
 
                 //4 plansze tutoriala
-                targetArray[87 + i] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
+                targetArray[87 + i] = Tuple.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, ArbiterUtils.calculateVectorSum(gridTaskResult.results) + "");
             }
         }
         //Poszczególne wyniki z plansz w orginalnej kolejności. Zaczynamy od komórki 99.
@@ -351,7 +349,7 @@ public class GridArbiter extends Tpr2Arbiter {
 
 
                 for (int j = 0; j < gridTaskResult.results.size(); j++) {
-                    targetArray[99 + j + summaryOffset] = Tuple.Two.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_P" + (j + 1) + "_K_" + typeLetter, gridTaskResult.results.get(j) + "");
+                    targetArray[99 + j + summaryOffset] = Tuple.create("Z7_S" + gridTaskResult.results.size() + itemCounter + "_P" + (j + 1) + "_K_" + typeLetter, gridTaskResult.results.get(j) + "");
 //                    Log.d(TAG, "i = " + i + " j = " + j + " summaryOffset = " + summaryOffset + " sum = " + (99 + j + summaryOffset) + " value = " + gridTaskResult.results.get(j));
                 }
                 summaryOffset += gridTaskResult.results.size();
@@ -372,7 +370,7 @@ public class GridArbiter extends Tpr2Arbiter {
                 itemsOccurence.put(gridTaskResult.results.size(), itemCounter);
 
 
-                targetArray[141 + i] = Tuple.Two.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, gridTaskResult.time + "");
+                targetArray[141 + i] = Tuple.create("Z7_T" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, gridTaskResult.time + "");
             }
         }
         // Wystąpiene wzorca w kolejności orginalnej. Zaczynamy od komórki 153 i 166
@@ -394,8 +392,8 @@ public class GridArbiter extends Tpr2Arbiter {
 
 
                 ArrayList<String> pattern = ArbiterUtils.checkIsPattern(gridTaskResult.results);
-                targetArray[153 + i] = Tuple.Two.create("Z7_PAT" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, pattern.get(0));
-                targetArray[166 + i] = Tuple.Two.create("Z7_PAT_OFFSET" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, pattern.get(1));
+                targetArray[153 + i] = Tuple.create("Z7_PAT" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, pattern.get(0));
+                targetArray[166 + i] = Tuple.create("Z7_PAT_OFFSET" + gridTaskResult.results.size() + itemCounter + "_K_" + typeLetter, pattern.get(1));
             }
         }
 
@@ -407,7 +405,7 @@ public class GridArbiter extends Tpr2Arbiter {
             }
             divider++;
         }
-        targetArray[0] = Tuple.Two.create("Z7_" + typeLetter, sum.floatValue() + "");
+        targetArray[0] = Tuple.create("Z7_" + typeLetter, sum.floatValue() + "");
 //        W zadaniu #7 (biedronki, kleksy):
 //        - samouczek nie jest wliczany do wyniku
 //                - prezentowane jest kilkanaście serii po kilka plansz

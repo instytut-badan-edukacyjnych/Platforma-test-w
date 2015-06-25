@@ -42,6 +42,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +81,9 @@ public class MainActivity extends BaseServiceActivity {
     MainButtonLayout demoButton;
     @InjectView(R.id.context_help)
     TextView contextHelp;
+    @InjectView(R.id.test_crash)
+    Button testCrash;
+
 
     private NetworkCheckDialog networkCheckDialog;
     private int testRequestCode;
@@ -96,6 +100,14 @@ public class MainActivity extends BaseServiceActivity {
         } catch (Exceptions.LocalizationException e) {
             LogUtils.v(TAG, "Localization not found", e);
         }
+
+        if (BuildConfig.DEBUG) {
+            testCrash.setVisibility(View.VISIBLE);
+            testCrash.setOnClickListener(v -> {
+                throw new RuntimeException("Testowy crash aplikacji");
+            });
+        }
+
     }
 
     private void setTitleBasedOnTestSuite() {

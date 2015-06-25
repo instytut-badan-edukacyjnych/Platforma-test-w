@@ -106,6 +106,7 @@ public abstract class TprTaskGroup extends TaskGroup implements TaskGroupControl
 
     @Override
     public void rollbackToPoint(int taskNumber) {
+        isAfterTutorial = false;
         m_taskIndex = taskNumber;
         ((TaskAct) getContext()).getTaskHandler().sendEmptyMessageDelayed(BaseTask.TASK_MESS_NEXT_TASK, 50);
     }

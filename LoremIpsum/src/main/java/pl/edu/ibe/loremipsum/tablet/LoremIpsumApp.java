@@ -1,4 +1,3 @@
-
 /*
  * This file is part of Test Platform.
  *
@@ -38,13 +37,11 @@
 package pl.edu.ibe.loremipsum.tablet;
 
 
-import android.app.Application;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -64,12 +61,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+import pl.edu.ibe.loremipsum.BaseApp;
 import pl.edu.ibe.loremipsum.configuration.CollectorConfig;
 import pl.edu.ibe.loremipsum.configuration.Gender;
 import pl.edu.ibe.loremipsum.configuration.TaskSuiteConfig;
-import pl.edu.ibe.loremipsum.data.CardData;
-import pl.edu.ibe.loremipsum.data.PupilData;
-import pl.edu.ibe.loremipsum.data.SchoolData;
 import pl.edu.ibe.loremipsum.db.DbHelper;
 import pl.edu.ibe.loremipsum.db.TestDataService;
 import pl.edu.ibe.loremipsum.db.schema.Researcher;
@@ -77,6 +72,9 @@ import pl.edu.ibe.loremipsum.db.schema.ResultsQueue;
 import pl.edu.ibe.loremipsum.manager.BaseManager;
 import pl.edu.ibe.loremipsum.manager.CbtManager;
 import pl.edu.ibe.loremipsum.manager.TestManager;
+import pl.edu.ibe.loremipsum.resultfixer.data.CardData;
+import pl.edu.ibe.loremipsum.resultfixer.data.PupilData;
+import pl.edu.ibe.loremipsum.resultfixer.data.SchoolData;
 import pl.edu.ibe.loremipsum.support.SupportService;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProvider;
 import pl.edu.ibe.loremipsum.tablet.base.ServiceProviderBuilder;
@@ -87,24 +85,26 @@ import pl.edu.ibe.loremipsum.task.TaskInfo;
 import pl.edu.ibe.loremipsum.task.management.collector.RaportPreparator;
 import pl.edu.ibe.loremipsum.tools.DbAccess;
 import pl.edu.ibe.loremipsum.tools.FileUtils;
+import pl.edu.ibe.loremipsum.tools.InstallationIdentifier;
 import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
 import pl.edu.ibe.loremipsum.tools.io.VirtualFile;
 import pl.edu.ibe.testplatform.BuildConfig;
+import pl.edu.ibe.testplatform.R;
 import rx.Observable;
 
 /**
  * Klasa bazowa aplikacji (Application)
  */
-public class LoremIpsumApp extends Application {
+public class LoremIpsumApp extends BaseApp {
 
-    /**
-     * identyfikacja aplikacji
-     */
-    public static final String APP_NAME = "LoremIpsum";
-    public static final String APP_VERSION = "MD";
-    public static final String APP_BUILD = "176";
+//    /**
+//     * identyfikacja aplikacji
+//     */
+//    public static final String APP_NAME = "LoremIpsum";
+//    public static final String APP_VERSION = "MD";
+//    public static final String APP_BUILD = "176";
     /**
      * flaga aplikacji rejestracji dodatkowych informacji. Musi byc ustawiona razem z flaga LOGGER_FLAG
      */
@@ -540,7 +540,7 @@ public class LoremIpsumApp extends Application {
      * @return data i godzina w postaci tekstowej
      */
     public static String GetDateTimeStringOut(long a_time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
 
         return formatter.format(a_time);
     }
@@ -1377,9 +1377,12 @@ public class LoremIpsumApp extends Application {
 
         Date date = new Date(System.currentTimeMillis() - SupportService.MAX_FILE_AGE);
         FileUtils.getFilesOlderThan(LogUtils.getLogsDirectory(), date).subscribe((list) -> {
-            FileUtils.deleteFiles(list);
+            FileUtils.deleteFiles(list).subscribe(result -> LogUtils.d("=======LOG CLEANER=====", "success = " + result));
         });
-
+        Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
+            LogUtils.d("UNHANDLED EXCEPTION", "unhandled exception", ex);
+            System.exit(1);
+        });
 
     }
 
@@ -1408,7 +1411,14 @@ public class LoremIpsumApp extends Application {
             m_manual = new Vector<AreaWrapper>(1);
             m_taskOrder = new Vector<TaskWrapper>(APP_PREDICT_AREA_NUMBER * APP_PREDICT_TASK_NUMBER);
 
-            m_versionString = APP_NAME + "-" + APP_VERSION + "-" + APP_BUILD;
+            m_versionString = getString(R.string.app_name).replace(" ", "_").replace("ó", "o")
+                    + "_version_"
+                    + BuildConfig.VERSION_NAME
+                    + "_build_"
+                    + BuildConfig.VERSION_CODE
+                    + "_installation_"
+                    + new InstallationIdentifier(this).getDeviceId();
+            LogUtils.d(TAG, m_versionString);
 
             File file = new File(APP_REPORT_PATH);
             if (!file.exists()) {

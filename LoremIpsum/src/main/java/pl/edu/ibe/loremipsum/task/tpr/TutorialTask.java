@@ -44,7 +44,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.util.Log;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -239,6 +238,11 @@ public class TutorialTask extends LookTask {
                 firstRun = false;
             }
             LogUtils.d(TAG, "sending refresh request -> " + m_actHandler + "success = " + m_actHandler.sendEmptyMessage(TASK_MESS_REFRESH_VIEW));
+
+
+            timer.purge();
+            timer = new Timer();
+
             timer.schedule(new Looper(), refreshTime);
         }
     }

@@ -37,6 +37,7 @@
 
 <resources>
     <string name="app_name">Platforma Testów IBE</string>
+    <string name="log_dir">Test_Platform_Logs</string>
     <string name="set_menu">Settings</string>
     <string name="pup_menu">Examinees</string>
     <string name="sch_menu">Institutions</string>

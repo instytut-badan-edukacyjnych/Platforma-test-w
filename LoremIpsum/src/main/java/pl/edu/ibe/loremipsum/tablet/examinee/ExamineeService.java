@@ -43,11 +43,9 @@ import android.widget.Spinner;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import pl.edu.ibe.loremipsum.configuration.Gender;
 import pl.edu.ibe.loremipsum.db.schema.Department;
 import pl.edu.ibe.loremipsum.db.schema.Examinee;
 import pl.edu.ibe.loremipsum.db.schema.ExamineeDao;
@@ -343,7 +341,7 @@ public class ExamineeService extends BaseService {
         Tuple.Two<Field, AdditionalDataItem> pair;
 
         for (Field requiredField : requiredFields) {
-            pair = Tuple.Two.create(requiredField, null);
+            pair = Tuple.create(requiredField, null);
             hashMap.put(requiredField.id, pair);
         }
         if (additionalDataItems != null && additionalDataItems.size() > 0) {

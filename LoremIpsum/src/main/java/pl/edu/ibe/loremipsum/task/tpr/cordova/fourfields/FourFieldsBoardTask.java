@@ -134,6 +134,7 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
     private int lastItem = -5;
     private boolean drawButtons;
     private boolean clearButtons;
+    private int logCounter;
 
     /**
      * Constructor.
@@ -531,6 +532,8 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
 
     public ArrayList<CurrentItemHandler> getData() {
         currentItemHandler.endDisplayTime = System.currentTimeMillis();
+        LogUtils.d(TAG,"Item: " + logCounter + "\n"+ currentItemHandler.toString());
+        logCounter++;
         return history;
     }
 
@@ -623,6 +626,9 @@ public class FourFieldsBoardTask extends LookTask implements MediaPlayer.OnCompl
             if (currentItemPosition != -1) {
                 if (currentItemHandler != null) {
                     currentItemHandler.endDisplayTime = System.currentTimeMillis();
+
+                    LogUtils.d(TAG,"Item: " + logCounter + "\n"+ currentItemHandler.toString());
+                    logCounter++;
                 }
                 currentItemHandler = new CurrentItemHandler();
                 currentItemHandler.location = getCurrentLocation();

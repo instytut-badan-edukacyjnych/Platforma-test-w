@@ -46,6 +46,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import pl.edu.ibe.loremipsum.arbiter.MarkData;
 import pl.edu.ibe.loremipsum.db.schema.DaoSession;
@@ -66,6 +67,7 @@ import pl.edu.ibe.loremipsum.tools.ExecutionException;
 import pl.edu.ibe.loremipsum.tools.LogUtils;
 import pl.edu.ibe.loremipsum.tools.RxExecutor;
 import pl.edu.ibe.loremipsum.tools.TimeUtils;
+import pl.edu.ibe.testplatform.BuildConfig;
 import rx.Observable;
 
 /**
@@ -96,7 +98,8 @@ public class ResultsService extends BaseService {
                     List<Result> results = suite.getResultList();
                     JSONArray array = new JSONArray();
                     try {
-                        for (Result result : results) {
+                        for (int i = 0; i < results.size(); i++) {
+                            Result result = results.get(i);
                             JSONObject obj = new JSONObject();
                             obj.put("id", result.getId());
                             obj.put("inst", result.getInstitution_text_id());
@@ -107,7 +110,34 @@ public class ResultsService extends BaseService {
                             for (ResultArea area : result.getResultAreaList()) {
                                 JSONObject o = new JSONObject();
                                 o.put("score", area.getValue());
-                                o.put("se", area.getStandard_error());
+                                if (BuildConfig.SHOW_INFINITY_IN_REPORT) {
+                                    switch (new Random().nextInt(3)) {
+                                        case 0:
+                                            o.put("se", "-Infinity");
+                                            break;
+                                        case 1:
+                                            o.put("se", "Infinity");
+                                            break;
+                                        case 2:
+                                            o.put("se", "NaN");
+                                            break;
+                                        default:
+                                            o.put("se", "NaN");
+                                            break;
+                                    }
+                                } else {
+                                    if (area.getStandard_error().isInfinite()) {
+                                        if (area.getStandard_error() == Double.NEGATIVE_INFINITY) {
+                                            o.put("se", "-Infinity");
+                                        } else if (area.getStandard_error() == Double.POSITIVE_INFINITY) {
+                                            o.put("se", "Infinity");
+                                        }
+                                    } else if (area.getStandard_error().isNaN()) {
+                                        o.put("se", "NaN");
+                                    } else {
+                                        o.put("se", area.getStandard_error());
+                                    }
+                                }
                                 o.put("status", area.getStatus());
                                 areas.put(area.getArea(), o);
                             }

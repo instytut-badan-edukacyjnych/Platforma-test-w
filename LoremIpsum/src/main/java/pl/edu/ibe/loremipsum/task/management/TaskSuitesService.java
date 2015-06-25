@@ -419,7 +419,7 @@ public class TaskSuitesService extends BaseService {
                         getServiceProvider().getDeviceId(),
                         getServiceProvider().getNetworkSupport()
                 ).getSuite()
-                        .map(suite -> Tuple.Two.create(researchersSuite, suite));
+                        .map(suite -> Tuple.create(researchersSuite, suite));
             } catch (Throwable t) {
                 throw ExecutionException.wrap(t);
             }
@@ -433,7 +433,7 @@ public class TaskSuitesService extends BaseService {
                 return new TaskSuiteUpdate.NoUpdate(suite.second.getName(), suite.second.getVersion());
             return new TaskSuiteUpdate(suite.first, suite.second, researcher, suite.first.getCredential());
         });
-        return Tuple.Two.create(o, s);
+        return Tuple.create(o, s);
     }
 
     public Pair<Observable<TaskSuite>, Observable<InstallationProgress>> installUpdate(TaskSuiteUpdate update) {
@@ -478,7 +478,7 @@ public class TaskSuitesService extends BaseService {
                                 })).map(suite -> new TaskSuite(dbAccess(), getTaskStorage(),
                                         suite.getTaskSuite().getName(), suite.getIdentifier()))
                 );
-        return Tuple.Two.create(o, s);
+        return Tuple.create(o, s);
     }
 
     public Observable<Object> uninstallSuite(ResearchersSuite researchersSuite) {

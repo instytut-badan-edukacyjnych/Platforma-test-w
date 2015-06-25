@@ -143,7 +143,7 @@ public class PrintingJSHandler {
         return Observable.merge(subjectPrint, controller)
                 .filter(file -> file != null)
                 .doOnNext(file -> done = true)
-                .map(file -> Tuple.Two.create(file, reportName));
+                .map(file -> Tuple.create(file, reportName));
     }
 
     /**

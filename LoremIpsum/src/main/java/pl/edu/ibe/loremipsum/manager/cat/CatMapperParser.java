@@ -119,7 +119,7 @@ class CatMapperParser {
                 }
             }
         }
-        return Tuple.Two.create(mappings, mappingDependency);
+        return Tuple.create(mappings, mappingDependency);
     }
 
     private Mapper parseArea(Element area, CatMappingDependency mappingDependency) throws ParseException {

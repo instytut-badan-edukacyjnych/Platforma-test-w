@@ -38,7 +38,6 @@ package pl.edu.ibe.loremipsum.support;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,13 +60,16 @@ import pl.edu.ibe.loremipsum.tools.TimeUtils;
 import pl.edu.ibe.loremipsum.tools.io.ReadStream;
 import rx.Observable;
 
+import static pl.edu.ibe.loremipsum.tools.TimeUtils.dateTimeFileNamePattern;
+import static pl.edu.ibe.loremipsum.tools.TimeUtils.dateToString;
+
 /**
  * Created by adam on 18.04.14.
  * Service for used to provide bug reports
  */
 public class SupportService extends BaseService {
 
-    public static final long MAX_FILE_AGE = 3 * 24 * 60 * 60 * 1000;
+    public static final long MAX_FILE_AGE = 7 * 24 * 60 * 60 * 1000;
     private static String BUG_REPORT_PATH;
     private static String TAG = SupportService.class.getSimpleName();
     private String supportUrl;
@@ -109,26 +111,22 @@ public class SupportService extends BaseService {
 
             bugReport.logFiles = new HashMap<>();
             if (attachLogs) {
-                List<File> list = FileUtils.getFilesYoungerThan(LogUtils.getLogsDirectory(), new Date(System.currentTimeMillis() - MAX_FILE_AGE))
-                        .toBlockingObservable().last();
-
-                
-                    File zipFile = new File(context().getExternalCacheDir(), "support_" + new Date() + ".zip");
-                    FileUtils.zipFile(list, zipFile);
-
-
-                    try {
-                        bugReport.logFiles.put(zipFile.getName(), ReadStream.readStream(new FileInputStream(zipFile))
-                                .execute().toBlockingObservable().last().getBytes());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                List<File> list = FileUtils.getFilesYoungerThan(LogUtils.getLogsDirectory()
+                        , new Date(System.currentTimeMillis() - MAX_FILE_AGE)).toBlockingObservable().last();
+                File zipFile = new File(context().getExternalCacheDir(), "support_" + dateToString(new Date(), dateTimeFileNamePattern) + ".zip");
+                FileUtils.zipFile(list, zipFile);
+                try {
+                    bugReport.logFiles.put(zipFile.getName(),
+                            ReadStream.readStream(new FileInputStream(zipFile)).execute().toBlockingObservable().last().getBytes());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
+            }
             String bugReportString = getServiceProvider().getGson().toJson(bugReport);
 
             LogUtils.d(TAG, bugReportString);
 
-            StringUtils.stringToFile(new File(BUG_REPORT_PATH + File.separator + TimeUtils.dateToString(new Date(), TimeUtils.timePatern) + ".bugReport")
+            StringUtils.stringToFile(new File(BUG_REPORT_PATH + File.separator + dateToString(new Date(), TimeUtils.timePatern) + ".bugReport")
                     , bugReportString);
 
             URL url = new URL(supportUrl);

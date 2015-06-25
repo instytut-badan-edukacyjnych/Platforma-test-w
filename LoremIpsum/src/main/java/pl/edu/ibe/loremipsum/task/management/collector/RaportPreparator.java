@@ -191,6 +191,7 @@ public class RaportPreparator {
             sco.setAttribute(TestResult.XML_TEST_RESULT_LENGTH, Integer.toString(item.m_length));
             sco.setAttribute(TestResult.XML_TEST_RESULT_THETA, numberFormat.format(item.m_theta));
             sco.setAttribute(TestResult.XML_TEST_RESULT_SE, numberFormat.format(item.m_se));
+
             root.appendChild(sco);
         }
 

@@ -58,7 +58,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Vector;
 
-import pl.edu.ibe.loremipsum.data.PupilData;
+import pl.edu.ibe.loremipsum.resultfixer.data.PupilData;
 import pl.edu.ibe.loremipsum.manager.BaseManager;
 import pl.edu.ibe.loremipsum.manager.BaseManager.ManagerTestInfo;
 import pl.edu.ibe.loremipsum.tablet.BaseXMLFile;
@@ -800,6 +800,10 @@ public class TestResult extends BaseXMLFile {
         StringBuilder headerLineBuilder = new StringBuilder();
         StringBuilder bottomLineBuilder = new StringBuilder();
 
+        headerLineBuilder.append(XML_TEST_RESPONDENT_VERSION);
+        bottomLineBuilder.append(m_version);
+        headerLineBuilder.append(XML_TEST_RESPONDENT_SERIAL);
+        bottomLineBuilder.append(m_serial);
 
         try {
             headerLineBuilder.append(XML_TEST_RESPONDENT_TIMESTAMP);
@@ -879,8 +883,12 @@ public class TestResult extends BaseXMLFile {
                 headerLineBuilder.append("TASK_SEPARATOR;");
                 bottomLineBuilder.append("TASK_SEPARATOR;");
             } else {
-                StringUtils.stringToFile(new File(resultsDir, "unexpected_data_" + m_task.m_taskName + "_" + new Date() + ".log"), "Expected 2 lines, got:" +
-                        answerLines.length + "\n\nDUMP:\n\n" + m_task.toString());
+                try {
+                    StringUtils.stringToFile(new File(resultsDir, "unexpected_data_" + m_task.m_taskName + "_" + TimeUtils.dateToString(new Date(), TimeUtils.dateTimeFileNamePattern) + ".log"), "Expected 2 lines, got:" +
+                            answerLines.length + "\n\nDUMP:\n\n" + m_task.toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 LogUtils.d(TAG, "Unexpected data, more than 2 lines " + m_task.toString());
             }
         }

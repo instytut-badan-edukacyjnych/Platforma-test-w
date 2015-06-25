@@ -37,7 +37,6 @@
 package pl.edu.ibe.loremipsum.tablet.base;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -48,7 +47,7 @@ import java.io.IOException;
 import java.util.List;
 
 import pl.edu.ibe.loremipsum.configuration.SharedPreferencesService;
-import pl.edu.ibe.loremipsum.data.ImportExportService;
+import pl.edu.ibe.loremipsum.resultfixer.data.ImportExportService;
 import pl.edu.ibe.loremipsum.db.TestDataService;
 import pl.edu.ibe.loremipsum.db.schema.TaskSuite;
 import pl.edu.ibe.loremipsum.db.schema.TaskSuiteDao;

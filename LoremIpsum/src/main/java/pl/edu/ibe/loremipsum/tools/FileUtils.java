@@ -188,7 +188,7 @@ public class FileUtils {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.d(FileUtils.class.getSimpleName(), "failed to clean logs", e);
                 return false;
             }
             return true;
@@ -218,9 +218,7 @@ public class FileUtils {
             zos.close();
             fos.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found : " + e);
+            LogUtils.d(TAG, "File not found: " + targetZipFile + "\n files: " + files, e);
         }
-
     }
-
 }

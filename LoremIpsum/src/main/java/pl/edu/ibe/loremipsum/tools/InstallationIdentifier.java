@@ -53,8 +53,8 @@ public class InstallationIdentifier {
 
     private static final String INSTALLATION = "INSTALLATION";
 
-    private String deviceId = null;
-    private boolean firstRun = false;
+    private static String deviceId = null;
+    private static boolean firstRun = false;
 
     /**
      * Constructor
@@ -63,17 +63,19 @@ public class InstallationIdentifier {
      * @throws IOException
      */
     public InstallationIdentifier(Context context) throws IOException {
-        File installation = new File(context.getFilesDir(), INSTALLATION);
-        if (!installation.exists()) {
-            LogUtils.v(TAG, "this is the first application run");
-            firstRun = true;
-            writeInstallationFile(installation);
-        } else {
-            LogUtils.v(TAG, "this is NOT the first application run");
-            firstRun = false;
+        if (deviceId == null) {
+            File installation = new File(context.getFilesDir(), INSTALLATION);
+            if (!installation.exists()) {
+                LogUtils.v(TAG, "this is the first application run");
+                firstRun = true;
+                writeInstallationFile(installation);
+            } else {
+                LogUtils.v(TAG, "this is NOT the first application run");
+                firstRun = false;
+            }
+            deviceId = readInstallationFile(installation);
+            LogUtils.v(TAG, "device id= " + deviceId);
         }
-        deviceId = readInstallationFile(installation);
-        LogUtils.v(TAG, "device id= " + deviceId);
     }
 
     /**

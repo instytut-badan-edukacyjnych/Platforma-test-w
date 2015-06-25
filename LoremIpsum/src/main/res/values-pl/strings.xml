@@ -37,6 +37,7 @@
 
 <resources>
     <string name="app_name">Platforma Testów IBE</string>
+    <string name="log_dir">Platforma_testow_IBE</string>
     <string name="set_menu">Ustawienia</string>
     <string name="pup_menu">Osoby egzaminowane</string>
     <string name="sch_menu">Placówki</string>

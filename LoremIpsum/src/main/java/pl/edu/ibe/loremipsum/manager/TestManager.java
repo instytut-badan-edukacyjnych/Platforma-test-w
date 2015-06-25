@@ -40,7 +40,7 @@ package pl.edu.ibe.loremipsum.manager;
 import java.util.Vector;
 
 import pl.edu.ibe.loremipsum.configuration.TaskSuiteConfig;
-import pl.edu.ibe.loremipsum.data.PupilData;
+import pl.edu.ibe.loremipsum.resultfixer.data.PupilData;
 import pl.edu.ibe.loremipsum.tablet.LoremIpsumApp;
 import pl.edu.ibe.loremipsum.tablet.task.mark.TestResult;
 import pl.edu.ibe.loremipsum.tablet.test.CurrentTaskSuiteService;

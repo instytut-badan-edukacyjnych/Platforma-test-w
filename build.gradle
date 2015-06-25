@@ -49,6 +49,7 @@ buildscript {
 
 allprojects {
     repositories {
+        jcenter()
         mavenCentral()
     }
 }

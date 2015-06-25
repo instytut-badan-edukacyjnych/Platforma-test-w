@@ -85,8 +85,8 @@ public class CountingArbiter extends Tpr2Arbiter {
     public double setSummary(ArrayList<CountingTaskGroup.SummaryTaskResults> summary, boolean taskIsCompleted, ArrayList<Integer> conf, boolean tutorialWasSuccesfull, boolean isAbstract, long totalTime) {
 
 
-        targetArray[1] = Tuple.Two.create("Z1_VERSION_" + getTypeLetter(isAbstract), isAbstract ? ABSTRACT : NORMAL);
-        targetArray[4] = Tuple.Two.create("Z1_TEST_PASS_" + getTypeLetter(isAbstract), tutorialWasSuccesfull ? "1" : "0");
+        targetArray[1] = Tuple.create("Z1_VERSION_" + getTypeLetter(isAbstract), isAbstract ? ABSTRACT : NORMAL);
+        targetArray[4] = Tuple.create("Z1_TEST_PASS_" + getTypeLetter(isAbstract), tutorialWasSuccesfull ? "1" : "0");
 
 
         CountingTaskGroup.SummaryTaskResults summaryTaskResults;
@@ -99,8 +99,8 @@ public class CountingArbiter extends Tpr2Arbiter {
         for (int i = 0; i < summary.size(); i++) {
             summaryTaskResults = summary.get(i);
             if (summaryTaskResults.isTutorial) {
-                targetArray[5 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, true, false, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
-                targetArray[11 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, false, false, -1, false), summaryTaskResults.overallTime + "");
+                targetArray[5 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, true, false, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
+                targetArray[11 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, false, false, -1, false), summaryTaskResults.overallTime + "");
                 if (tutorialCount > 3) {
                     additionalTutorial.add(summaryTaskResults);
                 }
@@ -110,11 +110,11 @@ public class CountingArbiter extends Tpr2Arbiter {
         //Jeśli tutorial nie był przechodzony 2 razy to generujemy placeholder;
         if (additionalTutorial.size() > 0) {
             for (int i = 0; i < 3; i++) {
-                targetArray[8 + i] = Tuple.Two.create(generateHeader(summary.get(i).resultses.size(), summary.get(i).isTutorial, isAbstract, false, true, false, -1, false), "7");
-                targetArray[14 + i] = Tuple.Two.create(generateHeader(summary.get(i).resultses.size(), summary.get(i).isTutorial, isAbstract, false, false, false, -1, false), "7");
+                targetArray[8 + i] = Tuple.create(generateHeader(summary.get(i).resultses.size(), summary.get(i).isTutorial, isAbstract, false, true, false, -1, false), "7");
+                targetArray[14 + i] = Tuple.create(generateHeader(summary.get(i).resultses.size(), summary.get(i).isTutorial, isAbstract, false, false, false, -1, false), "7");
             }
         }
-        targetArray[4] = Tuple.Two.create("Z1_TEST_PASS_" + getTypeLetter(isAbstract), isTutorialSuccessfull(additionalTutorial) ? "1" : "0");
+        targetArray[4] = Tuple.create("Z1_TEST_PASS_" + getTypeLetter(isAbstract), isTutorialSuccessfull(additionalTutorial) ? "1" : "0");
 
 
         //Koniec demo;
@@ -137,7 +137,7 @@ public class CountingArbiter extends Tpr2Arbiter {
         for (int i = 0; i < sortedSummary.size(); i++) {
             summaryTaskResults = sortedSummary.get(i);
             if (!summaryTaskResults.isTutorial) {
-                targetArray[17 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, false, true, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
+                targetArray[17 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, false, false, true, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
 
             }
         }
@@ -147,17 +147,17 @@ public class CountingArbiter extends Tpr2Arbiter {
             summaryTaskResults = sortedSummary.get(i);
             for (int j = 0; j < summaryTaskResults.resultses.size(); j++) {
                 result = summaryTaskResults.resultses.get(j);
-                targetArray[23 + j + summaryOffset] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, false, true, false, j + 1, false), result.answer == result.correctBallsCount ? "1" : "0");
+                targetArray[23 + j + summaryOffset] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, false, true, false, j + 1, false), result.answer == result.correctBallsCount ? "1" : "0");
             }
             summaryOffset += summaryTaskResults.resultses.size();
-            targetArray[50 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, false, false, false, -1, false), summaryTaskResults.overallTime + "");
+            targetArray[50 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, false, false, false, -1, false), summaryTaskResults.overallTime + "");
         }
 /////KOPIE!
 
         for (int i = 0; i < summary.size(); i++) {
             summaryTaskResults = summary.get(i);
             if (!summaryTaskResults.isTutorial) {
-                targetArray[56 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, true, false, true, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
+                targetArray[56 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), summaryTaskResults.isTutorial, isAbstract, true, false, true, -1, false), calculateCorrectness(summaryTaskResults.resultses) + "");
 
             }
         }
@@ -166,10 +166,10 @@ public class CountingArbiter extends Tpr2Arbiter {
             summaryTaskResults = summary.get(i);
             for (int j = 0; j < summaryTaskResults.resultses.size(); j++) {
                 result = summaryTaskResults.resultses.get(j);
-                targetArray[62 + j + summaryOffset] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, true, false, j + 1, false), result.answer == result.correctBallsCount ? "1" : "0");
+                targetArray[62 + j + summaryOffset] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, true, false, j + 1, false), result.answer == result.correctBallsCount ? "1" : "0");
             }
             summaryOffset += summaryTaskResults.resultses.size();
-            targetArray[89 + i] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, false, false, -1, false), summaryTaskResults.overallTime + "");
+            targetArray[89 + i] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, false, false, -1, false), summaryTaskResults.overallTime + "");
         }
 
 //Czasy jednostkowe
@@ -178,7 +178,7 @@ public class CountingArbiter extends Tpr2Arbiter {
             summaryTaskResults = summary.get(i);
             for (int j = 0; j < summaryTaskResults.resultses.size(); j++) {
                 result = summaryTaskResults.resultses.get(j);
-                targetArray[95 + j + summaryOffset] = Tuple.Two.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, false, false, j + 1, true), result.time + "");
+                targetArray[95 + j + summaryOffset] = Tuple.create(generateHeader(summaryTaskResults.resultses.size(), false, isAbstract, true, false, false, j + 1, true), result.time + "");
             }
             summaryOffset += summaryTaskResults.resultses.size();
         }
@@ -199,9 +199,9 @@ public class CountingArbiter extends Tpr2Arbiter {
         }
 
 
-        targetArray[0] = Tuple.Two.create("Z1_" + getTypeLetter(isAbstract), String.valueOf(seriesSum / 1)); //Task1.as DIVIDER. Nigdzie nie przyjmuje innej wartości niż 1;
-        targetArray[2] = Tuple.Two.create("W_Z1_" + getTypeLetter(isAbstract), taskIsCompleted ? "1" : "0");
-        targetArray[3] = Tuple.Two.create("TC_Z1_" + getTypeLetter(isAbstract), String.valueOf(totalTime));
+        targetArray[0] = Tuple.create("Z1_" + getTypeLetter(isAbstract), String.valueOf(seriesSum / 1)); //Task1.as DIVIDER. Nigdzie nie przyjmuje innej wartości niż 1;
+        targetArray[2] = Tuple.create("W_Z1_" + getTypeLetter(isAbstract), taskIsCompleted ? "1" : "0");
+        targetArray[3] = Tuple.create("TC_Z1_" + getTypeLetter(isAbstract), String.valueOf(totalTime));
 //        Answers.ANSWERS_TASK_1_A[3] = Utils.formatTime(TOTAL_TIME_END);
 
 
