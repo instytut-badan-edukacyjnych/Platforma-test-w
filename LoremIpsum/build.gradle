@@ -66,8 +66,8 @@ android {
     buildToolsVersion "19.1"
     defaultConfig {
         applicationId "pl.edu.ibe.testplatform"
-        versionCode 79
-        versionName "1.2.19"
+        versionCode 80
+        versionName "1.2.20"
         minSdkVersion 15
         targetSdkVersion 21
         buildConfigField "boolean", "OMIT_NETWORK_CHECK", "false"
@@ -81,7 +81,6 @@ android {
         buildConfigField "boolean", "SHOW_INFINITY_IN_REPORT", "false"
     }
 
-  
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -68,7 +68,7 @@ public class TimeUtils {
      * "yyyy'-'MM'-'dd'T'HH':'mm':'ss" pattern.
      */
     public static final String rfcFormat = "yyyy'-'MM'-'dd'T'HH'_'mm'_'ssZ";
-
+    public static final String reportFormat= "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
     /**
      * list of date formatters.
      */

@@ -105,7 +105,7 @@ public class ResultsService extends BaseService {
                             obj.put("inst", result.getInstitution_text_id());
                             obj.put("dept", result.getDepartment_name());
                             obj.put("examinee", result.getExaminee_text_id());
-                            obj.put("date", TimeUtils.dateToString(result.getDate(), TimeUtils.rfcFormat));
+                            obj.put("date", TimeUtils.dateToString(result.getDate(), TimeUtils.reportFormat));
                             JSONObject areas = new JSONObject();
                             for (ResultArea area : result.getResultAreaList()) {
                                 JSONObject o = new JSONObject();
